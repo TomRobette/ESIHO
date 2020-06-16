@@ -72,22 +72,4 @@ public enum EntityType {
         return this.id;
     }
 
-//    @Override
-//    public void render(OrthographicCamera cam, SpriteBatch batch) {
-//        batch.setProjectionMatrix(cam.combined);
-//        batch.begin();
-//
-//        for (int layer = 0; layer < getLayers(); layer++){
-//            for (int row = 0; row < getHeight(); row++){
-//                for (int col = 0; col < getWidth(); col++){
-//                    GameTile tile = getTileByCoordinates(layer, col, row);
-//                    if (tile!=null){
-//                        batch.draw(tiles[0][tile.getId() - 1], col * GameTile.TILE_SIZE, row * GameTile.TILE_SIZE );
-//                    }
-//                }
-//            }
-//        }
-//        super.render(cam, batch);
-//        batch.end();
-//    }
 }

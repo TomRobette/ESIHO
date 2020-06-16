@@ -1,7 +1,6 @@
 package com.esiho.combat;
 
 import com.esiho.combat.moves.MoveType;
-import com.esiho.world.entities.Pnj;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -26,8 +25,8 @@ public class CombatState {
         this.tourDeTable = 0;
         this.fin = false;
         this.listeOrdrePnj = new ArrayList<>();
-        this.listeOrdrePnj.addAll(team1.getListePNJ());
-        this.listeOrdrePnj.addAll(team2.getListePNJ());
+        this.listeOrdrePnj.addAll(team1.getListeCbtEntities());
+        this.listeOrdrePnj.addAll(team2.getListeCbtEntities());
         this.listeOrdrePnj = triVitesse();
         this.pnjsALancer = new ArrayList<>();
         this.movesALancer = new ArrayList<>();
@@ -60,9 +59,9 @@ public class CombatState {
             if (isPnjAllie){
                 Integer rang = pnjsALancer.indexOf(pnjPlay);
                 Integer compteur = 0;
-                for (Pnj pnj:team2.getListePNJ()) {
+                for (Pnj pnj:team2.getListeCbtEntities()) {
                     if (pnj.equals(pnjsARecevoir.get(rang))){
-                        team2.getListePNJ().get(compteur).setEntite(useMove(movesALancer.get(rang), pnjsALancer.get(rang).getEntite(), pnjsARecevoir.get(rang).getEntite()));
+                        team2.getListeCbtEntities().get(compteur).setEntite(useMove(movesALancer.get(rang), pnjsALancer.get(rang).getEntite(), pnjsARecevoir.get(rang).getEntite()));
                     }
                     compteur++;
                 }
@@ -82,7 +81,7 @@ public class CombatState {
                     move = Move.coupPoing();
                 }
                 ArrayList<Pnj> cibles = new ArrayList<>();
-                for (Pnj pnj:team1.getListePNJ()){
+                for (Pnj pnj:team1.getListeCbtEntities()){
                     if (pnj.getEntite().getPV().getlvlpv()>0){
                         cibles.add(pnj);
                     }
@@ -91,9 +90,9 @@ public class CombatState {
                     Integer ciblePtr = ThreadLocalRandom.current().nextInt(0, cibles.size());
                     Pnj cible = cibles.get(ciblePtr);
                     Integer compteur = 0;
-                    for (Pnj pnj:team1.getListePNJ()) {
+                    for (Pnj pnj:team1.getListeCbtEntities()) {
                         if (pnj.equals(cible)){
-                            team1.getListePNJ().get(compteur).setEntite(useMove(move, pnjPlay.getEntite(), cible.getEntite()));
+                            team1.getListeCbtEntities().get(compteur).setEntite(useMove(move, pnjPlay.getEntite(), cible.getEntite()));
                         }
                         compteur++;
                     }
@@ -127,10 +126,10 @@ public class CombatState {
         ArrayList<Pnj> listePnjsVitesse;
         if (this.listeOrdrePnj.size()==0){
             listePnjsVitesse = new ArrayList<>();
-            for (Pnj pnjAjoute:team1.getListePNJ()) {
+            for (Pnj pnjAjoute:team1.getListeCbtEntities()) {
                 listePnjsVitesse.add(pnjAjoute);
             }
-            for (Pnj pnjAjoute:team2.getListePNJ()) {
+            for (Pnj pnjAjoute:team2.getListeCbtEntities()) {
                 listePnjsVitesse.add(pnjAjoute);
             }
         }else{
@@ -164,13 +163,13 @@ public class CombatState {
             }//Pillage des objets de l'équipe adverse
             team1.addArgent(team2.getArgent()/2);//Pillage de la moitié de l'argent de l'équipe adverse
             Integer xpObtenu = 0;
-            for (Pnj pnjEnnemis:team2.getListePNJ()) {
+            for (Pnj pnjEnnemis:team2.getListeCbtEntities()) {
                 xpObtenu+=pnjEnnemis.getEntite().getXp();
             }//On récupère la somme d'xp de l'équipe adversaire
             Integer compteur = 0;
-            for (Pnj pnjAllie:team1.getListePNJ()){
-                pnjAllie.getEntite().addXp((Integer) xpObtenu/team1.getListePNJ().size());
-                team1.getListePNJ().set(compteur, pnjAllie);
+            for (Pnj pnjAllie:team1.getListeCbtEntities()){
+                pnjAllie.getEntite().addXp((Integer) xpObtenu/team1.getListeCbtEntities().size());
+                team1.getListeCbtEntities().set(compteur, pnjAllie);
                 compteur++;
             }//Ajout de l'xp sur chaque entité de l'équipe alliée
             fin=true;
@@ -187,11 +186,11 @@ public class CombatState {
         Integer pvAllie = 0;
         Integer pvEnnemis = 0;
         //Analyse des PV alliés
-        for (Pnj allie:team1.getListePNJ()) {
+        for (Pnj allie:team1.getListeCbtEntities()) {
             pvAllie += allie.getEntite().getPV().getPv();
         }
         //Analyse des PV ennemis
-        for (Pnj ennemis:team2.getListePNJ()) {
+        for (Pnj ennemis:team2.getListeCbtEntities()) {
             pvEnnemis += ennemis.getEntite().getPV().getPv();
         }
         if (pvAllie>0 && pvEnnemis>0){

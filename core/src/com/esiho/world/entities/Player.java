@@ -10,8 +10,8 @@ import com.esiho.world.map.GameMap;
 
 public class Player extends Entity {
     @Override
-    public void create (int x, int y, EntityType type, GameMap map){
-        super.create(x, y, type, map);
+    public void create (EntitySnapshot snapshot, EntityType type, GameMap map){
+        super.create(snapshot, type, map);
         super.sprite = new TextureRegion(type.getSprite(0, 0));
     }
 

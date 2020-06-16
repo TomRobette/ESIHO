@@ -1,10 +1,13 @@
 package com.esiho.combat;
 
+import com.esiho.combat.entities.CombatEntity;
+import com.esiho.world.item.Item;
+
 import java.util.ArrayList;
 
 public class Team {
     private String id;
-    private ArrayList<Pnj> listePNJ;
+    private ArrayList<CombatEntity> listeCbtEntities;
     private ArrayList<Item> inventaire;
     private Integer argent;
     private String position;
@@ -12,13 +15,13 @@ public class Team {
     public Team(String id, Integer argent, ArrayList<Item> inventaire){
         this.id=id;
         this.argent=argent;
-        this.inventaire=new Inventaire(new ArrayList<>());
+        this.inventaire = inventaire;
     }
 
     public Team(String id, Integer argent){
         this.id=id;
         this.argent=argent;
-        this.inventaire=new Inventaire();
+        this.inventaire= new ArrayList<>();
     }
 
     public String getId() {
@@ -29,23 +32,23 @@ public class Team {
         this.id = id;
     }
 
-    public void addPNJ(Pnj pnjAjoute){
-        if (listePNJ==null){
-            listePNJ = new ArrayList<>();
+    public void addPNJ(CombatEntity newEntity){
+        if (listeCbtEntities == null){
+            listeCbtEntities = new ArrayList<>();
         }
-        this.listePNJ.add(pnjAjoute);
+        this.listeCbtEntities.add(newEntity);
     }
 
-    public void removePNJ(Pnj pnjEnleve){
-        this.listePNJ.remove(pnjEnleve);
+    public void removePNJ(CombatEntity entityRemoved){
+        this.listeCbtEntities.remove(entityRemoved);
     }
 
-    public Inventaire getInventaire(){
+    public ArrayList<Item> getInventaire(){
         return inventaire;
     }
 
-    public ArrayList<Pnj> getListePNJ() {
-        return listePNJ;
+    public ArrayList<CombatEntity> getListeCbtEntities() {
+        return listeCbtEntities;
     }
 
     public void addArgent(Integer argentAjoutee){
