@@ -1,6 +1,7 @@
 package com.esiho.combat;
 
 import com.esiho.combat.moves.MoveType;
+import com.esiho.world.entities.Pnj;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;

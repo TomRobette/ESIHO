@@ -4,11 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esiho.combat.moves.MoveList;
 import com.esiho.combat.types.Type;
+import com.esiho.world.entities.Entity;
+import com.esiho.world.entities.Pnj;
 
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class CombatEntity {
+public abstract class CombatEntity extends Pnj {
     protected CombatEntityType entityType;
     protected int lvl;
     protected int xpmax;
