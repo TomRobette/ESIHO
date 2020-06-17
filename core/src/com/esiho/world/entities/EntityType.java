@@ -23,7 +23,7 @@ public enum EntityType {
     private EntityType(String id, Class loaderClass, String spriteName, int spritePosition){
         this.id = id;
         this.loaderClass = loaderClass;
-        TextureRegion[][] allsprites = TextureRegion.split(new Texture("/"+spriteName+".png"), 3*ENTITY_SIZE, 4*ENTITY_SIZE);
+        TextureRegion[][] allsprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), 3*ENTITY_SIZE, 4*ENTITY_SIZE);
         this.sprites = TextureRegion.split(allsprites[0][spritePosition].getTexture(), ENTITY_SIZE, ENTITY_SIZE);
         this.height = ENTITY_SIZE;
         this.width = ENTITY_SIZE;

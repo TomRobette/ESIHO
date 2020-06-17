@@ -15,7 +15,7 @@ public abstract class GameMap {
 
     public GameMap(){
         entities = new ArrayList<>();
-        entities.addAll(EntityLoader.loadEntity("basic", this, entities));
+        entities.addAll(EntityLoader.loadEntity("maison", this, entities));
     }
 
     public void render(OrthographicCamera cam, SpriteBatch batch){
@@ -31,12 +31,12 @@ public abstract class GameMap {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            EntityLoader.saveEntities("basic", entities);
+            EntityLoader.saveEntities("maison", entities);
         }
     }
 
     public void dispose(){
-        EntityLoader.saveEntities("basic", entities);
+        EntityLoader.saveEntities("maison", entities);
     }
 
     /****

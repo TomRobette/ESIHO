@@ -1,8 +1,8 @@
 [
-	{
-    "type": "player",
-    "x": 256,
-    "y": 256,
-    "data": {}
-  }
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P0
+	x: 20
+	y: 20
+}
 ]

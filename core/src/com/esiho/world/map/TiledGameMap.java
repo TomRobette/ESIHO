@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.esiho.world.entities.Entity;
 import com.esiho.world.entities.EntityLoader;
+import com.esiho.world.entities.EntityType;
+import com.esiho.world.entities.Player;
 
 public class TiledGameMap extends GameMap {
     private TiledMap tiledMap;
@@ -39,7 +41,7 @@ public class TiledGameMap extends GameMap {
             entity.update(delta, -9.8f);
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
             EntityLoader.saveEntities("maison", entities);
             System.out.println("BRUH");
         }
