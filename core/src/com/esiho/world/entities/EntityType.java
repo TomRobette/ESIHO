@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.esiho.world.map.GameMap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public enum EntityType {
@@ -23,8 +24,26 @@ public enum EntityType {
     private EntityType(String id, Class loaderClass, String spriteName, int spritePosition){
         this.id = id;
         this.loaderClass = loaderClass;
-        TextureRegion[][] allsprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), 3*ENTITY_SIZE, 4*ENTITY_SIZE);
-        this.sprites = TextureRegion.split(allsprites[0][spritePosition].getTexture(), ENTITY_SIZE, ENTITY_SIZE);
+        TextureRegion[][] allsprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), ENTITY_SIZE*3, ENTITY_SIZE*4);
+        ArrayList<TextureRegion> listeSprites = new ArrayList<>();
+        for (TextureRegion[] row:allsprites) {
+            for (TextureRegion col:row) {
+                listeSprites.add(col);
+            }
+        }
+        this.sprites = TextureRegion.split(listeSprites.get(spritePosition).getTexture(), ENTITY_SIZE, ENTITY_SIZE);
+        int b = 0;
+        int c = 0;
+//        for (int a = 0; a<12; a++){
+//            if (a%3==0){
+//                b++;
+//            }
+//            if (b%3==0){
+//                c++;
+//                b=0;
+//            }
+//            this.sprites[c][b] = allsprites[c][3*spritePosition+b];
+//        }
         this.height = ENTITY_SIZE;
         this.width = ENTITY_SIZE;
     }
