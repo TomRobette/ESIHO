@@ -40,7 +40,8 @@ public class TiledGameMap extends GameMap {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
-            EntityLoader.saveEntities("black", entities);
+            EntityLoader.saveEntities("maison", entities);
+            System.out.println("BRUH");
         }
 
     }
@@ -66,6 +67,22 @@ public class TiledGameMap extends GameMap {
             }
         }
         return null;
+    }
+
+    @Override
+    public Boolean doesRectCollideWithMap(float x, float y, float width, float height) {
+        if (x < 0 || y < 0 || x+width > getPixelWidth() || y+height > getPixelHeight()){
+            return true;
+        }
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
+        for (int row = (int)(y / GameTile.TILE_SIZE); row < Math.ceil((y + height) / GameTile.TILE_SIZE); row++){
+            for (int col = (int)(x / GameTile.TILE_SIZE); col < Math.ceil((x + width) / GameTile.TILE_SIZE); col++){
+                if (layer.getCell(col, row).getTile().getId()==0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

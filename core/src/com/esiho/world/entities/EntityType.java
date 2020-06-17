@@ -11,7 +11,7 @@ import com.esiho.world.map.GameMap;
 import java.util.HashMap;
 
 public enum EntityType {
-    JOUEUR("P0", Player.class, "joueur");
+    JOUEUR("P0", Player.class, "Actor1", 0);
 
     private String id;
     private Class loaderClass;
@@ -20,10 +20,11 @@ public enum EntityType {
 
     public static final int ENTITY_SIZE = 32;
 
-    private EntityType(String id, Class loaderClass, String spriteName){
+    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition){
         this.id = id;
         this.loaderClass = loaderClass;
-        this.sprites = TextureRegion.split(new Texture(spriteName+".png"), ENTITY_SIZE, ENTITY_SIZE);
+        TextureRegion[][] allsprites = TextureRegion.split(new Texture("/"+spriteName+".png"), 3*ENTITY_SIZE, 4*ENTITY_SIZE);
+        this.sprites = TextureRegion.split(allsprites[0][spritePosition].getTexture(), ENTITY_SIZE, ENTITY_SIZE);
         this.height = ENTITY_SIZE;
         this.width = ENTITY_SIZE;
     }

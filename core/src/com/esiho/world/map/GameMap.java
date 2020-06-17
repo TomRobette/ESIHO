@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.esiho.world.entities.Entity;
 import com.esiho.world.entities.EntityLoader;
 
@@ -14,7 +15,7 @@ public abstract class GameMap {
 
     public GameMap(){
         entities = new ArrayList<>();
-        entities.addAll(EntityLoader.loadEntity("black", this, entities));
+        entities.addAll(EntityLoader.loadEntity("basic", this, entities));
     }
 
     public void render(OrthographicCamera cam, SpriteBatch batch){
@@ -60,22 +61,7 @@ public abstract class GameMap {
      */
     public abstract GameTile getTileByCoordinates(int layer, int col, int row);
 
-    public Boolean doesRectCollideWithMap(float x, float y, float width, float height){
-        if (x < 0 || y < 0 || x+width > getPixelWidth() || y+height > getPixelHeight()){
-            return true;
-        }
-        for (int row = (int)(y / GameTile.TILE_SIZE); row < Math.ceil((y + height) / GameTile.TILE_SIZE); row++){
-            for (int col = (int)(x / GameTile.TILE_SIZE); col < Math.ceil((x + width) / GameTile.TILE_SIZE); col++){
-                for (int layer = 0; layer < getLayers(); layer++){
-                    GameTile tile = getTileByCoordinates(layer, col, row);
-                    if (tile!=null && tile.isCollidable()){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
+    public abstract Boolean doesRectCollideWithMap(float x, float y, float width, float height);
 
     public abstract int getWidth();
     public abstract int getHeight();
