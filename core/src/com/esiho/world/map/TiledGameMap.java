@@ -79,7 +79,7 @@ public class TiledGameMap extends GameMap {
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
         for (int row = (int)(y / GameTile.TILE_SIZE); row < Math.ceil((y + height) / GameTile.TILE_SIZE); row++){
             for (int col = (int)(x / GameTile.TILE_SIZE); col < Math.ceil((x + width) / GameTile.TILE_SIZE); col++){
-                if (layer.getCell(col, row).getTile().getId()==0){
+                if (layer.getCell(col, row)!=null){
                     return true;
                 }
             }
