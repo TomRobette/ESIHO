@@ -1,6 +1,5 @@
 package com.esiho.world.entities;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +15,9 @@ public abstract class Entity {
     protected TextureRegion sprite;
     protected GameMap map;
 
+    private int pointerX = 0;
+    private int pointerY = 0;
+
     public void create(EntitySnapshot snapshot, EntityType type, GameMap map){
         this.pos = new Vector2(snapshot.x, snapshot.y);
         this.type = type;
@@ -30,18 +32,38 @@ public abstract class Entity {
         float newX = pos.x + amount;
         if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight())){
             if (amount > 0){
-                this.haut=false;
-                this.bas=false;
-                this.droite=true;
-                this.gauche=false;
-                this.sprite = type.getSprite(2, 0);
+                if (!droite){
+                    this.haut=false;
+                    this.bas=false;
+                    this.droite=true;
+                    this.gauche=false;
+                    pointerY=2;
+                    pointerX=0;
+                }else{
+                    if (pointerX<2){
+                        pointerX++;
+                    }else{
+                        pointerX=0;
+                    }
+                }
+
             }else{
-                this.haut=false;
-                this.bas=false;
-                this.droite=false;
-                this.gauche=true;
-                this.sprite = type.getSprite(1, 0);
+                if (!gauche){
+                    this.haut=false;
+                    this.bas=false;
+                    this.droite=false;
+                    this.gauche=true;
+                    pointerY=1;
+                    pointerX=0;
+                }else{
+                    if (pointerX<2){
+                        pointerX++;
+                    }else{
+                        pointerX=0;
+                    }
+                }
             }
+            this.sprite = type.getSprite(4*type.spritePosition+pointerY, 3*type.spritePosition+pointerX);
             this.pos.x = newX;
         }
     }
@@ -50,18 +72,37 @@ public abstract class Entity {
         float newY = pos.y + amount;
         if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight())){
             if (amount > 0){
-                this.haut=true;
-                this.bas=false;
-                this.droite=false;
-                this.gauche=false;
-                this.sprite = type.getSprite(3, 0);
+                if (!haut){
+                    this.haut=true;
+                    this.bas=false;
+                    this.droite=false;
+                    this.gauche=false;
+                    pointerY=3;
+                    pointerX=0;
+                }else{
+                    if (pointerX<2){
+                        pointerX++;
+                    }else{
+                        pointerX=0;
+                    }
+                }
             }else{
-                this.haut=false;
-                this.bas=true;
-                this.droite=false;
-                this.gauche=false;
-                this.sprite = type.getSprite(0, 0);
+                if (!bas){
+                    this.haut=false;
+                    this.bas=true;
+                    this.droite=false;
+                    this.gauche=false;
+                    pointerY=0;
+                    pointerX=0;
+                }else{
+                    if (pointerX<2){
+                        pointerX++;
+                    }else{
+                        pointerX=0;
+                    }
+                }
             }
+            this.sprite = type.getSprite(4*type.spritePosition+pointerY, 3*type.spritePosition+pointerX);
             this.pos.y = newY;
         }
     }

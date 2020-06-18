@@ -17,16 +17,16 @@ public class Player extends Entity {
 
     @Override
     public void update(float deltaTime, float gravity) {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
             super.moveX(-32);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
             super.moveX(32);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             super.moveY(32);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
             super.moveY(-32);
         }
     }

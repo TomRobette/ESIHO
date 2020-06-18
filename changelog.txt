@@ -197,3 +197,7 @@ ex : T2-28 => Le 28e Tile du tileset 2
 
 #TomRobette#17/06/2020#
 -Affichage des maps
+-Reconstruction des déplacements
+
+#TomRobette#18/06/2020#
+-Corrections de bugs liés aux déplacements

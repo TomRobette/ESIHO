@@ -18,20 +18,23 @@ public enum EntityType {
     private Class loaderClass;
     private TextureRegion[][] sprites;
     private int height, width;
+    public int spritePosition;
 
     public static final int ENTITY_SIZE = 32;
 
     private EntityType(String id, Class loaderClass, String spriteName, int spritePosition){
         this.id = id;
         this.loaderClass = loaderClass;
-        TextureRegion[][] allsprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), ENTITY_SIZE*3, ENTITY_SIZE*4);
-        ArrayList<TextureRegion> listeSprites = new ArrayList<>();
-        for (TextureRegion[] row:allsprites) {
-            for (TextureRegion col:row) {
-                listeSprites.add(col);
-            }
-        }
-        this.sprites = TextureRegion.split(listeSprites.get(spritePosition).getTexture(), ENTITY_SIZE, ENTITY_SIZE);
+        this.spritePosition = spritePosition;
+//        TextureRegion[][] allsprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), ENTITY_SIZE*3, ENTITY_SIZE*4);
+//        ArrayList<TextureRegion> listeSprites = new ArrayList<>();
+//        for (TextureRegion[] row:allsprites) {
+//            for (TextureRegion col:row) {
+//                listeSprites.add(col);
+//            }
+//        }
+//        this.sprites = TextureRegion.split(listeSprites.get(this.spritePosition).getTexture(), ENTITY_SIZE, ENTITY_SIZE);
+        this.sprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), ENTITY_SIZE, ENTITY_SIZE);
         int b = 0;
         int c = 0;
 //        for (int a = 0; a<12; a++){
@@ -80,11 +83,7 @@ public enum EntityType {
 
     public TextureRegion getSprite(int sens, int etape){
         TextureRegion textureRegion = new TextureRegion();
-        if (sens<5 && sens>=0 && etape<4 && etape>=0){
-            textureRegion = sprites[0][etape+3*sens];
-        }else{
-            textureRegion = sprites[0][0];
-        }
+            textureRegion = sprites[sens][etape];
         return textureRegion;
     }
 
