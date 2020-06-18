@@ -27,7 +27,7 @@ public abstract class GameMap {
 
     public void update(float delta){
         for (Entity entity : entities) {
-            entity.update(delta, -9.8f);
+            entity.update(delta);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {

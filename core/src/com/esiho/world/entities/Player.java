@@ -3,12 +3,17 @@ package com.esiho.world.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.esiho.Launcher;
+import com.esiho.Timer;
 import com.esiho.world.map.GameMap;
 
 public class Player extends Entity {
+    Animation animation;
+    int[] tab;
+
     @Override
     public void create (EntitySnapshot snapshot, EntityType type, GameMap map){
         super.create(snapshot, type, map);
@@ -16,24 +21,29 @@ public class Player extends Entity {
     }
 
     @Override
-    public void update(float deltaTime, float gravity) {
+    public void update(float deltaTime) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
-            super.moveX(-32);
+            tab = super.moveX(-32);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)){
-            super.moveX(32);
+            tab = super.moveX(32);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            super.moveY(32);
+            tab = super.moveY(32);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
-            super.moveY(-32);
+            tab = super.moveY(-32);
         }
     }
 
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(super.sprite, pos.x, pos.y, getWidth(), getHeight());
+        if (tab!=null){
+            super.movingAnim(tab[0], tab[1]);
+//            Launcher.cam.translate(tab[0]*32+pos.x, tab[1]*32+pos.y, 0);
+            tab=null;
+        }else
         Launcher.cam.position.set(pos.x, pos.y, 0);
     }
 }

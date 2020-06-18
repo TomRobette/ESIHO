@@ -38,7 +38,7 @@ public class TiledGameMap extends GameMap {
     @Override
     public void update(float delta) {
         for (Entity entity : entities) {
-            entity.update(delta, -9.8f);
+            entity.update(delta);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
@@ -77,7 +77,7 @@ public class TiledGameMap extends GameMap {
             return true;
         }
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
-        for (int row = (int)(y / GameTile.TILE_SIZE); row < Math.ceil((y + height) / GameTile.TILE_SIZE); row++){
+        for (int row = (int)(y / GameTile.TILE_SIZE); row < Math.ceil((y + height - 16) / GameTile.TILE_SIZE); row++){
             for (int col = (int)(x / GameTile.TILE_SIZE); col < Math.ceil((x + width) / GameTile.TILE_SIZE); col++){
                 if (layer.getCell(col, row)!=null){
                     return true;
