@@ -1,14 +1,9 @@
 package com.esiho.world.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.esiho.Launcher;
-import com.esiho.Timer;
 import com.esiho.world.map.GameMap;
-
-import java.util.ArrayList;
 
 public abstract class Entity {
     protected Vector2 pos;

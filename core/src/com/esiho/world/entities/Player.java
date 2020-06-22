@@ -2,12 +2,10 @@ package com.esiho.world.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.esiho.Launcher;
-import com.esiho.Timer;
+import com.esiho.Game;
 import com.esiho.world.map.GameMap;
 
 public class Player extends Entity {
@@ -44,6 +42,6 @@ public class Player extends Entity {
 //            Launcher.cam.translate(tab[0]*32+pos.x, tab[1]*32+pos.y, 0);
             tab=null;
         }else
-        Launcher.cam.position.set(pos.x, pos.y, 0);
+        Game.cam.position.set(pos.x, pos.y, 0);
     }
 }

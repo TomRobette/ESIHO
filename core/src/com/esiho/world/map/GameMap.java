@@ -31,8 +31,12 @@ public abstract class GameMap {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            EntityLoader.saveEntities("maison", entities);
+            saveEntities();
         }
+    }
+
+    public void saveEntities(){
+        EntityLoader.saveEntities("maison", entities);
     }
 
     public void dispose(){
