@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,16 +14,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.combat.CombatState;
 
-
-public class MainScreen implements Screen {
+public class ScreensScreen implements Screen {
     Game game;
     private SpriteBatch batch;
     protected Stage stage;
     private Viewport viewport;
     private OrthographicCamera camera;
 
-    public MainScreen(Game game){
+    public ScreensScreen(Game game){
         this.game=game;
 
         batch = new SpriteBatch();
@@ -53,30 +52,43 @@ public class MainScreen implements Screen {
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 
 
-        TextButton playButton = new TextButton("Jouer", skin);
-        TextButton optionsButton = new TextButton("Parametres", skin);
-        TextButton debugButton = new TextButton("Debug", skin);
-        TextButton creditsButton = new TextButton("Credits", skin);
+        TextButton mainScreenButton = new TextButton("MainScreen", skin);
+        TextButton gameScreenButton = new TextButton("GameScreen", skin);
+        TextButton combatScreenButton = new TextButton("CombatScreen", skin);
+        TextButton inventoryScreenButton = new TextButton("InventoryScreen", skin);
+        TextButton lvlupScreenButton = new TextButton("LvlupScreen", skin);
         TextButton exitButton = new TextButton("Quitter", skin);
 
 
-        playButton.addListener(new ClickListener(){
+        mainScreenButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new MainScreen(game));
+            }
+        });
+
+        gameScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game));
             }
         });
-
-        creditsButton.addListener(new ClickListener(){
+        combatScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                game.setScreen(new CombatScreen(game, new CombatState()));
             }
         });
-        debugButton.addListener(new ClickListener(){
+        inventoryScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new ScreensScreen(game));
+                game.setScreen(new GameScreen(game));
+            }
+        });
+        lvlupScreenButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new GameScreen(game));
             }
         });
         exitButton.addListener(new ClickListener(){
@@ -87,13 +99,15 @@ public class MainScreen implements Screen {
         });
 
 
-        mainTable.add(playButton);
+        mainTable.add(mainScreenButton);
         mainTable.row();
-        mainTable.add(optionsButton);
+        mainTable.add(gameScreenButton);
         mainTable.row();
-        mainTable.add(debugButton);
+        mainTable.add(combatScreenButton);
         mainTable.row();
-        mainTable.add(creditsButton);
+        mainTable.add(inventoryScreenButton);
+        mainTable.row();
+        mainTable.add(lvlupScreenButton);
         mainTable.row();
         mainTable.add(exitButton);
 

@@ -1,4 +1,4 @@
-package com.esiho.combat;
+package com.esiho.combat.teams;
 
 import com.esiho.combat.entities.CombatEntity;
 import com.esiho.world.item.Item;
@@ -6,22 +6,21 @@ import com.esiho.world.item.Item;
 import java.util.ArrayList;
 
 public class Team {
-    private String id;
-    private ArrayList<CombatEntity> listeCbtEntities;
-    private ArrayList<Item> inventaire;
-    private Integer argent;
-    private String position;
+    private TeamType type;
 
-    public Team(String id, Integer argent, ArrayList<Item> inventaire){
+    public void create(String id, Integer argent, ArrayList<Item> inventaire, ArrayList<CombatEntity> listeCbtEntities){
         this.id=id;
         this.argent=argent;
         this.inventaire = inventaire;
+        this.listeCbtEntities = listeCbtEntities;
     }
 
-    public Team(String id, Integer argent){
-        this.id=id;
-        this.argent=argent;
-        this.inventaire= new ArrayList<>();
+    public void create(String id, Integer argent, ArrayList<CombatEntity> listeCbtEntities){
+        this.create(id, argent, new ArrayList<>(), listeCbtEntities);
+    }
+
+    public void create(String id, Integer argent){
+        this.create(id, argent, new ArrayList<>(), new ArrayList<>());
     }
 
     public String getId() {
