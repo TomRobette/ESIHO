@@ -2,12 +2,14 @@ package com.esiho.combat.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esiho.combat.moves.MoveList;
+import com.esiho.world.item.Arme;
+import com.esiho.world.item.Armure;
 
 public class Joueur extends CombatEntity {
 
 
-    public void create(CombatEntityType entityType, int lvl, int xpmax, int xp, int pvmax, int pv, int att, int def, int attspe, int defspe, int vitesse, Arme arme, Armure armure, MoveList movesPhy, MoveList movesSpe) {
-        super.create(entityType, lvl, xpmax, xp, pvmax, pv, att, def, attspe, defspe, vitesse, arme, armure, movesPhy, movesSpe);
+    public void create(CombatEntityType entityType) {
+        super.create(entityType);
     }
 
     @Override

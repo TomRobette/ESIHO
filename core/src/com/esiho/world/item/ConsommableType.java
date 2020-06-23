@@ -37,7 +37,7 @@ public enum ConsommableType {
     public Texture sprite;
     public String nom;
     public Integer valeur;
-    public UseItem useItem;
+    private UseItem useItem;
 
     private ConsommableType(String id, String spriteName, String nom, Integer valeur, UseItem useItem){
         this.id = id;
@@ -47,12 +47,12 @@ public enum ConsommableType {
         this.useItem = useItem;
     }
 
-    public void useItemOnEntity(CombatEntity combatEntity){
-        this.useItem.useItemOnEntity(combatEntity);
+    public CombatEntity useItemOnEntity(CombatEntity combatEntity){
+        return this.useItem.useItemOnEntity(combatEntity);
     }
 
-    public void useItemOnTeam(Team team){
-        this.useItem.useItemOnTeam(team);
+    public Team useItemOnTeam(Team team){
+        return this.useItem.useItemOnTeam(team);
     }
 
     private static HashMap<String, ConsommableType> consommableTypes;

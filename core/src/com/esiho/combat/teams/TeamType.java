@@ -19,10 +19,10 @@ public enum TeamType {
     JOUEUR("T0", Player.class, "Actor1");
 
     private String id;
-    private TeamType type;
-    private ArrayList<CombatEntity> listeCbtEntities;
-    private ArrayList<Item> inventaire;
-    private Integer argent;
+    public TeamType type;
+    public ArrayList<CombatEntity> listeCbtEntities;
+    public ArrayList<Item> inventaire;
+    public Integer argent;
     private Class loaderClass;
     private Texture sprite;
 
@@ -34,11 +34,11 @@ public enum TeamType {
         this.sprite = new Texture("combat/"+spriteName+".png");
     }
 
-    public static Entity createTeamUsingSnapshot(TeamSnapshot teamSnapshot, GameMap map){
+    public static Team createTeamUsingSnapshot(TeamSnapshot teamSnapshot){
         TeamType type = teamTypes.get(teamSnapshot.type);
         try{
             Team team = (Team) ClassReflection.newInstance(type.loaderClass);
-            team.create(teamSnapshot, type, map);
+            team.create(teamSnapshot, type);
             return team;
         }catch (Exception e){
             Gdx.app.error("TeamLoader", "N'a pas pu charger le type"+type.id+" depuis la snapshot");

@@ -1,6 +1,7 @@
 package com.esiho.combat.teams;
 
 import com.esiho.combat.entities.CombatEntity;
+import com.esiho.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +10,17 @@ public class TeamSnapshot {
 
     public String type;
     public ArrayList<CombatEntity> listeCombatEntities;
+    public ArrayList<Item> inventaire;
+    public int argent;
     public HashMap<String, String> data;
 
     public TeamSnapshot(){}
 
-    public TeamSnapshot(String type, ArrayList<CombatEntity> listeCombatEntities){
+    public TeamSnapshot(String type, ArrayList<CombatEntity> listeCombatEntities, ArrayList<Item> inventaire, int argent){
         this.type=type;
         this.listeCombatEntities=listeCombatEntities;
+        this.inventaire=inventaire;
+        this.argent=argent;
     }
 
     public String getType() {

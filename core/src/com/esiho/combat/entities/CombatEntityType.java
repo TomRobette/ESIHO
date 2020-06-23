@@ -5,13 +5,15 @@ import com.esiho.combat.moves.MoveList;
 import com.esiho.combat.moves.MoveType;
 import com.esiho.combat.types.Eau;
 import com.esiho.combat.types.Type;
+import com.esiho.world.item.Arme;
 import com.esiho.world.item.ArmeType;
+import com.esiho.world.item.Armure;
 import com.esiho.world.item.ArmureType;
 
 import java.util.HashMap;
 
 public enum CombatEntityType {
-    JOUEUR("C1", new Eau(), "Swordman", 5, 300, 0, 200, 200, 150, 100, 50, 100, 100, ArmeType.EPEELEGENDAIRE, ArmureType.ARMURE_BANALE, new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU), new MoveList(MoveType.FLECHE_EAU));
+    JOUEUR("C1", new Eau(), "Swordman", 5, 300, 0, 200, 200, 150, 100, 50, 100, 100, new Arme(ArmeType.EPEELEGENDAIRE), new Armure(ArmureType.ARMURE_BANALE), new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU), new MoveList(MoveType.FLECHE_EAU));
 
     private String id;
     private Type type;
@@ -26,12 +28,12 @@ public enum CombatEntityType {
     protected int attspe;
     protected int defspe;
     protected int vitesse;
-    protected ArmeType arme;
-    protected ArmureType armure;
+    protected Arme arme;
+    protected Armure armure;
     protected MoveList movesPhy;
     protected MoveList movesSpe;
 
-    private CombatEntityType(String id, Type type, String spriteName, int lvl, int xpmax, int xp, int pvmax, int pv, int att, int def, int attspe, int defspe, int vitesse, ArmeType arme, ArmureType armure, MoveList movesPhy, MoveList movesSpe){
+    private CombatEntityType(String id, Type type, String spriteName, int lvl, int xpmax, int xp, int pvmax, int pv, int att, int def, int attspe, int defspe, int vitesse, Arme arme, Armure armure, MoveList movesPhy, MoveList movesSpe){
         this.id = id;
         this.type = type;
         this.sprite = new Texture(spriteName+".png");

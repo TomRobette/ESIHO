@@ -1,14 +1,12 @@
 package com.esiho.world.item;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.teams.Team;
 
 public abstract class Item{
-    private ItemType type;
 
-    public void create(ItemType type) {
-        this.type=type;
-    }
+    public abstract CombatEntity useItemOnEntity(CombatEntity combatEntity);
 
-
-    public abstract void useItem();
+    public abstract Team useItemOnTeam(Team team);
 }

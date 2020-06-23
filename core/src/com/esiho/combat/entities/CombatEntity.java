@@ -2,8 +2,8 @@ package com.esiho.combat.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esiho.combat.moves.MoveList;
-import com.esiho.world.item.ArmeType;
-import com.esiho.world.item.ArmureType;
+import com.esiho.world.item.Arme;
+import com.esiho.world.item.Armure;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -77,19 +77,19 @@ public abstract class CombatEntity {
         }
     }//On ajoute les points aux stats
 
-    public ArmeType getArme() {
+    public Arme getArme() {
         return entityType.arme;
     }
 
-    public void setArme(ArmeType arme) {
+    public void setArme(Arme arme) {
         this.entityType.arme = arme;
     }
 
-    public ArmureType getArmure() {
+    public Armure getArmure() {
         return entityType.armure;
     }
 
-    public void setArmure(ArmureType armure) {
+    public void setArmure(Armure armure) {
         this.entityType.armure = armure;
     }
 
