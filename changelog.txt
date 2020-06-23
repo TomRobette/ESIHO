@@ -2,6 +2,11 @@
 
 // Veuillez déposer à partir d'ici :
 
+#TomRobette#23/06/2020#
+-Restructuration Majeure des Items
+-Restructuration Majeure des Teams
+-Restructuration Mineure des CombatEntities
+
 #TomRobette#22/06/2020#
 -Modification du Launcher pour pouvoir passer entre plusieurs écrans
 -Ajout de l'écran du jeu
