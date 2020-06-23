@@ -14,7 +14,7 @@ public enum ArmeType {
     public Texture sprite;
     public String nom;
     public Integer valeur;
-    private Integer coeffDegats;
+    public Integer coeffDegats;
 
     private ArmeType(String id, String spriteName, String nom, Integer valeur, Integer coeffDegats){
         this.id = id;

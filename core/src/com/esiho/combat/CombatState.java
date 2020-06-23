@@ -1,29 +1,32 @@
 package com.esiho.combat;
 
+import com.esiho.combat.entities.CombatEntity;
 import com.esiho.combat.moves.MoveType;
+import com.esiho.combat.teams.Team;
+import com.esiho.combat.types.Type;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class CombatState {
-//    public Team team1;
-//    public Team team2;
-//    private Integer tour;
-//    private Integer tourDeTable;
-//    private Boolean fin;
+    public Team team1;
+    public Team team2;
+    public CombatEntity entity1;
+    public CombatEntity entity2;
+    private Integer tour;
+    private Boolean fin;
 //    private ArrayList<Pnj> listeOrdrePnj;
 //    private ArrayList<Pnj> pnjsALancer;
 //    private ArrayList<MoveType> movesALancer;
 //    private ArrayList<Pnj> pnjsARecevoir;
-//    private Integer victoire;
+    private Integer victoire;
 //
-//    public CombatState(Team team1, Team team2){
-//        this.team1=team1;
-//        this.team2=team2;
-//        this.tour = 0;
-//        this.tourDeTable = 0;
-//        this.fin = false;
+    public CombatState(Team team1, Team team2){
+        this.team1=team1;
+        this.team2=team2;
+        this.tour = 0;
+        this.fin = false;
 //        this.listeOrdrePnj = new ArrayList<>();
 //        this.listeOrdrePnj.addAll(team1.getListeCbtEntities());
 //        this.listeOrdrePnj.addAll(team2.getListeCbtEntities());
@@ -31,8 +34,26 @@ public class CombatState {
 //        this.pnjsALancer = new ArrayList<>();
 //        this.movesALancer = new ArrayList<>();
 //        this.pnjsARecevoir = new ArrayList<>();
-//        victoire=0;
-//    }
+        victoire=0;
+    }
+
+    public Boolean selectEntity1(int pointer){
+        if (team1.getListeCbtEntities().get(pointer).getPv()>0){
+            this.entity1=team1.getListeCbtEntities().get(pointer);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Boolean selectEntity2(int pointer){
+        if (team2.getListeCbtEntities().get(pointer).getPv()>0){
+            this.entity2=team2.getListeCbtEntities().get(pointer);
+            return true;
+        }else{
+            return false;
+        }
+    }
 //
 //    private void newTourdeTable(){
 //        this.listeOrdrePnj = triVitesse();
@@ -238,40 +259,40 @@ public class CombatState {
 //        return entiteModifiee;
 //    }
 //
-//    private Double getModifier(Move move, Entity entityThrow, Entity entityReceiver){
-//        double modifier = 1.0;
-//        Types moveType = move.getType();
-//        Types typeReceiver = entityReceiver.getType();
-//        ArrayList<Types> faiblesses = moveType.getWeaknesses();
-//
-//        for (Types typeCompare:faiblesses) {
-//            if (typeCompare.getNomType().equals(typeReceiver.getNomType())){
-//                modifier = 0.5;//PAS TRÈS EFFICACE !
-//            }
-//        }
-//        ArrayList<Types> forces = moveType.getStrengths();
-//
-//        for (Types typeCompare:forces) {
-//            if (typeCompare.getNomType().equals(typeReceiver.getNomType())){
-//                modifier = 2;//SUPER EFFICACE
-//            }
-//        }
-//
-//        Types typeThrower = entityThrow.getType();
-//        if (typeThrower.equals(moveType)){
-//            modifier*=1.5;//STAB
-//        }
-//
-//        if (entityThrow.getArme()!=null){
-//            modifier*=entityThrow.getArme().getCoeffDegats();
-//        }//Coefficient de l'arme appliqué
-//
-//        if(entityReceiver.getArmure()!=null){
-//            modifier*=entityReceiver.getArmure().getCoeffProtection();
-//        }//Coefficient de l'arme appliqué
-//
-//        return modifier;
-//    }
+    private Double getModifier(MoveType move, CombatEntity entityThrow, CombatEntity entityReceiver){
+        double modifier = 1.0;
+        Type moveType = move.getType();
+        Type typeReceiver = entityReceiver.getType();
+        ArrayList<Type> faiblesses = moveType.getWeaknesses();
+
+        for (Type typeCompare:faiblesses) {
+            if (typeCompare.getNomType().equals(typeReceiver.getNomType())){
+                modifier = 0.5;//PAS TRÈS EFFICACE !
+            }
+        }
+        ArrayList<Type> forces = moveType.getStrengths();
+
+        for (Type typeCompare:forces) {
+            if (typeCompare.getNomType().equals(typeReceiver.getNomType())){
+                modifier = 2;//SUPER EFFICACE
+            }
+        }
+
+        Type typeThrower = entityThrow.getType();
+        if (typeThrower.equals(moveType)){
+            modifier*=1.5;//STAB
+        }
+
+        if (entityThrow.getArme()!=null){
+            modifier*=entityThrow.getArme().getCoeffDegats();
+        }//Coefficient de l'arme appliqué
+
+        if(entityReceiver.getArmure()!=null){
+            modifier*=entityReceiver.getArmure().getCoeffProtection();
+        }//Coefficient de l'arme appliqué
+
+        return modifier;
+    }
 //
 //    private void timer(Integer duree){
 //        try{

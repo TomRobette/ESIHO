@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -51,8 +52,14 @@ public class CombatScreen implements Screen {
         rootTable.top();
 
         Table entitiesTable = new Table();
-        Table allieTable = new Table();
         Table adversTable = new Table();
+        adversTable.add(new Image(cbtState.entity2.getTexture()));
+        Table allieTable = new Table();
+        allieTable.add(new Image(cbtState.entity1.getTexture()));
+        entitiesTable.add(adversTable);
+        entitiesTable.row();
+        entitiesTable.add(allieTable);
+        rootTable.add(entitiesTable);
 
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 
@@ -96,7 +103,7 @@ public class CombatScreen implements Screen {
             }
         });
 
-
+        rootTable.row();
         rootTable.add(mainScreenButton);
         rootTable.row();
         rootTable.add(gameScreenButton);

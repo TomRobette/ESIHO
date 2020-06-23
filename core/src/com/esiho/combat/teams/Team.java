@@ -16,6 +16,10 @@ public class Team {
         this.type.listeCbtEntities = snapshot.listeCombatEntities;
     }
 
+    public void create(TeamType type){
+        this.type=type;
+    }
+
     public void addPNJ(CombatEntity newEntity){
         if (type.listeCbtEntities == null){
             type.listeCbtEntities = new ArrayList<>();

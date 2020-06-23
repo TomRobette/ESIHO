@@ -27,4 +27,8 @@ public class Armure extends Item {
     public Team useItemOnTeam(Team team) {
         return team;
     }
+
+    public int getCoeffProtection(){
+        return type.coeffProtection;
+    }
 }

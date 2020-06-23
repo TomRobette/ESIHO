@@ -12,7 +12,7 @@ public enum ArmureType {
     public Texture sprite;
     public String nom;
     public Integer valeur;
-    private Integer coeffProtection;
+    public Integer coeffProtection;
 
     private ArmureType(String id, String spriteName, String nom, Integer valeur, Integer coeffProtection){
         this.id = id;

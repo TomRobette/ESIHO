@@ -62,4 +62,8 @@ public enum MoveType {
             MoveType.moveTypes.put(moveType.id, moveType);
         }
     }
+
+    public Type getType() {
+        return type;
+    }
 }
