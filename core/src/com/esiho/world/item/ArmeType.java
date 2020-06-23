@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import java.util.HashMap;
 
 public enum ArmeType {
-    EPEELEGENDAIRE("I1", "epee_legendaire", "Épée légendaire", 1000, 10);
+    EPEELEGENDAIRE("I1", "epee_legendaire", "Épée légendaire", 1000, 40),
+    BATON("I2", "baton", "Bâton", 100, 3),
+    DAGUE("I3", "dague", "Dague", 250,5),
+    ARC("I4", "arc", "Arc", 300, 7);
 
     private String id;
     public Texture sprite;
