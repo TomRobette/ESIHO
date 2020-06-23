@@ -9,26 +9,7 @@ public class Team {
     private TeamType type;
 
     public void create(String id, Integer argent, ArrayList<Item> inventaire, ArrayList<CombatEntity> listeCbtEntities){
-        this.id=id;
-        this.argent=argent;
-        this.inventaire = inventaire;
-        this.listeCbtEntities = listeCbtEntities;
-    }
 
-    public void create(String id, Integer argent, ArrayList<CombatEntity> listeCbtEntities){
-        this.create(id, argent, new ArrayList<>(), listeCbtEntities);
-    }
-
-    public void create(String id, Integer argent){
-        this.create(id, argent, new ArrayList<>(), new ArrayList<>());
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void addPNJ(CombatEntity newEntity){

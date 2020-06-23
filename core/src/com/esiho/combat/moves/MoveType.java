@@ -54,12 +54,12 @@ public enum MoveType {
     }
 
 
-    private static HashMap<String, MoveType> moveType;
+    private static HashMap<String, MoveType> moveTypes;
 
     static {
-        moveType = new HashMap<String, MoveType>();
+        moveTypes = new HashMap<String, MoveType>();
         for (MoveType moveType : MoveType.values()){
-            MoveType.moveType.put(moveType.id, moveType);
+            MoveType.moveTypes.put(moveType.id, moveType);
         }
     }
 }

@@ -3,67 +3,14 @@ package com.esiho.world.item;
 import com.badlogic.gdx.graphics.Texture;
 
 public abstract class Item{
-    private String id;
-    private String nom;
-    private Integer valeur;
-    private Texture texture;
-    private String typeI;
+    private ItemType type;
 
-    public Item(String id, String nom, Integer valeur, Texture texture) {
-        this.id = id;
-        this.nom = nom;
-        this.valeur = valeur;
-        this.texture = texture;
-    }
-
-    public Item(String id, String nom, Integer valeur) {
-        this.id = id;
-        this.nom = nom;
-        this.valeur = valeur;
+    public void create(ItemType type) {
+        this.type=type;
     }
 
 
     public abstract void useItem();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Integer getValeur() {
-        return valeur;
-    }
-
-    public void setValeur(Integer valeur) {
-        this.valeur = valeur;
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
-    }
-
-    public String getTypeI() {
-        return typeI;
-    }
-
-    public void setTypeI(String typeI) {
-        this.typeI = typeI;
-    }
 
     public static Arme epee(){
         Arme epee = new Arme("I3","Épée légendaire",500,5);
