@@ -9,17 +9,19 @@ import com.esiho.world.item.Armure;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class CombatEntity {
+public class CombatEntity {
     protected CombatEntityType entityType;
 
 
-    protected void create(CombatEntityType entityType) {
+    public void create(CombatEntityType entityType) {
         this.entityType = entityType;
 
     }
 
 
-    public abstract void render(SpriteBatch batch);
+    public void render(SpriteBatch batch){
+
+    }
 
     public void setPv(Integer pvmodif) {
         this.entityType.pv = pvmodif;

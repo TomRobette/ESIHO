@@ -15,6 +15,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
 import com.esiho.combat.CombatState;
+import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.CombatEntityType;
 import com.esiho.combat.teams.Team;
 import com.esiho.combat.teams.TeamType;
 
@@ -60,8 +62,12 @@ public class ScreensScreen implements Screen {
         TextButton inventoryScreenButton = new TextButton("InventoryScreen", skin);
         TextButton lvlupScreenButton = new TextButton("LvlupScreen", skin);
         TextButton exitButton = new TextButton("Quitter", skin);
-        Team team1 = new Team();
-        team1.create(TeamType.JOUEUR);
+        Team teamOne = new Team();
+        teamOne.create(TeamType.JOUEUR);
+        CombatEntity cbtEntity = new CombatEntity();
+        cbtEntity.create(CombatEntityType.JOUEUR);
+        teamOne.addPNJ(cbtEntity);
+        final CombatState combat = new CombatState(teamOne, teamOne);
 
         mainScreenButton.addListener(new ClickListener(){
             @Override
@@ -79,7 +85,8 @@ public class ScreensScreen implements Screen {
         combatScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new CombatScreen(game, new CombatState(team1, team1)));
+                final CombatState cbt = combat;
+                game.setScreen(new CombatScreen(game, cbt));
             }
         });
         inventoryScreenButton.addListener(new ClickListener(){

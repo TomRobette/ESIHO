@@ -36,7 +36,7 @@ public enum CombatEntityType {
     private CombatEntityType(String id, Type type, String spriteName, int lvl, int xpmax, int xp, int pvmax, int pv, int att, int def, int attspe, int defspe, int vitesse, Arme arme, Armure armure, MoveList movesPhy, MoveList movesSpe){
         this.id = id;
         this.type = type;
-        this.sprite = new Texture(spriteName+".png");
+        this.sprite = new Texture("combat/"+spriteName+".png");
         this.lvl = lvl;
         this.xpmax = xpmax;
         this.xp = xp;

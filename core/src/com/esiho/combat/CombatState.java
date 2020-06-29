@@ -27,6 +27,8 @@ public class CombatState {
         this.team2=team2;
         this.tour = 0;
         this.fin = false;
+        this.entity1 = team1.getListeCbtEntities().get(0);
+        this.entity2 = team2.getListeCbtEntities().get(0);
 //        this.listeOrdrePnj = new ArrayList<>();
 //        this.listeOrdrePnj.addAll(team1.getListeCbtEntities());
 //        this.listeOrdrePnj.addAll(team2.getListeCbtEntities());

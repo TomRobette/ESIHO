@@ -11,9 +11,4 @@ public class Joueur extends CombatEntity {
     public void create(CombatEntityType entityType) {
         super.create(entityType);
     }
-
-    @Override
-    public void render(SpriteBatch batch) {
-
-    }
 }
