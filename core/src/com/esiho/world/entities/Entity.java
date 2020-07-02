@@ -110,7 +110,7 @@ public abstract class Entity {
             }else{
                 pas=0;
             }
-            this.sprite = type.getSprite(4*type.spritePosition+sens, 3*type.spritePosition+pas);
+            this.sprite = type.getSprite(sens, 3*type.spritePosition+pas);
             this.pos.x += 2*sensX;
             this.pos.y += 2*sensY;
             nbPxl+=2;
