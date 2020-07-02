@@ -3,7 +3,9 @@ package com.esiho.world.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.esiho.Game;
 import com.esiho.world.map.GameMap;
+import com.esiho.world.map.TiledGameMap;
 
 public class Teleporteur extends Entity {
     float stateTime = 0;
@@ -16,7 +18,14 @@ public class Teleporteur extends Entity {
 
     @Override
     public void update(float deltaTime) {
+        Entity player = super.map.getPlayer();
+        if (player!=null){
+            if (super.map.doesEntityCollideWithEntity(player, player.getX(), player.getY(), this)){
+                activation = true;
+                Game.gameMap = new TiledGameMap("plaine");
 
+            }
+        }
     }
 
     @Override

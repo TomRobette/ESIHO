@@ -14,7 +14,7 @@ import com.esiho.world.map.TiledGameMap;
 public class Game extends com.badlogic.gdx.Game {
 	public SpriteBatch batch;
 	public static OrthographicCamera cam;
-	public GameMap gameMap;
+	public static GameMap gameMap;
 
 	public final static int WIDTH = 720;
 	public final static int HEIGHT = 480;

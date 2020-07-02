@@ -33,7 +33,7 @@ public abstract class Entity {
 
     protected int[] moveX(int amount){
         float newX = pos.x + amount;
-        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight())){
+        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, newX, pos.y)){
             if (amount > 0){
                 if (!droite){
                     this.haut=false;
@@ -69,7 +69,7 @@ public abstract class Entity {
 
     protected int[] moveY(int amount){
         float newY = pos.y + amount;
-        if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight())){
+        if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, pos.x, newY)){
             if (amount > 0){
                 if (!haut){
                     this.haut=true;

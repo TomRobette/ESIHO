@@ -67,6 +67,10 @@ public abstract class GameMap {
 
     public abstract Boolean doesRectCollideWithMap(float x, float y, float width, float height);
 
+    public abstract Boolean doesEntityCollideWithEntity(Entity entity1, float x, float y, Entity entity2);
+
+    public abstract Boolean doesEntityCollideWithEntities(Entity entity, float x, float y);
+
     public abstract int getWidth();
     public abstract int getHeight();
     public abstract int getLayers();
@@ -77,5 +81,14 @@ public abstract class GameMap {
 
     public int getPixelHeight(){
         return this.getHeight()*GameTile.TILE_SIZE;
+    }
+
+    public Entity getPlayer(){
+        for (Entity entity:entities){
+            if (entity.getType().getId()=="P0"){
+                return entity;
+            }
+        }
+        return null;
     }
 }
