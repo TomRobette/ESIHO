@@ -3,6 +3,7 @@
 // Veuillez déposer à partir d'ici :
 #TomRobette#02/07/2020#
 -Ajout d'animations pour les entités
+-Corrections de bugs d'animations
 
 #TomRobette#23/06/2020#
 -Ajout d'un écran de debug (ScreensScreen) où l'on sélectionne les autres écrans
