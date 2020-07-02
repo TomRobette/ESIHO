@@ -11,8 +11,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.esiho.world.entities.Entity;
 import com.esiho.world.entities.EntityLoader;
-import com.esiho.world.entities.EntityType;
-import com.esiho.world.entities.Player;
 
 public class TiledGameMap extends GameMap {
     private TiledMap tiledMap;
@@ -84,6 +82,11 @@ public class TiledGameMap extends GameMap {
                 if (layer.getCell(col, row)!=null){
                     return true;
                 }
+            }
+        }
+        for (Entity entity:entities){
+            if (entity.getHeight()+entity.getY()>=y && entity.getY()<=y+height && entity.getWidth()+entity.getX()>=x && entity.getX()<=x+width && entity.getType().collidable){
+                return true;
             }
         }
         return false;

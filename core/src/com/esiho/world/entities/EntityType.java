@@ -1,23 +1,20 @@
 package com.esiho.world.entities;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.esiho.world.map.GameMap;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public enum EntityType {
-    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true, 1f/4f),
-    TELEPORTEUR("P1", Teleporteur.class, "!Door1", 4, 32, 32, false, 1f/4f),
-    COFFRE("P2", Divers.class, "!Chest", 1, 32, 32, false, 1f/4f),
-    FLAMME("P3", Divers.class, "!Other2", 6, 32, 64, true, 1f/4f),
-    CRISTAL("P4", Divers.class, "!Crystal",1, 32, 64, false, 1f/8f);
+    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true, 1f/4f, false),
+    TELEPORTEUR("P1", Teleporteur.class, "!Door1", 4, 32, 32, false, 1f/4f, false),
+    COFFRE("P2", Divers.class, "!Chest", 1, 32, 32, false, 1f/4f, true),
+    FLAMME("P3", Divers.class, "!Other2", 6, 32, 64, true, 1f/4f, false),
+    CRISTAL("P4", Divers.class, "!Crystal",1, 32, 64, false, 1f/8f, true);
 
     private String id;
     private Class loaderClass;
@@ -25,10 +22,11 @@ public enum EntityType {
     private int height, width;
     public int spritePosition;
     public Animation[] animations;
+    public Boolean collidable;
 
     public static final int ENTITY_SIZE = 32;
 
-    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition, int pxlWidth, int pxlHeight, boolean sens, float rythme){
+    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition, int pxlWidth, int pxlHeight, boolean sens, float rythme, Boolean collidable){
         this.id = id;
         this.loaderClass = loaderClass;
         this.spritePosition = spritePosition;
@@ -62,6 +60,7 @@ public enum EntityType {
         }
         this.height = pxlHeight;
         this.width = pxlWidth;
+        this.collidable = collidable;
     }
 
     public static Entity createEntityUsingSnapshot(EntitySnapshot entitySnapshot, GameMap map){

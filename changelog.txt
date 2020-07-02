@@ -11,6 +11,7 @@
 -Restructuration Majeure des Items
 -Restructuration Majeure des Teams
 -Restructuration Mineure des CombatEntities
+-Ajout de collisions avec les entités collidable
 
 #TomRobette#22/06/2020#
 -Modification du Launcher pour pouvoir passer entre plusieurs écrans
