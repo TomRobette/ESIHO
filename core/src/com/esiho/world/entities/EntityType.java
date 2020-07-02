@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public enum EntityType {
-    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32),
-    TELEPORTEUR("P1", Teleporteur.class, "", 0, 32, 32),
-    PORTE("P2", Divers.class, "!Door1", 0, 32, 32),
-    FLAMME("P3", Divers.class, "!Other2", 6, 32, 64);
+    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true),
+    TELEPORTEUR("P1", Teleporteur.class, "", 0, 32, 32, true),
+    PORTE("P2", Divers.class, "!Door1", 0, 32, 32, false),
+    FLAMME("P3", Divers.class, "!Other2", 1, 32, 64, true);
 
     private String id;
     private Class loaderClass;
@@ -27,18 +27,24 @@ public enum EntityType {
 
     public static final int ENTITY_SIZE = 32;
 
-    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition, int pxlWidth, int pxlHeight){
+    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition, int pxlWidth, int pxlHeight, boolean sens){
         this.id = id;
         this.loaderClass = loaderClass;
         this.spritePosition = spritePosition;
         if (!spriteName.isEmpty()){
             this.sprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), pxlWidth, pxlHeight);
-
+            System.out.println("id:"+id+" , "+sprites.length+" ; "+sprites[0].length);
             animations = new Animation[4];
             for (int a = 0; a<4; a++){
-                for (TextureRegion[] assets:sprites) {
-                    animations[a] = new Animation<TextureRegion>(1f/4f, assets);
+                TextureRegion[] assets = new TextureRegion[3];
+                for (int b = 0; b<3; b++){
+                    if (sens){
+                        assets[b] = getSprite(spritePosition, b);
+                    }else{
+                        assets[b] = getSprite(b, spritePosition);
+                    }
                 }
+                animations[a] = new Animation<TextureRegion>(1f/4f, assets);
             }
         }
         this.height = pxlHeight;
@@ -77,7 +83,7 @@ public enum EntityType {
 
     public TextureRegion getSprite(int sens, int etape){
         TextureRegion textureRegion = new TextureRegion();
-            textureRegion = sprites[sens][etape];
+        textureRegion = sprites[sens][etape];
         return textureRegion;
     }
 

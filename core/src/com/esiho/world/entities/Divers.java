@@ -17,7 +17,7 @@ public class Divers extends Entity {
     @Override
     public void render(SpriteBatch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
-        TextureRegion texture = (TextureRegion) type.animations[1].getKeyFrame(stateTime, true);
+        TextureRegion texture = (TextureRegion) type.animations[0].getKeyFrame(stateTime, true);
         batch.draw(texture, pos.x, pos.y, getWidth(), getHeight());
     }
 }
