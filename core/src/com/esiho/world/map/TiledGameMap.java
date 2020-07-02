@@ -17,9 +17,11 @@ import com.esiho.world.entities.Player;
 public class TiledGameMap extends GameMap {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer tiledMapRenderer;
+    private String mapName;
 
-    public TiledGameMap(){
-        this.tiledMap = new TmxMapLoader().load("maps/"+"maison"+".tmx");
+    public TiledGameMap(String mapName){
+        this.mapName=mapName;
+        this.tiledMap = new TmxMapLoader().load("maps/"+mapName+".tmx");
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
     }
@@ -42,7 +44,7 @@ public class TiledGameMap extends GameMap {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-            EntityLoader.saveEntities("maison", entities);
+            EntityLoader.saveEntities(mapName, entities);
             System.out.println("BRUH");
         }
 

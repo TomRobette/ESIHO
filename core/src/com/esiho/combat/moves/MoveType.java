@@ -66,4 +66,24 @@ public enum MoveType {
     public Type getType() {
         return type;
     }
+
+    public Integer getPuissance() {
+        return puissance;
+    }
+
+    public Integer getPrecision() {
+        return precision;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
 }

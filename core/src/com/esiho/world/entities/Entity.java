@@ -1,5 +1,6 @@
 package com.esiho.world.entities;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -26,6 +27,7 @@ public abstract class Entity {
         this.gauche=false;
         this.droite=false;
         this.map=map;
+        sprite = type.getSprite(0, 0);
     }
 
     protected int[] moveX(int amount){

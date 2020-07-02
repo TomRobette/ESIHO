@@ -3,6 +3,7 @@ package com.esiho.world.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
@@ -12,23 +13,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public enum EntityType {
-    JOUEUR("P0", Player.class, "Actor1", 0);
+    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32),
+    TELEPORTEUR("P1", Teleporteur.class, "", 0, 32, 32),
+    PORTE("P2", Divers.class, "!Door1", 0, 32, 32),
+    FLAMME("P3", Divers.class, "!Other2", 6, 32, 64);
 
     private String id;
     private Class loaderClass;
     private TextureRegion[][] sprites;
     private int height, width;
     public int spritePosition;
+    public Animation[] animations;
 
     public static final int ENTITY_SIZE = 32;
 
-    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition){
+    private EntityType(String id, Class loaderClass, String spriteName, int spritePosition, int pxlWidth, int pxlHeight){
         this.id = id;
         this.loaderClass = loaderClass;
         this.spritePosition = spritePosition;
-        this.sprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), ENTITY_SIZE, ENTITY_SIZE);
-        this.height = ENTITY_SIZE;
-        this.width = ENTITY_SIZE;
+        if (!spriteName.isEmpty()){
+            this.sprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), pxlWidth, pxlHeight);
+
+            animations = new Animation[4];
+            for (int a = 0; a<4; a++){
+                for (TextureRegion[] assets:sprites) {
+                    animations[a] = new Animation<TextureRegion>(1f/4f, assets);
+                }
+            }
+        }
+        this.height = pxlHeight;
+        this.width = pxlWidth;
     }
 
     public static Entity createEntityUsingSnapshot(EntitySnapshot entitySnapshot, GameMap map){

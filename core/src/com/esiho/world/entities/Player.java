@@ -41,7 +41,7 @@ public class Player extends Entity {
             super.movingAnim(tab[0], tab[1]);
 //            Launcher.cam.translate(tab[0]*32+pos.x, tab[1]*32+pos.y, 0);
             tab=null;
-        }else
+        }
         Game.cam.position.set(pos.x, pos.y, 0);
     }
 }

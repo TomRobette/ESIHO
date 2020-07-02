@@ -27,7 +27,7 @@ public class Game extends com.badlogic.gdx.Game {
 		cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.update();
 
-		gameMap = new TiledGameMap();
+		gameMap = new TiledGameMap("maison");
 
 		this.setScreen(new MainScreen(this));
 	}

@@ -2,7 +2,13 @@
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P0
-	x: 32
+	x: 96
 	y: 32
+},
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P3
+	x: 98
+	y: 38
 }
 ]

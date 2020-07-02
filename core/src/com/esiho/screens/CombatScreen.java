@@ -63,56 +63,21 @@ public class CombatScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 
-
-        TextButton mainScreenButton = new TextButton("MainScreen", skin);
-        TextButton gameScreenButton = new TextButton("GameScreen", skin);
-        TextButton combatScreenButton = new TextButton("CombatScreen", skin);
-        TextButton inventoryScreenButton = new TextButton("InventoryScreen", skin);
-        TextButton lvlupScreenButton = new TextButton("LvlupScreen", skin);
+        Table btnTable = new Table();
+        Table quadTable = new Table();
+        TextButton firstBtn = new TextButton(cbtState.entity1.getMovesPhy().getMove(0).getNom(), skin);
 
 
-        mainScreenButton.addListener(new ClickListener(){
+        firstBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MainScreen(game));
-            }
-        });
 
-        gameScreenButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
             }
         });
-        combatScreenButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
-            }
-        });
-        inventoryScreenButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
-            }
-        });
-        lvlupScreenButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
-            }
-        });
-
+        quadTable.add(firstBtn);
+        btnTable.add(quadTable);
         rootTable.row();
-        rootTable.add(mainScreenButton);
-        rootTable.row();
-        rootTable.add(gameScreenButton);
-        rootTable.row();
-        rootTable.add(combatScreenButton);
-        rootTable.row();
-        rootTable.add(inventoryScreenButton);
-        rootTable.row();
-        rootTable.add(lvlupScreenButton);
+        rootTable.add(btnTable);
 
 
         stage.addActor(rootTable);
