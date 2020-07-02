@@ -3,18 +3,30 @@
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P0
 	x: 96
-	y: 128
+	y: 112
 }
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P3
-	x: 98
-	y: 38
+	x: 96
+	y: 32
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P4
+	x: 32
+	y: 32
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P1
+	x: 160
+	y: 304
 }
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P2
-	x: 160
-	y: 304
+	x: 32
+	y: 288
 }
 ]

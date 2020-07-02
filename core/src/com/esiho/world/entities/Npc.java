@@ -1,7 +1,6 @@
 package com.esiho.world.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.esiho.Timer;
 
 public class Npc extends Entity {
     @Override

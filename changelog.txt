@@ -4,6 +4,7 @@
 #TomRobette#02/07/2020#
 -Ajout d'animations pour les entités
 -Corrections de bugs d'animations
+-Refonte du système de déplacement (Maintenant ce n'est plus Tiles par Tiles)
 
 #TomRobette#23/06/2020#
 -Ajout d'un écran de debug (ScreensScreen) où l'on sélectionne les autres écrans
