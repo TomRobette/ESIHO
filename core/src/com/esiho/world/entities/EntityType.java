@@ -15,7 +15,7 @@ import java.util.HashMap;
 public enum EntityType {
     JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true),
     TELEPORTEUR("P1", Teleporteur.class, "", 0, 32, 32, true),
-    PORTE("P2", Divers.class, "!Door1", 0, 32, 32, false),
+    PORTE("P2", Divers.class, "!Door1", 4, 32, 32, false),
     FLAMME("P3", Divers.class, "!Other2", 6, 32, 64, true);
 
     private String id;
@@ -37,14 +37,14 @@ public enum EntityType {
             animations = new Animation[4];
             for (int a = 0; a<4; a++){
                 TextureRegion[] assets;
+                int indexY = 0;
+                int indexZ = 0;
+                if (spritePosition>3 && spritePosition<8){
+                    indexY = -12;
+                    indexZ = 4;
+                }
                 if (sens){
                     assets = new TextureRegion[3];
-                    int indexY = 0;
-                    int indexZ = 0;
-                    if (spritePosition>3 && spritePosition<8){
-                        indexY = -12;
-                        indexZ = 4;
-                    }
                     for (int b = 0; b<3; b++){
                         assets[b] = sprites[indexZ+a][3*spritePosition+indexY+b];
                     }
@@ -52,7 +52,8 @@ public enum EntityType {
                 }else{
                     assets = new TextureRegion[4];
                     for (int b = 0; b<4; b++){
-                        assets[b] = getSprite(b, spritePosition);
+//                        assets[b] = getSprite(b, spritePosition);
+                        assets[b] = sprites[indexZ+b][3*spritePosition+indexY+a];
                     }
                 }
                 animations[a] = new Animation<TextureRegion>(1f/4f, assets);
