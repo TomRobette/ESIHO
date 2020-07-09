@@ -31,7 +31,6 @@ public class CombatScreen implements Screen {
     private Viewport viewport;
     private OrthographicCamera camera;
     ProgressBar barAdv, barAli;
-    int bruh = 90;
     ProgressBar.ProgressBarStyle full, yellow, red, grey;
 
     public CombatScreen(Game game, CombatState cbtState){
@@ -47,7 +46,7 @@ public class CombatScreen implements Screen {
 
         stage = new Stage(viewport, batch);
 
-        full = updateBarStyle(Color.LIME);
+        full = updateBarStyle(Color.GREEN);
         yellow = updateBarStyle(Color.ORANGE);
         red = updateBarStyle(Color.RED);
         grey = updateBarStyle(Color.DARK_GRAY);
@@ -67,12 +66,12 @@ public class CombatScreen implements Screen {
 
         Table entitiesTable = new Table();
         Table adversTable = new Table();
-        barAdv = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.GREEN));
+        barAdv = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
         barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
         adversTable.add(barAdv);
         adversTable.add(new Image(cbtState.entity2.getTexture()));
         Table allieTable = new Table();
-        barAli = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.GREEN));
+        barAli = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
         barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
         adversTable.add(barAli);
         allieTable.add(new Image(cbtState.entity1.getTexture()));
@@ -91,13 +90,8 @@ public class CombatScreen implements Screen {
         firstBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-//                System.out.println(cbtState.entity2.getPv());
-//                cbtState.entity2.degatsPVprct(0.30);
-//                System.out.println(cbtState.entity2.getPv());
-//                barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
-                bruh--;
-                barAdv.setValue(bruh);
-                barAdv = refreshColor(barAdv);
+                cbtState.entity1;
+                updateBarValue();
             }
         });
         quadTable.add(firstBtn);
@@ -179,5 +173,12 @@ public class CombatScreen implements Screen {
             bar.setStyle(grey);
         }
         return bar;
+    }
+
+    private void updateBarValue(){
+        barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
+        barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
+        barAdv = refreshColor(barAdv);
+        barAli = refreshColor(barAli);
     }
 }

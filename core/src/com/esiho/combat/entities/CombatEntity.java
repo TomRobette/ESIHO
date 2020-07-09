@@ -113,6 +113,30 @@ public class CombatEntity {
         this.entityType.movesSpe = movesSpe;
     }
 
+    public Integer getLvl(){
+        return this.entityType.lvl;
+    }
+
+    public Integer getAtk(){
+        return this.entityType.att;
+    }
+
+    public Integer getDef(){
+        return this.entityType.def;
+    }
+
+    public Integer getAtkSpe(){
+        return this.entityType.attspe;
+    }
+
+    public Integer getDefSpe(){
+        return this.entityType.defspe;
+    }
+
+    public Integer getSpeed(){
+        return this.entityType.vitesse;
+    }
+
     public void regenPVabs(Integer regen){
         if (entityType.pvmax>=entityType.pv+regen){
             entityType.pv+=regen;
