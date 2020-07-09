@@ -1,6 +1,10 @@
 // ICI SERA NOTÉ LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
+#TomRobette#09/07/2020#
+-Ajout des barres de vies lors du combat
+-Refonte du système de combat
+
 #TomRobette#02/07/2020#
 -Ajout d'animations pour les entités
 -Corrections de bugs d'animations

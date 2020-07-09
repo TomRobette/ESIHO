@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.esiho.combat.moves.MoveList;
 import com.esiho.combat.moves.MoveType;
 import com.esiho.combat.types.Eau;
+import com.esiho.combat.types.Normal;
 import com.esiho.combat.types.Type;
 import com.esiho.world.item.Arme;
 import com.esiho.world.item.ArmeType;
@@ -13,7 +14,8 @@ import com.esiho.world.item.ArmureType;
 import java.util.HashMap;
 
 public enum CombatEntityType {
-    JOUEUR("C1", new Eau(), "Swordman", 5, 300, 0, 200, 200, 150, 100, 50, 100, 100, new Arme(ArmeType.EPEELEGENDAIRE), new Armure(ArmureType.ARMURE_BANALE), new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU), new MoveList(MoveType.FLECHE_EAU));
+    JOUEUR("C1", new Eau(), "Swordman", 5, 300, 0, 2000, 2000, 150, 100, 50, 100, 100, new Arme(ArmeType.EPEELEGENDAIRE), new Armure(ArmureType.ARMURE_BANALE), new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU, MoveType.FLECHE_EAU)),
+    RAT("C2", new Normal(), "Rat", 2, 100, 37, 100, 100, 50, 20, 20, 50, 90, null, null, new MoveList(MoveType.COUP_POING));
 
     private String id;
     protected Type type;
@@ -30,10 +32,9 @@ public enum CombatEntityType {
     protected int vitesse;
     protected Arme arme;
     protected Armure armure;
-    protected MoveList movesPhy;
-    protected MoveList movesSpe;
+    protected MoveList moves;
 
-    private CombatEntityType(String id, Type type, String spriteName, int lvl, int xpmax, int xp, int pvmax, int pv, int att, int def, int attspe, int defspe, int vitesse, Arme arme, Armure armure, MoveList movesPhy, MoveList movesSpe){
+    private CombatEntityType(String id, Type type, String spriteName, int lvl, int xpmax, int xp, int pvmax, int pv, int att, int def, int attspe, int defspe, int vitesse, Arme arme, Armure armure, MoveList moves){
         this.id = id;
         this.type = type;
         this.sprite = new Texture("combat/"+spriteName+".png");
@@ -49,8 +50,7 @@ public enum CombatEntityType {
         this.vitesse = vitesse;
         this.arme = arme;
         this.armure = armure;
-        this.movesPhy = movesPhy;
-        this.movesSpe = movesSpe;
+        this.moves = moves;
     }
 
 

@@ -97,20 +97,12 @@ public class CombatEntity {
         this.entityType.armure = armure;
     }
 
-    public MoveList getMovesPhy() {
-        return entityType.movesPhy;
+    public MoveList getMoves() {
+        return entityType.moves;
     }
 
-    public void setMovesPhy(MoveList movesPhy) {
-        this.entityType.movesPhy = movesPhy;
-    }
-
-    public MoveList getMovesSpe() {
-        return entityType.movesSpe;
-    }
-
-    public void setMovesSpe(MoveList movesSpe) {
-        this.entityType.movesSpe = movesSpe;
+    public void setMoves(MoveList moves) {
+        this.entityType.moves = moves;
     }
 
     public Integer getLvl(){
@@ -135,6 +127,10 @@ public class CombatEntity {
 
     public Integer getSpeed(){
         return this.entityType.vitesse;
+    }
+
+    public Integer getXp(){
+        return this.entityType.xp;
     }
 
     public void regenPVabs(Integer regen){

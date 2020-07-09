@@ -31,9 +31,9 @@ public class MoveList {
         movelist.add(move4);
     }
 
-    public MoveType getMove(Integer position) {
+    public MoveType get(Integer position) {
         MoveType move;
-        if (movelist.get(position)!=null){
+        if (movelist.size()-1>=position && movelist.get(position)!=null){
             move = movelist.get(position);
         }else{
             move = null;

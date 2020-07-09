@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -22,6 +23,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
 import com.esiho.combat.CombatState;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CombatScreen implements Screen {
     Game game;
@@ -84,23 +87,45 @@ public class CombatScreen implements Screen {
 
         Table btnTable = new Table();
         Table quadTable = new Table();
-        TextButton firstBtn = new TextButton(cbtState.entity1.getMovesPhy().getMove(0).getNom(), skin);
-
-
-        firstBtn.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                cbtState.entity1;
-                updateBarValue();
+        for (int a = 0; a<4; a++){
+            TextButton btn;
+            if (cbtState.entity1.getMoves().get(a)!=null){
+                btn = new TextButton(cbtState.entity1.getMoves().get(a).getNom(), skin);
+                final int index = a;
+                btn.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        cbtState.memorizeMove(cbtState.entity1.getMoves().get(index), cbtState.entity1, cbtState.entity2);
+                        enemySelection();
+                        cbtState.tour();
+                        updateBarValue();
+                    }
+                });
+            }else{
+                btn = new TextButton("", skin);
+                final int index = a;
+                btn.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                    }
+                });
             }
-        });
-        quadTable.add(firstBtn);
+            quadTable.add(btn);
+        }
         btnTable.add(quadTable);
         rootTable.row();
         rootTable.add(btnTable);
 
 
         stage.addActor(rootTable);
+        if (cbtState.getFin()==true){
+            stage = new Stage(viewport, batch);
+            if (cbtState.getVictoire()==1) {
+                stage.addActor(new TextArea("Victoire !", new Skin(Gdx.files.internal("uiskin.json"))));
+            }else{
+                stage.addActor(new TextArea("Défaite !", new Skin(Gdx.files.internal("uiskin.json"))));
+            }
+        }
     }
 
     @Override
@@ -115,7 +140,6 @@ public class CombatScreen implements Screen {
 
 
         game.batch.begin();
-
         stage.act();
         stage.draw();
 
@@ -162,7 +186,6 @@ public class CombatScreen implements Screen {
     }
 
     private ProgressBar refreshColor(ProgressBar bar){
-        System.out.println(bar.getPercent());
         if (bar.getPercent()>=0.5){
             bar.setStyle(full);
         }else if (bar.getPercent()<=0.49 && bar.getPercent()>0.15){
@@ -180,5 +203,10 @@ public class CombatScreen implements Screen {
         barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
         barAdv = refreshColor(barAdv);
         barAli = refreshColor(barAli);
+    }
+
+    private void enemySelection(){
+        int random = ThreadLocalRandom.current().nextInt(0, cbtState.entity2.getMoves().getSize());
+        cbtState.memorizeMove(cbtState.entity2.getMoves().get(random), cbtState.entity2, cbtState.entity1);
     }
 }

@@ -3,6 +3,7 @@ package com.esiho.combat.teams;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.Joueur;
 import com.esiho.world.entities.Player;
 import com.esiho.world.item.Item;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public enum TeamType {
-    JOUEUR("T0", Player.class, new ArrayList<CombatEntity>());
+    JOUEUR("T0", Joueur.class, new ArrayList<CombatEntity>());
 
     private String id;
     public TeamType type;
