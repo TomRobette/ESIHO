@@ -122,8 +122,8 @@ public class CombatEntity {
         setPv(entityType.pv);
     }
 
-    public void regenPVprct(float pourcentage){
-        Integer regen = (int)pourcentage*entityType.pvmax;
+    public void regenPVprct(double pourcentage){
+        Integer regen = Math.toIntExact(Math.round(pourcentage*entityType.pvmax));
         if (entityType.pvmax>=entityType.pv+regen){
             entityType.pv+=regen;
         }else{
@@ -142,8 +142,8 @@ public class CombatEntity {
         System.out.println(degats);
     }
 
-    public void degatsPVprct(float pourcentage){
-        Integer degats = (int)pourcentage*entityType.pvmax;
+    public void degatsPVprct(double pourcentage){
+        Integer degats = Math.toIntExact(Math.round(pourcentage * entityType.pvmax));
         if (entityType.pv-degats>0){
             entityType.pv-=degats;
         }else{
