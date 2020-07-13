@@ -128,10 +128,15 @@ public class CombatState {
 
     private void fin(Integer victoire){
         if (victoire==1){
+            System.out.println("VICTOIRE !");
             //Réussite !
-            for (Item objet:team2.getInventaire()) {
-                team1.getInventaire().add(objet);
-            }//Pillage des objets de l'équipe adverse
+            if (team2.getInventaire()!=null){
+                if (team2.getInventaire().size()!=0){
+                    for (Item objet:team2.getInventaire()) {
+                        team1.getInventaire().add(objet);
+                    }//Pillage des objets de l'équipe adverse
+                }
+            }
             team1.addArgent(team2.getArgent()/2);//Pillage de la moitié de l'argent de l'équipe adverse
             int xpObtenu = 0;
             for (CombatEntity pnjEnnemi:team2.getListeCbtEntities()) {
@@ -145,6 +150,7 @@ public class CombatState {
             }//Ajout de l'xp sur chaque entité de l'équipe alliée
             this.victoire = 1;
         }else if (victoire==-1){
+            System.out.println("DÉFAITE !");
             //Défaite !
             this.victoire = -1;
         }

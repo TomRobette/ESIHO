@@ -81,6 +81,8 @@ public class CombatEntity {
         }
     }//On ajoute les points aux stats
 
+    public String getName(){ return entityType.name;}
+
     public Arme getArme() {
         return entityType.arme;
     }

@@ -19,6 +19,9 @@ import com.esiho.combat.entities.CombatEntity;
 import com.esiho.combat.entities.CombatEntityType;
 import com.esiho.combat.teams.Team;
 import com.esiho.combat.teams.TeamType;
+import com.esiho.world.item.Arme;
+import com.esiho.world.item.ArmeType;
+import com.esiho.world.item.Item;
 
 public class ScreensScreen implements Screen {
     Game game;
@@ -67,11 +70,14 @@ public class ScreensScreen implements Screen {
         CombatEntity joueur = new CombatEntity();
         joueur.create(CombatEntityType.JOUEUR);
         teamOne.addPNJ(joueur);
+        teamOne.addArgent(100);
         CombatEntity rat = new CombatEntity();
         rat.create(CombatEntityType.RAT);
         Team teamTwo = new Team();
-        teamTwo.create(TeamType.JOUEUR);
+        teamTwo.create(TeamType.MONSTRES);
         teamTwo.addPNJ(rat);
+        teamTwo.addArgent(10);
+        teamTwo.addItem(new Arme(ArmeType.BATON));
         final CombatState combat = new CombatState(teamOne, teamTwo);
 
         mainScreenButton.addListener(new ClickListener(){

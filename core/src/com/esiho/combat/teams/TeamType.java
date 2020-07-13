@@ -3,6 +3,7 @@ package com.esiho.combat.teams;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.Ennemis;
 import com.esiho.combat.entities.Joueur;
 import com.esiho.world.entities.Player;
 import com.esiho.world.item.Item;
@@ -11,7 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public enum TeamType {
-    JOUEUR("T0", Joueur.class, new ArrayList<CombatEntity>());
+    JOUEUR("T0", Joueur.class, new ArrayList<CombatEntity>()),
+    MONSTRES("T1", Ennemis.class, new ArrayList<CombatEntity>());
 
     private String id;
     public TeamType type;
@@ -25,12 +27,17 @@ public enum TeamType {
     private TeamType(String id, Class loaderClass){
         this.id = id;
         this.loaderClass = loaderClass;
+        this.listeCbtEntities = new ArrayList<>();
+        this.inventaire = new ArrayList<>();
+        this.argent = 0;
     }
 
     private TeamType(String id, Class loaderClass, ArrayList<CombatEntity> listeCbtEntities){
         this.id = id;
         this.loaderClass = loaderClass;
         this.listeCbtEntities = listeCbtEntities;
+        this.inventaire = new ArrayList<>();
+        this.argent = 0;
     }
 
     public static Team createTeamUsingSnapshot(TeamSnapshot teamSnapshot){

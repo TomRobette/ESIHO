@@ -31,8 +31,28 @@ public class Team {
         this.type.listeCbtEntities.remove(entityRemoved);
     }
 
+    public void removePNJ(int index){
+        this.type.listeCbtEntities.remove(index);
+    }
+
     public ArrayList<Item> getInventaire(){
         return type.inventaire;
+    }
+
+    public void addItem(Item objet){
+        type.inventaire.add(objet);
+    }
+
+    public void removeItem(Item objet){
+        type.inventaire.remove(objet);
+    }
+
+    public void removeItem(int index){
+        type.inventaire.remove(index);
+    }
+
+    public void setItem(Item objet, int index){
+        type.inventaire.set(index, objet);
     }
 
     public ArrayList<CombatEntity> getListeCbtEntities() {

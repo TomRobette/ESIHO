@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -34,6 +35,7 @@ public class CombatScreen implements Screen {
     private Viewport viewport;
     private OrthographicCamera camera;
     ProgressBar barAdv, barAli;
+    Label nameAdv, nameAli;
     ProgressBar.ProgressBarStyle full, yellow, red, grey;
 
     public CombatScreen(Game game, CombatState cbtState){
@@ -49,7 +51,7 @@ public class CombatScreen implements Screen {
 
         stage = new Stage(viewport, batch);
 
-        full = updateBarStyle(Color.GREEN);
+        full = updateBarStyle(Color.LIME);
         yellow = updateBarStyle(Color.ORANGE);
         red = updateBarStyle(Color.RED);
         grey = updateBarStyle(Color.DARK_GRAY);
@@ -60,6 +62,8 @@ public class CombatScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+
 
         Table rootTable = new Table();
 
@@ -69,21 +73,23 @@ public class CombatScreen implements Screen {
 
         Table entitiesTable = new Table();
         Table adversTable = new Table();
+        nameAdv = new Label(""+cbtState.entity2.getName()+"  lvl:"+cbtState.entity2.getLvl(), skin);
+        adversTable.add(nameAdv);
         barAdv = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
         barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
         adversTable.add(barAdv);
         adversTable.add(new Image(cbtState.entity2.getTexture()));
         Table allieTable = new Table();
+        nameAli = new Label(""+cbtState.entity1.getName()+"  lvl:"+cbtState.entity1.getLvl(), skin);
+        allieTable.add(nameAli);
         barAli = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
         barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
-        adversTable.add(barAli);
+        allieTable.add(barAli);
         allieTable.add(new Image(cbtState.entity1.getTexture()));
         entitiesTable.add(adversTable);
         entitiesTable.row();
         entitiesTable.add(allieTable);
         rootTable.add(entitiesTable);
-
-        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
 
         Table btnTable = new Table();
         Table quadTable = new Table();
@@ -137,7 +143,6 @@ public class CombatScreen implements Screen {
 //		if (Gdx.input.isTouched()){
 //			cam.translate(-Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
 //		}
-
 
         game.batch.begin();
         stage.act();
