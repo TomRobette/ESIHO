@@ -6,6 +6,7 @@
 -Ajout d'une Team pour monstres
 -Ajout des noms lors du combat
 -Correction du positionnement des barres de vie
+-Ajout d'un écran de victoire ou de défaite
 
 #TomRobette#09/07/2020#
 -Ajout des barres de vies lors du combat

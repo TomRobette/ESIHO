@@ -124,14 +124,6 @@ public class CombatScreen implements Screen {
 
 
         stage.addActor(rootTable);
-        if (cbtState.getFin()==true){
-            stage = new Stage(viewport, batch);
-            if (cbtState.getVictoire()==1) {
-                stage.addActor(new TextArea("Victoire !", new Skin(Gdx.files.internal("uiskin.json"))));
-            }else{
-                stage.addActor(new TextArea("Défaite !", new Skin(Gdx.files.internal("uiskin.json"))));
-            }
-        }
     }
 
     @Override
@@ -146,6 +138,14 @@ public class CombatScreen implements Screen {
 
         game.batch.begin();
         stage.act();
+        if (cbtState.getFin()==true){
+            stage = new Stage(viewport, batch);
+            if (cbtState.getVictoire()==1) {
+                stage.addActor(new TextArea("Victoire !", new Skin(Gdx.files.internal("uiskin.json"))));
+            }else{
+                stage.addActor(new TextArea("Défaite !", new Skin(Gdx.files.internal("uiskin.json"))));
+            }
+        }
         stage.draw();
 
         game.batch.end();
