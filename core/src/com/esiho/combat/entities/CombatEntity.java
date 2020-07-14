@@ -10,12 +10,41 @@ import com.esiho.world.item.Armure;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CombatEntity {
-    protected CombatEntityType entityType;
 
+    protected Type type;
+    private Texture sprite;
+    protected String name;
+    protected int lvl;
+    protected int xpmax;
+    protected int xp;
+    protected int pvmax;
+    protected int pv;
+    protected int att;
+    protected int def;
+    protected int attspe;
+    protected int defspe;
+    protected int vitesse;
+    protected Arme arme;
+    protected Armure armure;
+    protected MoveList moves;
 
     public void create(CombatEntityType entityType) {
-        this.entityType = entityType;
-
+        this.type=entityType.type;
+        this.sprite=entityType.getSprite();
+        this.name=entityType.name;
+        this.lvl=entityType.lvl;
+        this.xpmax=entityType.xpmax;
+        this.xp=entityType.xp;
+        this.pvmax=entityType.pvmax;
+        this.pv=entityType.pv;
+        this.att=entityType.att;
+        this.def=entityType.def;
+        this.attspe=entityType.attspe;
+        this.defspe=entityType.defspe;
+        this.vitesse=entityType.vitesse;
+        this.arme=entityType.arme;
+        this.armure=entityType.armure;
+        this.moves=entityType.moves;
     }
 
 
@@ -24,161 +53,161 @@ public class CombatEntity {
     }
 
     public void setPv(Integer pvmodif) {
-        this.entityType.pv = pvmodif;
+        this.pv = pvmodif;
     }
 
     public void setPvMax(Integer pvmaxmodif){
-        this.entityType.pvmax = pvmaxmodif;
+        this.pvmax = pvmaxmodif;
     }
 
     public int getPv(){
-        return this.entityType.pv;
+        return this.pv;
     }
 
     public int getPvMax(){
-        return this.entityType.pvmax;
+        return this.pvmax;
     }
 
     public void addXp(Integer xpobtenu){
-        Integer xpold = entityType.xp;
-        Integer xpmaxold = entityType.xpmax;
-        this.entityType.xp=xpold+xpobtenu;
-        if (xpmaxold<=entityType.xp){//S'il y a plus ou juste assez d'exp que nécessaire
+        Integer xpold = xp;
+        Integer xpmaxold = xpmax;
+        this.xp=xpold+xpobtenu;
+        if (xpmaxold<=xp){//S'il y a plus ou juste assez d'exp que nécessaire
             double xpnd=xpmaxold*1.1;
-            this.entityType.xpmax=(int)xpnd;
-            this.entityType.lvl++;
-            this.entityType.xp=entityType.xp-xpmaxold;
+            this.xpmax=(int)xpnd;
+            this.lvl++;
+            this.xp=xp-xpmaxold;
             lvlUp();
         }
-        if (entityType.xpmax<=entityType.xp){
+        if (xpmax<=xp){
             addXp(0);
         }
     }
 
     private void lvlUp(){
-        Integer ptsObtenus = entityType.lvl;
+        Integer ptsObtenus = lvl;
         for (int a =0; a<ptsObtenus; a++){
             Integer ran = ThreadLocalRandom.current().nextInt(0, 5);
             switch (ran){
                 case 0:
-                    this.entityType.pvmax++;
+                    this.pvmax++;
                     break;
                 case 1:
-                    this.entityType.att++;
+                    this.att++;
                     break;
                 case 2:
-                    this.entityType.def++;
+                    this.def++;
                     break;
                 case 3:
-                    this.entityType.attspe++;
+                    this.attspe++;
                     break;
                 case 4:
-                    this.entityType.defspe++;
+                    this.defspe++;
                     break;
                 case 5:
-                    this.entityType.vitesse++;
+                    this.vitesse++;
             }
         }
     }//On ajoute les points aux stats
 
-    public String getName(){ return entityType.name;}
+    public String getName(){ return name;}
 
     public Arme getArme() {
-        return entityType.arme;
+        return arme;
     }
 
     public void setArme(Arme arme) {
-        this.entityType.arme = arme;
+        this.arme = arme;
     }
 
     public Armure getArmure() {
-        return entityType.armure;
+        return armure;
     }
 
     public void setArmure(Armure armure) {
-        this.entityType.armure = armure;
+        this.armure = armure;
     }
 
     public MoveList getMoves() {
-        return entityType.moves;
+        return moves;
     }
 
     public void setMoves(MoveList moves) {
-        this.entityType.moves = moves;
+        this.moves = moves;
     }
 
     public Integer getLvl(){
-        return this.entityType.lvl;
+        return this.lvl;
     }
 
     public Integer getAtk(){
-        return this.entityType.att;
+        return this.att;
     }
 
     public Integer getDef(){
-        return this.entityType.def;
+        return this.def;
     }
 
     public Integer getAtkSpe(){
-        return this.entityType.attspe;
+        return this.attspe;
     }
 
     public Integer getDefSpe(){
-        return this.entityType.defspe;
+        return this.defspe;
     }
 
     public Integer getSpeed(){
-        return this.entityType.vitesse;
+        return this.vitesse;
     }
 
     public Integer getXp(){
-        return this.entityType.xp;
+        return this.xp;
     }
 
     public void regenPVabs(Integer regen){
-        if (entityType.pvmax>=entityType.pv+regen){
-            entityType.pv+=regen;
+        if (pvmax>=pv+regen){
+            pv+=regen;
         }else{
-            entityType.pv=entityType.pvmax;
+            pv=pvmax;
         }
-        setPv(entityType.pv);
+        setPv(pv);
     }
 
     public void regenPVprct(double pourcentage){
-        Integer regen = Math.toIntExact(Math.round(pourcentage*entityType.pvmax));
-        if (entityType.pvmax>=entityType.pv+regen){
-            entityType.pv+=regen;
+        Integer regen = Math.toIntExact(Math.round(pourcentage*pvmax));
+        if (pvmax>=pv+regen){
+            pv+=regen;
         }else{
-            entityType.pv=entityType.pvmax;
+            pv=pvmax;
         }
-        setPv(entityType.pv);
+        setPv(pv);
     }
 
     public void degatsPVabs(Integer degats){
-        if (entityType.pv-degats>0){
-            entityType.pv-=degats;
+        if (pv-degats>0){
+            pv-=degats;
         }else{
-            entityType.pv=0;
+            pv=0;
         }
-        setPv(entityType.pv);
+        setPv(pv);
         System.out.println(degats);
     }
 
     public void degatsPVprct(double pourcentage){
-        Integer degats = Math.toIntExact(Math.round(pourcentage * entityType.pvmax));
-        if (entityType.pv-degats>0){
-            entityType.pv-=degats;
+        Integer degats = Math.toIntExact(Math.round(pourcentage * pvmax));
+        if (pv-degats>0){
+            pv-=degats;
         }else{
-            entityType.pv=0;
+            pv=0;
         }
-        setPv(entityType.pv);
+        setPv(pv);
     }
 
     public Type getType(){
-        return this.entityType.type;
+        return this.type;
     }
 
     public Texture getTexture(){
-        return this.entityType.getSprite();
+        return this.sprite;
     }
 }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -24,6 +25,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
 import com.esiho.combat.CombatState;
+import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.moves.MoveType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -37,6 +40,8 @@ public class CombatScreen implements Screen {
     ProgressBar barAdv, barAli;
     Label nameAdv, nameAli;
     ProgressBar.ProgressBarStyle full, yellow, red, grey;
+    Skin skin;
+    Table cbtScreen, swapScreen;
 
     public CombatScreen(Game game, CombatState cbtState){
         this.game=game;
@@ -62,68 +67,9 @@ public class CombatScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
-
-
-        Table rootTable = new Table();
-
-        rootTable.setFillParent(true);
-
-        rootTable.top();
-
-        Table entitiesTable = new Table();
-        Table adversTable = new Table();
-        nameAdv = new Label(""+cbtState.entity2.getName()+"  lvl:"+cbtState.entity2.getLvl(), skin);
-        adversTable.add(nameAdv);
-        barAdv = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
-        barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
-        adversTable.add(barAdv);
-        adversTable.add(new Image(cbtState.entity2.getTexture()));
-        Table allieTable = new Table();
-        nameAli = new Label(""+cbtState.entity1.getName()+"  lvl:"+cbtState.entity1.getLvl(), skin);
-        allieTable.add(nameAli);
-        barAli = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
-        barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
-        allieTable.add(barAli);
-        allieTable.add(new Image(cbtState.entity1.getTexture()));
-        entitiesTable.add(adversTable);
-        entitiesTable.row();
-        entitiesTable.add(allieTable);
-        rootTable.add(entitiesTable);
-
-        Table btnTable = new Table();
-        Table quadTable = new Table();
-        for (int a = 0; a<4; a++){
-            TextButton btn;
-            if (cbtState.entity1.getMoves().get(a)!=null){
-                btn = new TextButton(cbtState.entity1.getMoves().get(a).getNom(), skin);
-                final int index = a;
-                btn.addListener(new ClickListener(){
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        cbtState.memorizeMove(cbtState.entity1.getMoves().get(index), cbtState.entity1, cbtState.entity2);
-                        enemySelection();
-                        cbtState.tour();
-                        updateBarValue();
-                    }
-                });
-            }else{
-                btn = new TextButton("", skin);
-                final int index = a;
-                btn.addListener(new ClickListener(){
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                    }
-                });
-            }
-            quadTable.add(btn);
-        }
-        btnTable.add(quadTable);
-        rootTable.row();
-        rootTable.add(btnTable);
-
-
-        stage.addActor(rootTable);
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+        createCbtScreen();
+        stage.addActor(cbtScreen);
     }
 
     @Override
@@ -139,12 +85,13 @@ public class CombatScreen implements Screen {
         game.batch.begin();
         stage.act();
         if (cbtState.getFin()==true){
-            stage = new Stage(viewport, batch);
+            String text;
             if (cbtState.getVictoire()==1) {
-                stage.addActor(new TextArea("Victoire !", new Skin(Gdx.files.internal("uiskin.json"))));
+                text = "Victoire !";
             }else{
-                stage.addActor(new TextArea("Défaite !", new Skin(Gdx.files.internal("uiskin.json"))));
+                text = "Défaite !";
             }
+            changeScreen(new TextArea(text, new Skin(Gdx.files.internal("uiskin.json"))));
         }
         stage.draw();
 
@@ -213,5 +160,118 @@ public class CombatScreen implements Screen {
     private void enemySelection(){
         int random = ThreadLocalRandom.current().nextInt(0, cbtState.entity2.getMoves().getSize());
         cbtState.memorizeMove(cbtState.entity2.getMoves().get(random), cbtState.entity2, cbtState.entity1);
+    }
+
+    private void createCbtScreen(){
+        Table rootTable = new Table();
+
+        rootTable.setFillParent(true);
+
+        rootTable.top();
+
+        Table entitiesTable = new Table();
+        Table adversTable = new Table();
+        nameAdv = new Label(""+cbtState.entity2.getName()+"  lvl:"+cbtState.entity2.getLvl(), skin);
+        adversTable.add(nameAdv);
+        barAdv = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
+        barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
+        adversTable.add(barAdv);
+        adversTable.add(new Image(cbtState.entity2.getTexture()));
+        Table allieTable = new Table();
+        nameAli = new Label(""+cbtState.entity1.getName()+"  lvl:"+cbtState.entity1.getLvl(), skin);
+        allieTable.add(nameAli);
+        barAli = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
+        barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
+        allieTable.add(barAli);
+        allieTable.add(new Image(cbtState.entity1.getTexture()));
+        entitiesTable.add(adversTable);
+        entitiesTable.row();
+        entitiesTable.add(allieTable);
+        rootTable.add(entitiesTable);
+
+        Table btnTable = new Table();
+        Table quadTable = new Table();
+        for (int a = 0; a<4; a++){
+            TextButton btn;
+            if (cbtState.entity1.getMoves().get(a)!=null){
+                btn = new TextButton(cbtState.entity1.getMoves().get(a).getNom(), skin);
+                final int index = a;
+                btn.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        cbtState.memorizeMove(cbtState.entity1.getMoves().get(index), cbtState.entity1, cbtState.entity2);
+                        enemySelection();
+                        cbtState.tour();
+                        updateBarValue();
+                    }
+                });
+            }else{
+                btn = new TextButton("  ...  ", skin);
+                final int index = a;
+                btn.addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+
+                    }
+                });
+            }
+            quadTable.add(btn);
+            if (a == 1) quadTable.row();
+        }
+        TextButton swapBtn = new TextButton("Swap", skin);
+        swapBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (swapScreen==null) createSwapScreen();
+                changeScreen(swapScreen);
+            }
+        });
+        btnTable.add(quadTable);
+        btnTable.row();
+        btnTable.add(swapBtn);
+
+        rootTable.row();
+        rootTable.add(btnTable);
+        cbtScreen = rootTable;
+    }
+
+    private void createSwapScreen(){
+        Table rootTable = new Table();
+
+        rootTable.setFillParent(true);
+
+        rootTable.top();
+
+        int compteur = 0;
+
+        for (CombatEntity entity:cbtState.team1.getListeCbtEntities()) {
+            Table entityTable = new Table();
+            TextButton btn = new TextButton(""+entity.getName()+"  lvl:"+entity.getLvl(), skin);
+            final CombatEntity entite = entity;
+            btn.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    cbtState.memorizeMove(MoveType.NULL, cbtState.entity1, cbtState.entity2);
+                    cbtState.entity1 = entite;
+                    enemySelection();
+                    cbtState.tour();
+                    updateBarValue();
+                }
+            });
+            entityTable.add(btn);
+            ProgressBar bar = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
+            bar.setValue(Math.round((entity.getPv()*100)/entity.getPvMax()));
+            entityTable.add(bar);
+
+            if (compteur%3==0) rootTable.row();
+            rootTable.add(entityTable);
+            compteur++;
+        }
+        swapScreen = rootTable;
+    }
+
+    private void changeScreen(Actor actor){
+        stage = new Stage(viewport, batch);
+        stage.addActor(actor);
     }
 }

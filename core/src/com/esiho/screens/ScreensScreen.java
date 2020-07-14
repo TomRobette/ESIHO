@@ -69,7 +69,9 @@ public class ScreensScreen implements Screen {
         teamOne.create(TeamType.JOUEUR);
         CombatEntity joueur = new CombatEntity();
         joueur.create(CombatEntityType.JOUEUR);
-        teamOne.addPNJ(joueur);
+        for (int a = 0; a<16; a++ ){
+            teamOne.addPNJ(joueur);
+        }
         teamOne.addArgent(100);
         CombatEntity rat = new CombatEntity();
         rat.create(CombatEntityType.RAT);
