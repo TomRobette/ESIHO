@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public enum CombatEntityType {
     JOUEUR("C1", new Eau(), "Swordman", "Maurice", 5, 300, 0, 2000, 2000, 150, 100, 50, 100, 100, new Arme(ArmeType.EPEELEGENDAIRE), new Armure(ArmureType.ARMURE_BANALE), new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU, MoveType.FLECHE_EAU)),
-    RAT("C2", new Normal(), "Rat", "Rat",2, 100, 37, 1000000, 1000000, 50, 20, 20, 50, 90, null, null, new MoveList(MoveType.COUP_POING));
+    RAT("C2", new Normal(), "Rat", "Rat",2, 100, 37, 500, 500, 50, 20, 20, 50, 90, null, null, new MoveList(MoveType.COUP_POING));
 
     private String id;
     protected Type type;

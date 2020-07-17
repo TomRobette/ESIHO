@@ -170,7 +170,6 @@ public class CombatEntity {
         }else{
             pv=pvmax;
         }
-        setPv(pv);
     }
 
     public void regenPVprct(double pourcentage){
@@ -180,7 +179,6 @@ public class CombatEntity {
         }else{
             pv=pvmax;
         }
-        setPv(pv);
     }
 
     public void degatsPVabs(Integer degats){
@@ -189,7 +187,6 @@ public class CombatEntity {
         }else{
             pv=0;
         }
-        setPv(pv);
         System.out.println(degats);
     }
 
@@ -200,7 +197,6 @@ public class CombatEntity {
         }else{
             pv=0;
         }
-        setPv(pv);
     }
 
     public Type getType(){

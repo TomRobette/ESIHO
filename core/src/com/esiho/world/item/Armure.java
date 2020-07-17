@@ -28,7 +28,7 @@ public class Armure extends Item {
         return team;
     }
 
-    public int getCoeffProtection(){
+    public double getCoeffProtection(){
         return type.coeffProtection;
     }
 }

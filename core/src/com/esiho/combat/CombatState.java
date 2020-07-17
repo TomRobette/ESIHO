@@ -18,15 +18,11 @@ public class CombatState {
     public CombatEntity entity2;
     private Integer tour;
     private Boolean fin;
-//    private ArrayList<Pnj> listeOrdrePnj;
-//    private ArrayList<Pnj> pnjsALancer;
-//    private ArrayList<MoveType> movesALancer;
-//    private ArrayList<Pnj> pnjsARecevoir;
     private ArrayList<MoveType> ordreMoves;
     private ArrayList<CombatEntity> ordreLanceurs;
     private ArrayList<CombatEntity> ordreReceveurs;
     private Integer victoire;
-//
+
     public CombatState(Team team1, Team team2){
         this.team1=team1;
         this.team2=team2;
@@ -75,6 +71,7 @@ public class CombatState {
         this.ordreMoves = new ArrayList<>();
         this.ordreLanceurs = new ArrayList<>();
         this.ordreReceveurs = new ArrayList<>();
+        if (entity2.getPv()<=0) changeEntityOnDeathAdv();
         this.tour++;
     }
 
@@ -101,8 +98,8 @@ public class CombatState {
                 if(random==1) inversionOrdre();
             }
 
-            if (ordreLanceurs.get(0).getPv()>0) useMove(ordreMoves.get(0), ordreLanceurs.get(0), ordreReceveurs.get(0));
-            if (ordreLanceurs.get(1).getPv()>0) useMove(ordreMoves.get(1), ordreLanceurs.get(1), ordreReceveurs.get(1));
+            if (ordreLanceurs.get(0).getPv()>0) entity2 = useMove(ordreMoves.get(0), ordreLanceurs.get(0), ordreReceveurs.get(0));
+            if (ordreLanceurs.get(1).getPv()>0) entity1 = useMove(ordreMoves.get(1), ordreLanceurs.get(1), ordreReceveurs.get(1));
             Integer victoire = analyseVictoire();
             if (victoire!=0){
                 fin(victoire);
@@ -246,6 +243,17 @@ public class CombatState {
         }//Coefficient de l'arme appliqué
 
         return modifier;
+    }
+
+    private void changeEntityOnDeathAdv(){
+        if (team2.getListeCbtEntities().size()>1){
+            ArrayList<CombatEntity> notKOEntities = new ArrayList<>();
+            for (CombatEntity entity:team2.getListeCbtEntities()) {
+                if (entity.getPv()>0) notKOEntities.add(entity);
+            }
+            int random = ThreadLocalRandom.current().nextInt(0, notKOEntities.size());
+            entity2 = notKOEntities.get(random);
+        }
     }
 
     public Integer getTour() {

@@ -175,6 +175,7 @@ public class CombatScreen implements Screen {
         adversTable.add(nameAdv);
         barAdv = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
         barAdv.setValue(Math.round((cbtState.entity2.getPv()*100)/cbtState.entity2.getPvMax()));
+        barAdv = refreshColor(barAdv);
         adversTable.add(barAdv);
         adversTable.add(new Image(cbtState.entity2.getTexture()));
         Table allieTable = new Table();
@@ -182,6 +183,7 @@ public class CombatScreen implements Screen {
         allieTable.add(nameAli);
         barAli = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
         barAli.setValue(Math.round((cbtState.entity1.getPv()*100)/cbtState.entity1.getPvMax()));
+        barAli = refreshColor(barAli);
         allieTable.add(barAli);
         allieTable.add(new Image(cbtState.entity1.getTexture()));
         entitiesTable.add(adversTable);
@@ -203,6 +205,8 @@ public class CombatScreen implements Screen {
                         enemySelection();
                         cbtState.tour();
                         updateBarValue();
+                        createCbtScreen();
+                        changeScreen(cbtScreen);
                     }
                 });
             }else{
@@ -222,7 +226,7 @@ public class CombatScreen implements Screen {
         swapBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (swapScreen==null) createSwapScreen();
+                createSwapScreen();
                 changeScreen(swapScreen);
             }
         });
@@ -256,22 +260,37 @@ public class CombatScreen implements Screen {
                     enemySelection();
                     cbtState.tour();
                     updateBarValue();
+                    createCbtScreen();
+                    changeScreen(cbtScreen);
                 }
             });
             entityTable.add(btn);
             ProgressBar bar = new ProgressBar(0, 100, 1, false, updateBarStyle(Color.LIME));
             bar.setValue(Math.round((entity.getPv()*100)/entity.getPvMax()));
+            bar = refreshColor(bar);
             entityTable.add(bar);
 
-            if (compteur%3==0) rootTable.row();
+            if (compteur%2==0) rootTable.row();
             rootTable.add(entityTable);
+
             compteur++;
         }
+        TextButton btnRetour = new TextButton("Retour", skin);
+        btnRetour.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                createCbtScreen();
+                changeScreen(cbtScreen);
+            }
+        });
+        rootTable.row();
+        rootTable.add(btnRetour);
         swapScreen = rootTable;
     }
 
     private void changeScreen(Actor actor){
         stage = new Stage(viewport, batch);
+        Gdx.input.setInputProcessor(stage);
         stage.addActor(actor);
     }
 }

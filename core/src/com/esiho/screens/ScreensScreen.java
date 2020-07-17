@@ -67,17 +67,22 @@ public class ScreensScreen implements Screen {
         TextButton exitButton = new TextButton("Quitter", skin);
         Team teamOne = new Team();
         teamOne.create(TeamType.JOUEUR);
-        CombatEntity joueur = new CombatEntity();
-        joueur.create(CombatEntityType.JOUEUR);
-        for (int a = 0; a<16; a++ ){
+        for (int a = 0; a<6; a++ ){
+            CombatEntity joueur = new CombatEntity();
+            joueur.create(CombatEntityType.JOUEUR);
             teamOne.addPNJ(joueur);
         }
         teamOne.addArgent(100);
         CombatEntity rat = new CombatEntity();
         rat.create(CombatEntityType.RAT);
+        teamOne.addPNJ(rat);
         Team teamTwo = new Team();
         teamTwo.create(TeamType.MONSTRES);
-        teamTwo.addPNJ(rat);
+        for (int a = 0; a<3; a++) {
+            rat = new CombatEntity();
+            rat.create(CombatEntityType.RAT);
+            teamTwo.addPNJ(rat);
+        }
         teamTwo.addArgent(10);
         teamTwo.addItem(new Arme(ArmeType.BATON));
         final CombatState combat = new CombatState(teamOne, teamTwo);

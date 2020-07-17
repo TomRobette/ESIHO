@@ -28,7 +28,7 @@ public class Arme extends Item {
         return team;
     }
 
-    public int getCoeffDegats(){
+    public double getCoeffDegats(){
         return type.coeffDegats;
     }
 }
