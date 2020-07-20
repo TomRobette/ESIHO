@@ -1,9 +1,9 @@
 package com.esiho.combat.entities;
 
-public class Ennemis extends CombatEntity {
+public class Ennemis extends Combattant {
 
 
-    public void create(CombatEntityType entityType) {
+    public void create(CombattantType entityType) {
         super.create(entityType);
     }
 }

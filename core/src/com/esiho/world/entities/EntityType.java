@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.esiho.world.entities.activables.Coffre;
 import com.esiho.world.map.GameMap;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 public enum EntityType {
     JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true, 1f/4f, false),
     TELEPORTEUR("P1", Teleporteur.class, "!Door1", 4, 32, 32, false, 1f/4f, false),
-    COFFRE("P2", Divers.class, "!Chest", 1, 32, 32, false, 1f/4f, true),
+    COFFRE("P2", Coffre.class, "!Chest", 1, 32, 32, false, 1f/4f, true),
     FLAMME("P3", Divers.class, "!Other2", 6, 32, 64, true, 1f/4f, false),
     CRISTAL("P4", Divers.class, "!Crystal",1, 32, 64, false, 1f/8f, true);
 

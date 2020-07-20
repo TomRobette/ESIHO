@@ -15,13 +15,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
 import com.esiho.combat.CombatState;
-import com.esiho.combat.entities.CombatEntity;
-import com.esiho.combat.entities.CombatEntityType;
+import com.esiho.combat.entities.Combattant;
+import com.esiho.combat.entities.CombattantType;
 import com.esiho.combat.teams.Team;
 import com.esiho.combat.teams.TeamType;
 import com.esiho.world.item.Arme;
 import com.esiho.world.item.ArmeType;
-import com.esiho.world.item.Item;
 
 public class ScreensScreen implements Screen {
     Game game;
@@ -68,19 +67,19 @@ public class ScreensScreen implements Screen {
         Team teamOne = new Team();
         teamOne.create(TeamType.JOUEUR);
         for (int a = 0; a<6; a++ ){
-            CombatEntity joueur = new CombatEntity();
-            joueur.create(CombatEntityType.JOUEUR);
+            Combattant joueur = new Combattant();
+            joueur.create(CombattantType.JOUEUR);
             teamOne.addPNJ(joueur);
         }
         teamOne.addArgent(100);
-        CombatEntity rat = new CombatEntity();
-        rat.create(CombatEntityType.RAT);
+        Combattant rat = new Combattant();
+        rat.create(CombattantType.RAT);
         teamOne.addPNJ(rat);
         Team teamTwo = new Team();
         teamTwo.create(TeamType.MONSTRES);
         for (int a = 0; a<3; a++) {
-            rat = new CombatEntity();
-            rat.create(CombatEntityType.RAT);
+            rat = new Combattant();
+            rat.create(CombattantType.RAT);
             teamTwo.addPNJ(rat);
         }
         teamTwo.addArgent(10);

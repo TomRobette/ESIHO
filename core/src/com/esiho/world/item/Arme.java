@@ -1,6 +1,6 @@
 package com.esiho.world.item;
 
-import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.teams.Team;
 
 public class Arme extends Item {
@@ -19,8 +19,8 @@ public class Arme extends Item {
     }
 
     @Override
-    public CombatEntity useItemOnEntity(CombatEntity combatEntity) {
-        return combatEntity;
+    public Combattant useItemOnEntity(Combattant combattant) {
+        return combattant;
     }
 
     @Override

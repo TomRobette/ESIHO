@@ -1,7 +1,6 @@
 package com.esiho.combat.teams;
 
-import com.esiho.combat.entities.CombatEntity;
-import com.esiho.world.entities.EntitySnapshot;
+import com.esiho.combat.entities.Combattant;
 import com.esiho.world.item.Item;
 
 import java.util.ArrayList;
@@ -20,14 +19,14 @@ public class Team {
         this.type=type;
     }
 
-    public void addPNJ(CombatEntity newEntity){
+    public void addPNJ(Combattant newEntity){
         if (type.listeCbtEntities == null){
             type.listeCbtEntities = new ArrayList<>();
         }
         this.type.listeCbtEntities.add(newEntity);
     }
 
-    public void removePNJ(CombatEntity entityRemoved){
+    public void removePNJ(Combattant entityRemoved){
         this.type.listeCbtEntities.remove(entityRemoved);
     }
 
@@ -55,7 +54,7 @@ public class Team {
         type.inventaire.set(index, objet);
     }
 
-    public ArrayList<CombatEntity> getListeCbtEntities() {
+    public ArrayList<Combattant> getListeCbtEntities() {
         return type.listeCbtEntities;
     }
 

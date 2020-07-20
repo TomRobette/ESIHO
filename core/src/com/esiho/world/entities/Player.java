@@ -23,18 +23,10 @@ public class Player extends Entity {
 
     @Override
     public void update(float deltaTime) {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            tab = super.moveX(-2);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            tab = super.moveX(2);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-            tab = super.moveY(2);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-            tab = super.moveY(-2);
-        }
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) tab = super.moveX(-2);
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) tab = super.moveX(2);
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) tab = super.moveY(2);
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) tab = super.moveY(-2);
     }
 
     @Override

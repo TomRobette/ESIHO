@@ -40,8 +40,8 @@ public abstract class Entity {
                     this.bas=false;
                     this.droite=true;
                     this.gauche=false;
-                    sens =2;
-                    pas =0;
+                    sens = 2;
+                    pas = 0;
                 }
 //                movingAnim(1, 0);
                 int[] tab = new int[2];
@@ -54,8 +54,8 @@ public abstract class Entity {
                     this.bas=false;
                     this.droite=false;
                     this.gauche=true;
-                    sens =1;
-                    pas =0;
+                    sens = 1;
+                    pas = 0;
                 }
 //                movingAnim(-1, 0);
                 int[] tab = new int[2];

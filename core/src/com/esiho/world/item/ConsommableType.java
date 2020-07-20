@@ -1,7 +1,7 @@
 package com.esiho.world.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.teams.Team;
 
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import java.util.HashMap;
 public enum ConsommableType {
     POTION_VIE("I11", "potion_vie", "Potion de vie", 50, new UseItem() {
         @Override
-        public CombatEntity useItemOnEntity(CombatEntity combatEntity) {
-            combatEntity.regenPVprct((float) 0.2);
-            return combatEntity;
+        public Combattant useItemOnEntity(Combattant combattant) {
+            combattant.regenPVprct((float) 0.2);
+            return combattant;
         }
 
         @Override
@@ -21,9 +21,9 @@ public enum ConsommableType {
     }),
     POISON_VIE("I12", "poison_vie", "Poison de vie", 50, new UseItem() {
         @Override
-        public CombatEntity useItemOnEntity(CombatEntity combatEntity) {
-            combatEntity.degatsPVprct((float) 0.2);
-            return combatEntity;
+        public Combattant useItemOnEntity(Combattant combattant) {
+            combattant.degatsPVprct((float) 0.2);
+            return combattant;
         }
 
         @Override
@@ -47,8 +47,8 @@ public enum ConsommableType {
         this.useItem = useItem;
     }
 
-    public CombatEntity useItemOnEntity(CombatEntity combatEntity){
-        return this.useItem.useItemOnEntity(combatEntity);
+    public Combattant useItemOnEntity(Combattant combattant){
+        return this.useItem.useItemOnEntity(combattant);
     }
 
     public Team useItemOnTeam(Team team){

@@ -29,7 +29,6 @@ public class GameScreen implements Screen {
         game.gameMap.render(game.cam, game.batch);
 
         if (Gdx.input.isButtonJustPressed(Input.Keys.ESCAPE)){
-            game.dispose();
             game.setScreen(new MainScreen(game));
         }
     }

@@ -1,6 +1,6 @@
 package com.esiho.world.item;
 
-import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.teams.Team;
 
 public class Consommable extends Item{
@@ -12,8 +12,8 @@ public class Consommable extends Item{
 
 
     @Override
-    public CombatEntity useItemOnEntity(CombatEntity combatEntity) {
-        return type.useItemOnEntity(combatEntity);
+    public Combattant useItemOnEntity(Combattant combattant) {
+        return type.useItemOnEntity(combattant);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.esiho.world.item.Armure;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class CombatEntity {
+public class Combattant {
 
     protected Type type;
     private Texture sprite;
@@ -28,7 +28,7 @@ public class CombatEntity {
     protected Armure armure;
     protected MoveList moves;
 
-    public void create(CombatEntityType entityType) {
+    public void create(CombattantType entityType) {
         this.type=entityType.type;
         this.sprite=entityType.getSprite();
         this.name=entityType.name;

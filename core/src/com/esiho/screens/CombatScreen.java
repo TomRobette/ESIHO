@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
 import com.esiho.combat.CombatState;
-import com.esiho.combat.entities.CombatEntity;
+import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.moves.MoveType;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -41,7 +41,8 @@ public class CombatScreen implements Screen {
     Label nameAdv, nameAli;
     ProgressBar.ProgressBarStyle full, yellow, red, grey;
     Skin skin;
-    Table cbtScreen, swapScreen;
+    Table cbtScreen, swapScreen, victoryScreen;
+    int pointerV = 0;
 
     public CombatScreen(Game game, CombatState cbtState){
         this.game=game;
@@ -64,9 +65,7 @@ public class CombatScreen implements Screen {
 
     @Override
     public void show() {
-
         Gdx.input.setInputProcessor(stage);
-
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         createCbtScreen();
         stage.addActor(cbtScreen);
@@ -248,10 +247,10 @@ public class CombatScreen implements Screen {
 
         int compteur = 0;
 
-        for (CombatEntity entity:cbtState.team1.getListeCbtEntities()) {
+        for (Combattant entity:cbtState.team1.getListeCbtEntities()) {
             Table entityTable = new Table();
             TextButton btn = new TextButton(""+entity.getName()+"  lvl:"+entity.getLvl(), skin);
-            final CombatEntity entite = entity;
+            final Combattant entite = entity;
             btn.addListener(new ClickListener(){
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -286,6 +285,20 @@ public class CombatScreen implements Screen {
         rootTable.row();
         rootTable.add(btnRetour);
         swapScreen = rootTable;
+    }
+
+    private void createVictoryScreen(){
+        Table rootTable = new Table();
+
+        rootTable.setFillParent(true);
+
+        rootTable.top();
+        Combattant entity = cbtState.team1.getListeCbtEntities().get(pointerV);
+
+        rootTable.add(new Label(""+entity.getName()+"  lvl:"+entity.getLvl(), skin));
+//        TextButton btn = new TextButton(, skin);
+
+        victoryScreen = rootTable;
     }
 
     private void changeScreen(Actor actor){
