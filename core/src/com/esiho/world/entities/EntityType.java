@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.esiho.world.entities.activables.Coffre;
+import com.esiho.world.entities.activables.Teleporteur;
 import com.esiho.world.map.GameMap;
 
 import java.util.HashMap;
@@ -24,8 +25,6 @@ public enum EntityType {
     public int spritePosition;
     public Animation[] animations;
     public Boolean collidable;
-
-    public static final int ENTITY_SIZE = 32;
 
     private EntityType(String id, Class loaderClass, String spriteName, int spritePosition, int pxlWidth, int pxlHeight, boolean sens, float rythme, Boolean collidable){
         this.id = id;

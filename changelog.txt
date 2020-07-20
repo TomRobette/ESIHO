@@ -2,6 +2,7 @@
 
 // Veuillez déposer à partir d'ici :
 #TomRobette#17/07/2020#
+-L'animation des Activables ne se fait que lors de l'activation
 -CombatEntity et CombatEntityType renommés en Combattant et CombattantType
 -Ajout d'une classe Activable et Coffre, la seconde, ainsi que d'autres plus tard, hérite de la première.
 
