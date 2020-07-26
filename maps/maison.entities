@@ -29,4 +29,10 @@
 	x: 32
 	y: 288
 }
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P5
+	x: 32
+	y: 256
+}
 ]

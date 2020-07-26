@@ -1,13 +1,12 @@
 package com.esiho.world.entities.activables;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.esiho.Game;
 import com.esiho.world.entities.Activable;
-import com.esiho.world.entities.Entity;
+import com.esiho.world.entities.EntitySnapshot;
 import com.esiho.world.entities.EntityType;
+import com.esiho.world.map.GameMap;
 
 public class Coffre extends Activable {
 

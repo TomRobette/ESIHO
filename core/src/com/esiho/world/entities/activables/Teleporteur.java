@@ -14,11 +14,6 @@ import com.esiho.world.map.TiledGameMap;
 public class Teleporteur extends Activable {
 
     @Override
-    public void update(float deltaTime) {
-
-    }
-
-    @Override
     public void onUse() {
         Entity player = super.map.getPlayer();
         if (player!=null){
