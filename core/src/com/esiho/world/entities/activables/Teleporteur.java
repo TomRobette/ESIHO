@@ -27,6 +27,11 @@ public class Teleporteur extends Activable {
     }
 
     @Override
+    public void onCreate(EntitySnapshot snapshot) {
+
+    }
+
+    @Override
     public void onUse() {
         Entity player = super.map.getPlayer();
         System.out.println(1);
@@ -34,7 +39,7 @@ public class Teleporteur extends Activable {
             System.out.println(2);
             if (super.map.doesEntityCollideWithEntity(player, player.getX(), player.getY(), this)){
                 activated = true;
-                System.out.println("BRUH");
+                if (Game.debug) System.out.println("Téléportation");
             }
         }
     }

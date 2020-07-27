@@ -42,8 +42,9 @@ public class TiledGameMap extends GameMap {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+            System.out.println("Sauvegarde...");
             EntityLoader.saveEntities(mapName, entities);
-            System.out.println("BRUH");
+            System.out.println("Sauvegarde réussie !");
         }
 
     }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
+import com.esiho.Game;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.EntitySnapshot;
 import com.esiho.world.entities.EntityType;
@@ -15,17 +16,21 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Npc extends Activable {
     int[] tab;
     float stateTime = 0;
-    public String text;
-    int amount = 16;
+    String text;
+    int amount;
+    int amountMax;
     int direction = 0;
-    int wait = 0;
+    int wait;
+    int waitMax;
+
+
 
     @Override
     public void routine() {
         if (amount==0){
             direction = ThreadLocalRandom.current().nextInt(0, 4);
-            amount=16;
-            wait=160;
+            amount=amountMax;
+            wait=waitMax;
         }
         if (wait==0){
             move();
@@ -33,6 +38,15 @@ public class Npc extends Activable {
         }else{
             wait--;
         }
+    }
+
+    @Override
+    public void onCreate(EntitySnapshot snapshot) {
+        text = snapshot.getString("text", "AH");
+        waitMax = snapshot.getInt("wait", 160);
+        wait=waitMax;
+        amountMax = snapshot.getInt("amount", 16);
+        amount=amountMax;
     }
 
     public void move(){
@@ -53,6 +67,7 @@ public class Npc extends Activable {
 
     @Override
     public void onUse() {
+        System.out.println(text);
     }
 
     @Override

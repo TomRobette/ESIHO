@@ -22,16 +22,34 @@
 	type: P1
 	x: 160
 	y: 304
+	data: {
+		activated: false
+		oneUse: false
+		loop: false
+	}
 }
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P2
 	x: 32
 	y: 288
+	data: {
+		activated: false
+		oneUse: true
+		loop: false
+	}
 }
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P5
 	y: 192
+	data: {
+		activated: false
+		oneUse: true
+		loop: false
+		text: "Bonjour étranger !"
+		wait: 32
+		amount: 32
+	}
 }
 ]

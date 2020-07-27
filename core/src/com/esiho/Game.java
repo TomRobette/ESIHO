@@ -2,6 +2,7 @@ package com.esiho;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,6 +19,8 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public final static int WIDTH = 720;
 	public final static int HEIGHT = 480;
+
+	public static boolean debug = false;
 
 	@Override
 	public void create () {

@@ -1,5 +1,7 @@
 package com.esiho.world.entities;
 
+import com.esiho.Game;
+
 import java.util.HashMap;
 
 public class EntitySnapshot {
@@ -81,6 +83,7 @@ public class EntitySnapshot {
     }
 
     public boolean getBoolean(String key, boolean defaultvalue){
+        if (Game.debug) System.out.println("key : "+key+" default : "+defaultvalue+" type : "+type);
         if (data.containsKey(key)){
             try{
                 return Boolean.parseBoolean(data.get(key));
