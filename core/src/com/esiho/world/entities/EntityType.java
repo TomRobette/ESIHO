@@ -13,12 +13,12 @@ import com.esiho.world.map.GameMap;
 import java.util.HashMap;
 
 public enum EntityType {
-    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true, 1f/4f, false),
+    JOUEUR("P0", Player.class, "Actor1", 0, 32, 32, true, 1f/4f, true),
     TELEPORTEUR("P1", Teleporteur.class, "!Door1", 4, 32, 32, false, 1f/4f, false),
     COFFRE("P2", Coffre.class, "!Chest", 1, 32, 32, false, 1f/4f, true),
     FLAMME("P3", Divers.class, "!Other2", 6, 32, 64, true, 1f/4f, false),
     CRISTAL("P4", Divers.class, "!Crystal",1, 32, 64, false, 1f/8f, true),
-    MAURICETTE("P5", Npc.class, "Actor1", 4, 32, 32, true, 1f/4f, true);
+    MAURICETTE("P5", Npc.class, "Actor1", 3, 32, 32, true, 1f/4f, true);
 
     private String id;
     private Class loaderClass;
@@ -68,11 +68,8 @@ public enum EntityType {
     public static Entity createEntityUsingSnapshot(EntitySnapshot entitySnapshot, GameMap map){
         EntityType type = entityTypes.get(entitySnapshot.type);
         try{
-            System.out.println("1"+type.id);
             Entity entity = (Entity) ClassReflection.newInstance(type.loaderClass);
-            System.out.println("2"+type.id);
             entity.create(entitySnapshot, type, map);
-            System.out.println("3"+type.id);
             return entity;
         }catch (Exception e){
             Gdx.app.error("EntityLoader", "N'a pas pu charger le type"+type.id+" depuis la snapshot");

@@ -12,15 +12,29 @@ import com.esiho.world.map.GameMap;
 import com.esiho.world.map.TiledGameMap;
 
 public class Teleporteur extends Activable {
+    int wait = 16;
+
+    @Override
+    public void routine() {
+        if (activated){
+            if (wait==0){
+                activated=false;
+                Game.gameMap = new TiledGameMap("plaine");
+            }else{
+                wait--;
+            }
+        }
+    }
 
     @Override
     public void onUse() {
         Entity player = super.map.getPlayer();
+        System.out.println(1);
         if (player!=null){
+            System.out.println(2);
             if (super.map.doesEntityCollideWithEntity(player, player.getX(), player.getY(), this)){
                 activated = true;
-                Game.gameMap = new TiledGameMap("plaine");
-
+                System.out.println("BRUH");
             }
         }
     }

@@ -28,4 +28,9 @@ public class Coffre extends Activable {
         }
         batch.draw(texture, pos.x, pos.y, getWidth(), getHeight());
     }
+
+    @Override
+    public void routine() {
+
+    }
 }

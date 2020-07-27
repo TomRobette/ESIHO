@@ -19,16 +19,21 @@ public abstract class Activable extends Entity {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E) && activated!=true){
             Entity player = super.map.getPlayer();
             if (player!=null){
-                if (Game.gameMap.doesEntityCollideWithEntity(player, player.getX()+4, player.getY()+4, this)){
+                System.out.println("X : "+this.getPos().x+" Y : "+this.getPos().y+" pX : "+player.getX()+" pY : "+player.getY());
+                if (Game.gameMap.doesEntityCollideWithEntity(player, player.getX()+2, player.getY()+2, this)){
+                    System.out.println(4);
                     onUse();
                     activated = true;
                 }
             }
         }
+        routine();
     }
 
     public abstract void onUse(/*SpriteBatch batch*/);
 
     @Override
     public abstract void render(SpriteBatch batch);
+
+    public abstract void routine();
 }

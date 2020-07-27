@@ -10,15 +10,45 @@ import com.esiho.world.entities.EntitySnapshot;
 import com.esiho.world.entities.EntityType;
 import com.esiho.world.map.GameMap;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Npc extends Activable {
     int[] tab;
     float stateTime = 0;
     public String text;
+    int amount = 16;
+    int direction = 0;
+    int wait = 0;
 
     @Override
-    public void update(float deltaTime) {
-        if (deltaTime%100==0) tab = super.moveX(-16);
+    public void routine() {
+        if (amount==0){
+            direction = ThreadLocalRandom.current().nextInt(0, 4);
+            amount=16;
+            wait=160;
+        }
+        if (wait==0){
+            move();
+            amount--;
+        }else{
+            wait--;
+        }
+    }
 
+    public void move(){
+        switch(direction){
+            case 0:
+                tab = super.moveY(-1);
+                break;
+            case 1:
+                tab = super.moveY(1);
+                break;
+            case 2:
+                tab = super.moveX(-1);
+                break;
+            case 3:
+                tab = super.moveX(1);
+        }
     }
 
     @Override

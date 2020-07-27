@@ -1,6 +1,14 @@
 // ICI SERONT NOTÉES LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
+#TomRobette#27/07/2020#
+-Déplacement des Npc
+-Correction des bugs d'animation
+
+#TomRobette#26/07/2020#
+-Ajout d'une classe NPC
+-Corrections de bugs
+
 #TomRobette#17/07/2020#
 -L'animation des Activables ne se fait que lors de l'activation
 -CombatEntity et CombatEntityType renommés en Combattant et CombattantType

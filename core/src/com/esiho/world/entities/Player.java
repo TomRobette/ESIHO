@@ -14,6 +14,8 @@ public class Player extends Entity {
     float stateTime = 0;
     long startTime = 0;
 
+
+
     @Override
     public void create (EntitySnapshot snapshot, EntityType type, GameMap map){
         super.create(snapshot, type, map);

@@ -32,7 +32,6 @@
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P5
-	x: 32
-	y: 256
+	y: 192
 }
 ]
