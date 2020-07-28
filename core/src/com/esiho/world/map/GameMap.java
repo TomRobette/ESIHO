@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public abstract class GameMap {
     protected ArrayList<Entity> entities;
+    protected String mapName;
 
     public GameMap(){
         entities = new ArrayList<>();
-        entities.addAll(EntityLoader.loadEntity("maison", this, entities));
     }
 
     public void render(OrthographicCamera cam, SpriteBatch batch){
@@ -36,11 +36,11 @@ public abstract class GameMap {
     }
 
     public void saveEntities(){
-        EntityLoader.saveEntities("maison", entities);
+        EntityLoader.saveEntities(mapName, entities);
     }
 
     public void dispose(){
-        EntityLoader.saveEntities("maison", entities);
+        EntityLoader.saveEntities(mapName, entities);
     }
 
     /****
@@ -91,4 +91,14 @@ public abstract class GameMap {
         }
         return null;
     }
+
+    public void refreshEntities(){
+        if (mapName!=null){
+            entities.addAll(EntityLoader.loadEntity(mapName, this, entities));
+        }else{
+            entities.addAll(EntityLoader.loadEntity("maison", this, entities));
+        }
+    }
+
+    public abstract void save();
 }

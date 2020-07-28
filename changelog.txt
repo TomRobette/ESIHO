@@ -2,6 +2,10 @@
 
 // Veuillez déposer à partir d'ici :
 #TomRobette#27/07/2020#
+-Correction d'un bug majeur lié aux tilesets des maps
+-Ajout d'une nouvelle map
+
+#TomRobette#27/07/2020#
 -Déplacement des Npc
 -Correction des bugs d'animation
 

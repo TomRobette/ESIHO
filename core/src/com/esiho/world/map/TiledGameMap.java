@@ -15,13 +15,11 @@ import com.esiho.world.entities.EntityLoader;
 public class TiledGameMap extends GameMap {
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer tiledMapRenderer;
-    private String mapName;
 
     public TiledGameMap(String mapName){
         this.mapName=mapName;
         this.tiledMap = new TmxMapLoader().load("maps/"+mapName+".tmx");
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-
     }
 
     @Override
@@ -42,11 +40,16 @@ public class TiledGameMap extends GameMap {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-            System.out.println("Sauvegarde...");
-            EntityLoader.saveEntities(mapName, entities);
-            System.out.println("Sauvegarde réussie !");
+            save();
         }
 
+    }
+
+    @Override
+    public void save(){
+        System.out.println("Sauvegarde...");
+        EntityLoader.saveEntities(mapName, entities);
+        System.out.println("Sauvegarde réussie !");
     }
 
     @Override

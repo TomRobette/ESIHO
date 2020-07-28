@@ -31,6 +31,7 @@ public class Game extends com.badlogic.gdx.Game {
 		cam.update();
 
 		gameMap = new TiledGameMap("maison");
+		gameMap.refreshEntities();
 
 		this.setScreen(new MainScreen(this));
 	}

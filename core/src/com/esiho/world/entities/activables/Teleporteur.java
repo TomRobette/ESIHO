@@ -7,19 +7,24 @@ import com.esiho.Game;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.Entity;
 import com.esiho.world.entities.EntitySnapshot;
-import com.esiho.world.entities.EntityType;
-import com.esiho.world.map.GameMap;
 import com.esiho.world.map.TiledGameMap;
 
 public class Teleporteur extends Activable {
     int wait = 16;
+    String destination;
+    int destiX;
+    int destiY;
 
     @Override
     public void routine() {
         if (activated){
             if (wait==0){
                 activated=false;
-                Game.gameMap = new TiledGameMap("plaine");
+                Game.gameMap = new TiledGameMap(destination);
+                if (Game.gameMap.getPlayer()!=null){
+                    Game.gameMap.getPlayer().hardPositionning(destiX, destiY);
+                }
+                Game.gameMap.refreshEntities();
             }else{
                 wait--;
             }
@@ -28,7 +33,9 @@ public class Teleporteur extends Activable {
 
     @Override
     public void onCreate(EntitySnapshot snapshot) {
-
+        this.destination = snapshot.getString("destination", "maison");
+        this.destiX = snapshot.getInt("destiX", 0);
+        this.destiY = snapshot.getInt("destiY", 0);
     }
 
     @Override

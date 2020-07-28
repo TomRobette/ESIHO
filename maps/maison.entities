@@ -26,6 +26,9 @@
 		activated: false
 		oneUse: false
 		loop: false
+		destination: "plaine"
+		destiX: 176
+		destiY: 192
 	}
 }
 {

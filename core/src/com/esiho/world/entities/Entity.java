@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
+import com.esiho.Game;
 import com.esiho.world.map.GameMap;
 
 public abstract class Entity {
@@ -33,7 +34,7 @@ public abstract class Entity {
 
     protected int[] moveX(int amount){
         float newX = pos.x + amount;
-        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, newX, pos.y)){
+        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, newX, pos.y) || Game.debug){
             if (amount > 0){
                 if (!droite){
                     this.haut=false;
@@ -69,7 +70,7 @@ public abstract class Entity {
 
     protected int[] moveY(int amount){
         float newY = pos.y + amount;
-        if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, pos.x, newY)){
+        if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, pos.x, newY) || Game.debug){
             if (amount > 0){
                 if (!haut){
                     this.haut=true;
@@ -138,6 +139,11 @@ public abstract class Entity {
 
     public float getHeight(){
         return type.getHeight();
+    }
+
+    public void hardPositionning(int x, int y){
+        this.pos.x = x;
+        this.pos.y = y;
     }
 
 }
