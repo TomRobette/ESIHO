@@ -1,7 +1,12 @@
 // ICI SERONT NOTÉES LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
-#TomRobette#27/07/2020#
+#TomRobette#29/07/2020#
+-Ajout d'une classe ScreenLoader pour accéder aux écrans et interfaces
+-Les npc peuvent maintenant lancer des combats
+-Ajout d'un accès au nom des objets depuis la classe Item
+
+#TomRobette#28/07/2020#
 -Correction d'un bug majeur lié aux tilesets des maps
 -Ajout d'une nouvelle map
 

@@ -8,4 +8,6 @@ public abstract class Item{
     public abstract Combattant useItemOnEntity(Combattant combattant);
 
     public abstract Team useItemOnTeam(Team team);
+
+    public abstract String getNom();
 }

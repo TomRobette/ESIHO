@@ -1,1 +1,22 @@
-[]
+[
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P0
+	x: 176
+	y: 192
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P1
+	x: 176
+	y: 192
+	data: {
+		activated: false
+		oneUse: false
+		loop: false
+		destination: "maison"
+		destiX: 160
+		destiY: 304
+	}
+}
+]

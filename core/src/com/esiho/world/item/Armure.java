@@ -31,4 +31,9 @@ public class Armure extends Item {
     public double getCoeffProtection(){
         return type.coeffProtection;
     }
+
+    @Override
+    public String getNom() {
+        return type.nom;
+    }
 }

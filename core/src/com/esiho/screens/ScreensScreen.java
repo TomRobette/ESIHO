@@ -89,33 +89,33 @@ public class ScreensScreen implements Screen {
         mainScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MainScreen(game));
+                game.changeScreen(new MainScreen(game));
             }
         });
 
         gameScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.changeScreen(new GameScreen(game));
             }
         });
         combatScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 final CombatState cbt = combat;
-                game.setScreen(new CombatScreen(game, cbt));
+                game.changeScreen(new CombatScreen(game, cbt));
             }
         });
         inventoryScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.changeScreen(new GameScreen(game));
             }
         });
         lvlupScreenButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.changeScreen(new GameScreen(game));
             }
         });
         exitButton.addListener(new ClickListener(){

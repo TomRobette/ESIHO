@@ -19,7 +19,6 @@ public abstract class GameMap {
     }
 
     public void render(OrthographicCamera cam, SpriteBatch batch){
-
         for (Entity entity:entities) {
             entity.render(batch);
         }

@@ -3,13 +3,9 @@ package com.esiho.world.entities.activables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.gdx.utils.Timer;
-import com.esiho.Game;
+import com.esiho.ScreenLoader;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.EntitySnapshot;
-import com.esiho.world.entities.EntityType;
-import com.esiho.world.map.GameMap;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -68,6 +64,8 @@ public class Npc extends Activable {
     @Override
     public void onUse() {
         System.out.println(text);
+        ScreenLoader.team();
+        ScreenLoader.game.cbtScreen(ScreenLoader.cbt);
     }
 
     @Override

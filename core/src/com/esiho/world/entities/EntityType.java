@@ -34,7 +34,6 @@ public enum EntityType {
         this.spritePosition = spritePosition;
         if (!spriteName.isEmpty()){
             this.sprites = TextureRegion.split(new Texture("pnjs/"+spriteName+".png"), pxlWidth, pxlHeight);
-            System.out.println("id:"+id+" , "+sprites.length+" ; "+sprites[0].length);
             animations = new Animation[4];
             for (int a = 0; a<4; a++){
                 TextureRegion[] assets;

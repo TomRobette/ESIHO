@@ -63,7 +63,7 @@ public class MainScreen implements Screen {
         playButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));
+                game.changeScreen(new GameScreen(game));
             }
         });
 
@@ -76,7 +76,7 @@ public class MainScreen implements Screen {
         debugButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new ScreensScreen(game));
+                game.changeScreen(new ScreensScreen(game));
             }
         });
         exitButton.addListener(new ClickListener(){

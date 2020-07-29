@@ -4,10 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.combat.entities.Combattant;
+import com.esiho.world.item.Item;
+
+import java.util.ArrayList;
 
 public class GameScreen implements Screen {
     Game game;
+    private SpriteBatch batch;
+    protected Stage stage;
+    private Viewport viewport;
+    private OrthographicCamera camera;
+    Skin skin;
+    Table newItemUI, conversationUI;
 
     public GameScreen(Game game){
         this.game=game;
@@ -15,7 +33,36 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(stage);
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
+//        createNewItemScreen();
+//        stage.addActor(newItemScreen);
+    }
 
+    public void newItems(ArrayList<Item> objets){
+        createNewItemScreen(objets);
+        changeScreen();
+    }
+
+    private void createNewItemScreen(ArrayList<Item> objets) {
+        Table rootTable = new Table();
+
+        rootTable.setFillParent(true);
+
+        rootTable.top();
+
+        String listeNomsItems = "";
+        for (Item objet:objets) {
+            listeNomsItems = listeNomsItems+" et "+objet.getNom();
+        }
+        if (listeNomsItems.length()>=30){
+            listeNomsItems.substring(0, 29);
+            listeNomsItems = listeNomsItems+"...";
+        }
+        rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
+//        TextButton btn = new TextButton(, skin);
+
+        newItemUI = rootTable;
     }
 
     @Override
@@ -28,14 +75,13 @@ public class GameScreen implements Screen {
         game.gameMap.update(Gdx.graphics.getDeltaTime());
         game.gameMap.render(game.cam, game.batch);
 
-        if (Gdx.input.isButtonJustPressed(Input.Keys.ESCAPE)){
-            game.setScreen(new MainScreen(game));
-        }
     }
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        camera.update();
     }
 
     @Override
@@ -57,5 +103,11 @@ public class GameScreen implements Screen {
     public void dispose() {
         game.gameMap.saveEntities();
 
+    }
+
+    private void changeScreen(Actor actor){
+        stage = new Stage(viewport, batch);
+        Gdx.input.setInputProcessor(stage);
+        stage.addActor(actor);
     }
 }

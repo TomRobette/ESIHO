@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.ScreenLoader;
 import com.esiho.combat.CombatState;
 import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.moves.MoveType;
@@ -91,6 +92,9 @@ public class CombatScreen implements Screen {
                 text = "Défaite !";
             }
             changeScreen(new TextArea(text, new Skin(Gdx.files.internal("uiskin.json"))));
+            for (int a=0; a<160; a++){}
+            ScreenLoader.changeScreen(Game.gameScreen);
+
         }
         stage.draw();
 

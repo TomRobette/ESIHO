@@ -27,4 +27,9 @@ public class Divers extends Item {
     public Team useItemOnTeam(Team team) {
         return team;
     }
+
+    @Override
+    public String getNom() {
+        return type.nom;
+    }
 }

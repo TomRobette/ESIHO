@@ -20,4 +20,9 @@ public class Consommable extends Item{
     public Team useItemOnTeam(Team team) {
         return type.useItemOnTeam(team);
     }
+
+    @Override
+    public String getNom() {
+        return type.nom;
+    }
 }

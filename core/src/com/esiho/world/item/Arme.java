@@ -28,6 +28,11 @@ public class Arme extends Item {
         return team;
     }
 
+    @Override
+    public String getNom() {
+        return type.nom;
+    }
+
     public double getCoeffDegats(){
         return type.coeffDegats;
     }
