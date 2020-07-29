@@ -55,7 +55,6 @@ public class CombatScreen implements Screen {
 
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
-
         stage = new Stage(viewport, batch);
 
         full = updateBarStyle(Color.LIME);

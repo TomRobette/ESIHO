@@ -11,8 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.ScreenLoader;
 import com.esiho.combat.entities.Combattant;
 import com.esiho.world.item.Item;
 
@@ -29,6 +32,14 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game){
         this.game=game;
+        batch = new SpriteBatch();
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(Game.WIDTH, Game.HEIGHT, camera);
+        viewport.apply();
+
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        camera.update();
+        stage = new Stage(viewport, batch);
     }
 
     @Override
@@ -41,7 +52,7 @@ public class GameScreen implements Screen {
 
     public void newItems(ArrayList<Item> objets){
         createNewItemScreen(objets);
-        changeScreen();
+        changeScreen(newItemUI);
     }
 
     private void createNewItemScreen(ArrayList<Item> objets) {
@@ -55,8 +66,8 @@ public class GameScreen implements Screen {
         for (Item objet:objets) {
             listeNomsItems = listeNomsItems+" et "+objet.getNom();
         }
-        if (listeNomsItems.length()>=30){
-            listeNomsItems.substring(0, 29);
+        if (listeNomsItems.length()>=20){
+            listeNomsItems = listeNomsItems.substring(0, 19);
             listeNomsItems = listeNomsItems+"...";
         }
         rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
@@ -74,6 +85,13 @@ public class GameScreen implements Screen {
         game.cam.update();
         game.gameMap.update(Gdx.graphics.getDeltaTime());
         game.gameMap.render(game.cam, game.batch);
+
+        game.batch.begin();
+        stage.act();
+
+        stage.draw();
+
+        game.batch.end();
 
     }
 

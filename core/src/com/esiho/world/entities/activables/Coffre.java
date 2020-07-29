@@ -8,7 +8,14 @@ import com.esiho.ScreenLoader;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.EntitySnapshot;
 import com.esiho.world.entities.EntityType;
+import com.esiho.world.item.Arme;
+import com.esiho.world.item.ArmeType;
+import com.esiho.world.item.Armure;
+import com.esiho.world.item.ArmureType;
+import com.esiho.world.item.Item;
 import com.esiho.world.map.GameMap;
+
+import java.util.ArrayList;
 
 public class Coffre extends Activable {
 
@@ -19,7 +26,13 @@ public class Coffre extends Activable {
             System.out.println("COFFRE");
         }
         if (Game.gameScreen!=null){
-//            Game.gameScreen
+            ArrayList<Item> listeItems = new ArrayList<>();
+            for (int a = 0; a<5; a++){
+                listeItems.add(new Arme(ArmeType.BATON));
+                listeItems.add( new Armure(ArmureType.ARMURE_LEGENDAIRE));
+
+            }
+            Game.gameScreen.newItems(listeItems);
         }
     }
 

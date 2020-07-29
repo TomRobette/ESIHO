@@ -5,6 +5,7 @@
 -Ajout d'une classe ScreenLoader pour accéder aux écrans et interfaces
 -Les npc peuvent maintenant lancer des combats
 -Ajout d'un accès au nom des objets depuis la classe Item
+-Ajout d'un UI lorsqu'un Item est obtenu
 
 #TomRobette#28/07/2020#
 -Correction d'un bug majeur lié aux tilesets des maps
