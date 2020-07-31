@@ -32,7 +32,6 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     Skin skin;
     Table newItemUI, conversationUI;
-    Label.LabelStyle labelStyle;
 
     public GameScreen(Game game){
         this.game=game;
@@ -49,9 +48,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
-        labelStyle = new Label.LabelStyle();
-        labelStyle.font = new BitmapFont(Gdx.files.internal("font.fnt"), false);
+        skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
 //        createNewItemScreen();
 //        stage.addActor(newItemScreen);
     }
@@ -88,7 +85,7 @@ public class GameScreen implements Screen {
         }
         rootTable.add();
         rootTable.row();
-        rootTable.add(new Label("Vous avez gagné "+listeNomsItems, labelStyle));
+        rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
 //        TextButton btn = new TextButton(, skin);
 
         newItemUI = rootTable;
