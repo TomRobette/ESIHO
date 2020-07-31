@@ -43,6 +43,7 @@ public class Npc extends Activable {
         wait=waitMax;
         amountMax = snapshot.getInt("amount", 16);
         amount=amountMax;
+//        this.sprite = type.getSprite(0, 0);
     }
 
     public void move(){

@@ -2,6 +2,11 @@
 
 // Veuillez déposer à partir d'ici :
 #TomRobette#29/07/2020#
+-Correction du bug lié aux caractères étranges
+-Ajout des méthodes getValeur et getSprite dans les objets
+-Affichage des objets lorsqu'ils sont obtenus un coffre.
+
+#TomRobette#29/07/2020#
 -Ajout d'une classe ScreenLoader pour accéder aux écrans et interfaces
 -Les npc peuvent maintenant lancer des combats
 -Ajout d'un accès au nom des objets depuis la classe Item

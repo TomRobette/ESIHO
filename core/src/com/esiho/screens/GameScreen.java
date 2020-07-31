@@ -5,9 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -29,6 +32,7 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     Skin skin;
     Table newItemUI, conversationUI;
+    Label.LabelStyle labelStyle;
 
     public GameScreen(Game game){
         this.game=game;
@@ -46,6 +50,8 @@ public class GameScreen implements Screen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
+        labelStyle = new Label.LabelStyle();
+        labelStyle.font = new BitmapFont(Gdx.files.internal("font.fnt"), false);
 //        createNewItemScreen();
 //        stage.addActor(newItemScreen);
     }
@@ -63,17 +69,33 @@ public class GameScreen implements Screen {
         rootTable.top();
 
         String listeNomsItems = "";
+        int compteur = 0;
         for (Item objet:objets) {
-            listeNomsItems = listeNomsItems+" et "+objet.getNom();
+
+            if (compteur==0){
+                listeNomsItems = ""+objet.getNom();
+            }else if (compteur==objets.size()-1){
+                listeNomsItems = listeNomsItems+" et "+objet.getNom();
+            }else{
+                listeNomsItems = listeNomsItems + ", " + objet.getNom();
+            }
+            compteur++;
+            if (objet.getSprite()!=null) rootTable.add(new Image(objet.getSprite()));
         }
         if (listeNomsItems.length()>=20){
             listeNomsItems = listeNomsItems.substring(0, 19);
             listeNomsItems = listeNomsItems+"...";
         }
-        rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
+        rootTable.add();
+        rootTable.row();
+        rootTable.add(new Label("Vous avez gagné "+listeNomsItems, labelStyle));
 //        TextButton btn = new TextButton(, skin);
 
         newItemUI = rootTable;
+    }
+
+    private void createConversationScreen(){
+
     }
 
     @Override
