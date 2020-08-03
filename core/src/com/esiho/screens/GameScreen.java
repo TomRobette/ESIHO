@@ -10,12 +10,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -34,6 +37,10 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     Skin skin;
     Table newItemUI, conversationUI;
+    Boolean newItemUIState = false;
+    Boolean conversationUIState = false;
+    Label labelConv;
+    int pointerConv = 0;
 
     public GameScreen(Game game){
         this.game=game;
@@ -58,8 +65,13 @@ public class GameScreen implements Screen {
     }
 
     public void newItems(ArrayList<Item> objets){
-        createNewItemScreen(objets);
-        changeScreen(newItemUI);
+        if (!newItemUIState){
+            newItemUIState = true;
+            createNewItemScreen(objets);
+            changeScreen(newItemUI);
+//        }else{
+//            newItemUI.clear();
+        }
     }
 
     private void createNewItemScreen(ArrayList<Item> objets) {
@@ -87,7 +99,7 @@ public class GameScreen implements Screen {
 //                image.setWidth(0.5f*Gdx.graphics.getWidth());
 //                image.setHeight(0.5f*Gdx.graphics.getWidth());
                 image.setScale(2, 2);
-                rootTable.add(image).colspan(2);
+                rootTable.add(image).pad(10);
                 rootTable.row();
             }
         }
@@ -103,8 +115,38 @@ public class GameScreen implements Screen {
         newItemUI.align(Align.center);
     }
 
-    private void createConversationScreen(){
+    private void createConversationScreen(ArrayList<String> listePhrases){
+        Table rootTable = new Table();
 
+        rootTable.setFillParent(true);
+
+        rootTable.top();
+
+        labelConv = new Label(listePhrases.get(0), skin);
+
+        rootTable.row();
+        rootTable.add();
+        TextButton btn = new TextButton("Suivant", skin);
+        btn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                pointerConv++;
+                updateLabelConv(listePhrases);
+            }
+        });
+        rootTable.row();
+        rootTable.add(btn).align(Align.bottomRight);
+
+        conversationUI = rootTable;
+        conversationUI.align(Align.bottom);
+    }
+
+    private void updateLabelConv(ArrayList<String> listePhrases){
+        if (pointerConv>listePhrases.size()+1){
+            //FIN CONVERSATION
+        }else{
+            labelConv = new Label(listePhrases.get(pointerConv), skin);
+        }
     }
 
     @Override
@@ -117,13 +159,20 @@ public class GameScreen implements Screen {
         game.gameMap.update(Gdx.graphics.getDeltaTime());
         game.gameMap.render(game.cam, game.batch);
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            if (newItemUIState){
+                newItemUIState=false;
+                System.out.println("AH");
+                newItemUI.clear();
+            }
+        }
+
         game.batch.begin();
         stage.act();
 
         stage.draw();
 
         game.batch.end();
-
     }
 
     @Override
@@ -151,7 +200,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         game.gameMap.saveEntities();
-
     }
 
     private void changeScreen(Actor actor){
