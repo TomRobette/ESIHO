@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -56,7 +57,9 @@ public class ScreensScreen implements Screen {
 
         mainTable.top();
 
-        Skin skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
+        Skin skin = new Skin();
+        skin.addRegions(new TextureAtlas(Gdx.files.internal("default/skin/uiskin.atlas")));
+        skin.load(Gdx.files.internal("default/skin/uiskin.json"));
 
 
         TextButton mainScreenButton = new TextButton("MainScreen", skin);

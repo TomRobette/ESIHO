@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -51,13 +52,17 @@ public class MainScreen implements Screen {
 
         mainTable.top();
 
-        Skin skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
+//        Skin skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
+//        skin.remove("default-font", BitmapFont.class);
+        Skin skin = new Skin();
+        skin.addRegions(new TextureAtlas(Gdx.files.internal("default/skin/uiskin.atlas")));
+        skin.load(Gdx.files.internal("default/skin/uiskin.json"));
 
 
         TextButton playButton = new TextButton("Jouer", skin);
-        TextButton optionsButton = new TextButton("Parametres", skin);
+        TextButton optionsButton = new TextButton("Paramètres", skin);
         TextButton debugButton = new TextButton("Debug", skin);
-        TextButton creditsButton = new TextButton("Credits", skin);
+        TextButton creditsButton = new TextButton("Crédits", skin);
         TextButton exitButton = new TextButton("Quitter", skin);
 
 

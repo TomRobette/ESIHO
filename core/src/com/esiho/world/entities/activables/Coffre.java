@@ -27,11 +27,12 @@ public class Coffre extends Activable {
         }
         if (Game.gameScreen!=null){
             ArrayList<Item> listeItems = new ArrayList<>();
-            for (int a = 0; a<5; a++){
-                listeItems.add(new Arme(ArmeType.BATON));
-                listeItems.add( new Armure(ArmureType.ARMURE_LEGENDAIRE));
-
-            }
+            listeItems.add(new Arme(ArmeType.BATON));
+            listeItems.add( new Armure(ArmureType.ARMURE_LEGENDAIRE));
+            listeItems.add(new Arme(ArmeType.EPEELEGENDAIRE));
+            listeItems.add(new Arme(ArmeType.ARC));
+            listeItems.add(new Arme(ArmeType.DAGUE));
+            listeItems.add(new Armure(ArmureType.ARMURE_BANALE));
             Game.gameScreen.newItems(listeItems);
         }
     }

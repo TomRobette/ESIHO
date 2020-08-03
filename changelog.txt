@@ -1,7 +1,10 @@
 // ICI SERONT NOTÉES LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
-#TomRobette#29/07/2020#
+#TomRobette#03/08/2020#
+-Correction finale du bug de caractères
+
+#TomRobette#01/08/2020#
 -Correction du bug lié aux caractères étranges
 -Ajout des méthodes getValeur et getSprite dans les objets
 -Affichage des objets lorsqu'ils sont obtenus un coffre.

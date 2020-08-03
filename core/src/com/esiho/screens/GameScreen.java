@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
@@ -48,7 +50,9 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
-        skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
+        skin = new Skin();
+        skin.addRegions(new TextureAtlas(Gdx.files.internal("default/skin/uiskin.atlas")));
+        skin.load(Gdx.files.internal("default/skin/uiskin.json"));
 //        createNewItemScreen();
 //        stage.addActor(newItemScreen);
     }
@@ -77,18 +81,26 @@ public class GameScreen implements Screen {
                 listeNomsItems = listeNomsItems + ", " + objet.getNom();
             }
             compteur++;
-            if (objet.getSprite()!=null) rootTable.add(new Image(objet.getSprite()));
+            if (objet.getSprite()!=null){
+                Image image = new Image(objet.getSprite());
+//            image.setSize(0.17f*Gdx.graphics.getWidth(), 0.17f*Gdx.graphics.getWidth());
+//                image.setWidth(0.5f*Gdx.graphics.getWidth());
+//                image.setHeight(0.5f*Gdx.graphics.getWidth());
+                image.setScale(2, 2);
+                rootTable.add(image).colspan(2);
+                rootTable.row();
+            }
         }
-        if (listeNomsItems.length()>=20){
-            listeNomsItems = listeNomsItems.substring(0, 19);
+        if (listeNomsItems.length()>=30){
+            listeNomsItems = listeNomsItems.substring(0, 29);
             listeNomsItems = listeNomsItems+"...";
         }
-        rootTable.add();
         rootTable.row();
         rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
 //        TextButton btn = new TextButton(, skin);
 
         newItemUI = rootTable;
+        newItemUI.align(Align.center);
     }
 
     private void createConversationScreen(){
