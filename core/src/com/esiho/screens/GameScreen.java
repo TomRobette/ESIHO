@@ -5,8 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -16,15 +14,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
-import com.esiho.ScreenLoader;
-import com.esiho.combat.entities.Combattant;
+import com.esiho.world.scenarii.Conversation;
 import com.esiho.world.item.Item;
 
 import java.util.ArrayList;
@@ -41,6 +37,7 @@ public class GameScreen implements Screen {
     Boolean conversationUIState = false;
     Label labelConv;
     int pointerConv = 0;
+    Conversation conversationTempo;
 
     public GameScreen(Game game){
         this.game=game;
@@ -71,6 +68,15 @@ public class GameScreen implements Screen {
             changeScreen(newItemUI);
 //        }else{
 //            newItemUI.clear();
+        }
+    }
+
+    public void newConversation(Conversation conversation){
+        this.conversationTempo = conversation;
+        if (!conversationUIState){
+            conversationUIState = true;
+            createConversationScreen();
+            changeScreen(conversationUI);
         }
     }
 
@@ -115,37 +121,44 @@ public class GameScreen implements Screen {
         newItemUI.align(Align.center);
     }
 
-    private void createConversationScreen(ArrayList<String> listePhrases){
-        Table rootTable = new Table();
+    private void createConversationScreen(){
+        conversationUI = new Table();
 
-        rootTable.setFillParent(true);
+        conversationUI.setFillParent(true);
 
-        rootTable.top();
+        conversationUI.top();
 
-        labelConv = new Label(listePhrases.get(0), skin);
+        labelConv = new Label(conversationTempo.getPhrase(0), skin);
 
-        rootTable.row();
-        rootTable.add();
+
+        conversationUI.row();
+        conversationUI.add(labelConv);
         TextButton btn = new TextButton("Suivant", skin);
         btn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 pointerConv++;
-                updateLabelConv(listePhrases);
+                updateLabelConv();
             }
         });
-        rootTable.row();
-        rootTable.add(btn).align(Align.bottomRight);
+        conversationUI.row();
+        conversationUI.add(btn).align(Align.bottomRight);
 
-        conversationUI = rootTable;
         conversationUI.align(Align.bottom);
     }
 
-    private void updateLabelConv(ArrayList<String> listePhrases){
-        if (pointerConv>listePhrases.size()+1){
-            //FIN CONVERSATION
+    private void updateLabelConv(){
+        if (Game.debug){
+            System.out.println("PointerConv : "+pointerConv);
+            System.out.println("ConversationTempo : "+conversationTempo.getPhrase(pointerConv));
+        }
+        if (pointerConv==conversationTempo.getConversation().size()){
+            conversationUIState = false;
+            conversationTempo.isRead();
+            conversationUI.clear();
+            pointerConv=0;
         }else{
-            labelConv = new Label(listePhrases.get(pointerConv), skin);
+            labelConv.setText(conversationTempo.getPhrase(pointerConv));
         }
     }
 
@@ -162,8 +175,10 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             if (newItemUIState){
                 newItemUIState=false;
-                System.out.println("AH");
                 newItemUI.clear();
+            }else if (conversationUIState){
+                conversationUIState = false;
+                conversationUI.clear();
             }
         }
 

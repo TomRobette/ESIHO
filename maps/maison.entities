@@ -45,14 +45,31 @@
 {
 	class: com.esiho.world.entities.EntitySnapshot
 	type: P5
+	x: 32
+	y: 192
+	data: {
+		activated: false
+		oneUse: false
+		loop: false
+		text: "Rebonjour ! @@ Bonjour étranger ! %% Comment allez-vous ? %% Moi je vais bien."
+		wait: 32
+		amount: 32
+		fixed: false
+	}
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P6
+	x: 160
 	y: 192
 	data: {
 		activated: false
 		oneUse: true
 		loop: false
-		text: "Bonjour étranger !"
-		wait: 32
+		text: "NULL"
+		wait: 64
 		amount: 32
+		fixed: true
 	}
 }
 ]

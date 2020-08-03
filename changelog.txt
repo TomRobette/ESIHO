@@ -2,7 +2,9 @@
 
 // Veuillez déposer à partir d'ici :
 #TomRobette#03/08/2020#
--Correction finale du bug de caractères
+-Correction supplémentaire du bug de caractères
+-Ajout des Conversations
+-Ajout de classes indépendantes selon les Npc
 
 #TomRobette#01/08/2020#
 -Correction du bug lié aux caractères étranges

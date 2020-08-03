@@ -3,47 +3,65 @@ package com.esiho.world.entities.activables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.esiho.ScreenLoader;
+import com.esiho.world.scenarii.Conversation;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.EntitySnapshot;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Npc extends Activable {
-    int[] tab;
-    float stateTime = 0;
-    String text;
-    int amount;
-    int amountMax;
-    int direction = 0;
-    int wait;
-    int waitMax;
+public abstract class Npc extends Activable {
+    private int[] tab;
+    private float stateTime = 0;
+    protected Conversation conversation;
+    private int amount;
+    private int amountMax;
+    private int direction = 0;
+    private int wait;
+    private int waitMax;
+    private Boolean fixed;
 
 
 
     @Override
     public void routine() {
-        if (amount==0){
-            direction = ThreadLocalRandom.current().nextInt(0, 4);
-            amount=amountMax;
-            wait=waitMax;
-        }
-        if (wait==0){
-            move();
-            amount--;
-        }else{
-            wait--;
+        if (!fixed){
+            if (amount==0){
+                direction = ThreadLocalRandom.current().nextInt(0, 4);
+                amount=amountMax;
+                wait=waitMax;
+            }
+            if (wait==0){
+                move();
+                amount--;
+            }else{
+                wait--;
+            }
         }
     }
 
     @Override
     public void onCreate(EntitySnapshot snapshot) {
-        text = snapshot.getString("text", "AH");
+        readConversationFromString(snapshot.getString("text", "NULL"));
         waitMax = snapshot.getInt("wait", 160);
         wait=waitMax;
         amountMax = snapshot.getInt("amount", 16);
         amount=amountMax;
+        fixed = snapshot.getBoolean("fixed", true);
 //        this.sprite = type.getSprite(0, 0);
+    }
+
+    private void readConversationFromString(String string){
+        if (!string.equals("NULL")){
+            System.out.println("a");
+            String conversationsTab[] = string.trim().split("@@"); //Coupe entre les deux conversations (lues et nonlues)
+            String phrasesReadTab[] = conversationsTab[0].trim().split("%%"); //Coupe entre les phrases lues
+            String phrasesNotReadTab[] = conversationsTab[1].trim().split("%%"); //Coupe entre les phrases non lues
+            ArrayList<String> phrasesReadArray = new ArrayList<>(Arrays.asList(phrasesReadTab));
+            ArrayList<String> phrasesNotReadArray = new ArrayList<>(Arrays.asList(phrasesNotReadTab));
+            this.conversation = new Conversation(phrasesNotReadArray, phrasesReadArray);
+        }
     }
 
     public void move(){
@@ -63,11 +81,7 @@ public class Npc extends Activable {
     }
 
     @Override
-    public void onUse() {
-        System.out.println(text);
-        ScreenLoader.team();
-        ScreenLoader.game.cbtScreen(ScreenLoader.cbt);
-    }
+    public abstract void onUse();
 
     @Override
     public void render(SpriteBatch batch) {
