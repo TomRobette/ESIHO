@@ -32,8 +32,9 @@ public abstract class Activable extends Entity {
                 Entity player = super.map.getPlayer();
                 if (player!=null){
                     if (Game.gameMap.doesEntityCollideWithEntity(player, player.getX()+2, player.getY()+2, this)){
-                        onUse();
+                        Game.pause = true;
                         activated = true;
+                        onUse();
                     }
                 }
             }

@@ -17,6 +17,7 @@ public abstract class Entity {
     protected Boolean droite;
     protected TextureRegion sprite;
     protected GameMap map;
+    protected Boolean immobilize = false;
 
     protected int pas = 0;
     protected int sens = 0;
@@ -34,7 +35,7 @@ public abstract class Entity {
 
     protected int[] moveX(int amount){
         float newX = pos.x + amount;
-        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, newX, pos.y) || Game.debug){
+        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, newX, pos.y) && !Game.pause || Game.debug){
             if (amount > 0){
                 if (!droite){
                     this.haut=false;
@@ -70,7 +71,7 @@ public abstract class Entity {
 
     protected int[] moveY(int amount){
         float newY = pos.y + amount;
-        if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, pos.x, newY) || Game.debug){
+        if (!map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight()) && !map.doesEntityCollideWithEntities(this, pos.x, newY) && !Game.pause || Game.debug){
             if (amount > 0){
                 if (!haut){
                     this.haut=true;

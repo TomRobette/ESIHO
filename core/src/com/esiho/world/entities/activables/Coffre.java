@@ -35,6 +35,7 @@ public class Coffre extends Activable {
             listeItems.add(new Armure(ArmureType.ARMURE_BANALE));
             Game.gameScreen.newItems(listeItems);
         }
+        Game.pause = false;
     }
 
     @Override

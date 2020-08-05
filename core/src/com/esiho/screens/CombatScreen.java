@@ -97,6 +97,7 @@ public class CombatScreen implements Screen {
             changeScreen(new TextArea(text, new Skin(Gdx.files.internal("uiskin.json"))));
             for (int a=0; a<160; a++){}
             ScreenLoader.changeScreen(Game.gameScreen);
+            Game.pause = false;
 
         }
         stage.draw();
@@ -170,11 +171,8 @@ public class CombatScreen implements Screen {
 
     private void createCbtScreen(){
         Table rootTable = new Table();
-
         rootTable.setFillParent(true);
-
         rootTable.top();
-
         Table entitiesTable = new Table();
         Table adversTable = new Table();
         nameAdv = new Label(""+cbtState.entity2.getName()+"  lvl:"+cbtState.entity2.getLvl(), skin);

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -76,11 +77,12 @@ public class GameScreen implements Screen {
         if (!conversationUIState){
             conversationUIState = true;
             createConversationScreen();
-            changeScreen(conversationUI);
+//            changeScreen(conversationUI);
         }
     }
 
     private void createNewItemScreen(ArrayList<Item> objets) {
+        Dialog dia = new Dialog("Vous avez trouvé :", new Skin(Gdx.files.internal("uiskin.json")));
         Table rootTable = new Table();
 
         rootTable.setFillParent(true);
@@ -117,8 +119,11 @@ public class GameScreen implements Screen {
         rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
 //        TextButton btn = new TextButton(, skin);
 
-        newItemUI = rootTable;
-        newItemUI.align(Align.center);
+        dia.add(rootTable);
+//        newItemUI = rootTable;
+//        newItemUI.align(Align.center);
+        dia.show(stage);
+//        stage.addActor(dia);
     }
 
     private void createConversationScreen(){
@@ -157,6 +162,7 @@ public class GameScreen implements Screen {
             conversationTempo.isRead();
             conversationUI.clear();
             pointerConv=0;
+            Game.pause = false;
         }else{
             labelConv.setText(conversationTempo.getPhrase(pointerConv));
         }

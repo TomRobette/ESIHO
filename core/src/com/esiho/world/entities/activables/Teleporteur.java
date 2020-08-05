@@ -49,6 +49,7 @@ public class Teleporteur extends Activable {
                 if (Game.debug) System.out.println("Téléportation");
             }
         }
+        Game.pause = false;
     }
 
     @Override

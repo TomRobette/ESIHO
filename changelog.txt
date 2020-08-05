@@ -1,6 +1,9 @@
 // ICI SERONT NOTÉES LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
+#TomRobette#05/08/2020#
+-Ajout d'une pause activée lors d'une intéraction
+
 #TomRobette#03/08/2020#
 -Correction supplémentaire du bug de caractères
 -Ajout des Conversations
