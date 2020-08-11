@@ -51,6 +51,7 @@
 		activated: false
 		oneUse: false
 		loop: false
+		sens: true@@false@@false@@false
 		text: "Rebonjour ! @@ Bonjour étranger ! %% Comment allez-vous ? %% Moi je vais bien."
 		wait: 32
 		amount: 32
@@ -66,6 +67,7 @@
 		activated: false
 		oneUse: true
 		loop: false
+		sens: false@@false@@true@@false
 		text: "NULL"
 		wait: 64
 		amount: 32

@@ -44,6 +44,7 @@ public abstract class Npc extends Activable {
     @Override
     public void onCreate(EntitySnapshot snapshot) {
         readConversationFromString(snapshot.getString("text", "NULL"));
+        readSensOriginFromString(snapshot.getString("sens", "false"));
         waitMax = snapshot.getInt("wait", 160);
         wait=waitMax;
         amountMax = snapshot.getInt("amount", 16);
@@ -54,13 +55,43 @@ public abstract class Npc extends Activable {
 
     private void readConversationFromString(String string){
         if (!string.equals("NULL")){
-            System.out.println("a");
             String conversationsTab[] = string.trim().split("@@"); //Coupe entre les deux conversations (lues et nonlues)
             String phrasesReadTab[] = conversationsTab[0].trim().split("%%"); //Coupe entre les phrases lues
             String phrasesNotReadTab[] = conversationsTab[1].trim().split("%%"); //Coupe entre les phrases non lues
             ArrayList<String> phrasesReadArray = new ArrayList<>(Arrays.asList(phrasesReadTab));
             ArrayList<String> phrasesNotReadArray = new ArrayList<>(Arrays.asList(phrasesNotReadTab));
             this.conversation = new Conversation(phrasesNotReadArray, phrasesReadArray);
+        }
+    }
+
+    private void readSensOriginFromString(String string){
+        if (!string.equals("NULL")){
+            String sensTab[] = string.trim().split("@@"); //Coupe entre les quatre sens
+            ArrayList<Boolean> sensArray = new ArrayList<>();
+            for (String chaine:sensTab) {
+                try{
+                    sensArray.add(Boolean.parseBoolean(chaine));
+                }catch (Exception e){
+                    sensArray.add(false);
+                }
+            }
+            int compteur = 0;
+            for (Boolean bool:sensArray) {
+                if (bool==true){
+                    compteur++;
+                }
+            }
+            if (compteur>1){
+                sensArray = new ArrayList<>();
+                sensArray.add(false);
+                sensArray.add(false);
+                sensArray.add(true);
+                sensArray.add(false);
+            }
+            super.haut = sensArray.get(0);
+            super.droite = sensArray.get(1);
+            super.bas = sensArray.get(2);
+            super.gauche = sensArray.get(3);
         }
     }
 
@@ -98,7 +129,11 @@ public abstract class Npc extends Activable {
             this.sprite = type.getSprite(sens, 3*type.spritePosition+pas);
             tab=null;
         }else{
-            batch.draw(super.sprite, pos.x, pos.y, getWidth(), getHeight());
+            if (sprite!=null){
+                batch.draw(super.sprite, pos.x, pos.y, getWidth(), getHeight());
+            }else{
+                batch.draw(type.getSprite(sens, 3*type.spritePosition+pas), pos.x, pos.y, getWidth(), getHeight());
+            }
         }
     }
 }

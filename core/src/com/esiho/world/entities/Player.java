@@ -57,7 +57,11 @@ public class Player extends Entity {
             this.sprite = type.getSprite(sens, 3*type.spritePosition+pas);
             tab=null;
         }else{
-            batch.draw(super.sprite, pos.x, pos.y, getWidth(), getHeight());
+            if (sprite!=null){
+                batch.draw(super.sprite, pos.x, pos.y, getWidth(), getHeight());
+            }else{
+                batch.draw(type.getSprite(sens, 3*type.spritePosition+pas), pos.x, pos.y, getWidth(), getHeight());
+            }
             Game.cam.position.set(pos.x, pos.y, 0);
         }
     }
