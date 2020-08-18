@@ -11,16 +11,22 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.combat.teams.TeamType;
+import com.esiho.world.item.Arme;
+import com.esiho.world.item.ArmeType;
 import com.esiho.world.scenarii.Conversation;
 import com.esiho.world.item.Item;
 
@@ -33,12 +39,10 @@ public class GameScreen implements Screen {
     private Viewport viewport;
     private OrthographicCamera camera;
     Skin skin;
-    Boolean newItemUIState = false;
-    Boolean conversationUIState = false;
     Label labelConv;
     int pointerConv = 0;
     Conversation conversationTempo;
-    Dialog newItemDialog, conversationDialog;
+    Dialog newItemDialog, conversationDialog, inventaireDialog;
 
     public GameScreen(Game game){
         this.game=game;
@@ -63,8 +67,8 @@ public class GameScreen implements Screen {
     }
 
     public void newItems(ArrayList<Item> objets){
-        if (!newItemUIState){
-            newItemUIState = true;
+        if (!Game.newItemActif){
+            Game.newItemActif = true;
             createNewItemScreen(objets);
 //            changeScreen(newItemUI);
 //        }else{
@@ -74,8 +78,8 @@ public class GameScreen implements Screen {
 
     public void newConversation(Conversation conversation){
         this.conversationTempo = conversation;
-        if (!conversationUIState){
-            conversationUIState = true;
+        if (!Game.dialogueActif){
+            Game.dialogueActif = true;
             createConversationScreen();
 //            changeScreen(conversationUI);
         }
@@ -84,15 +88,11 @@ public class GameScreen implements Screen {
     private void createNewItemScreen(ArrayList<Item> objets) {
         newItemDialog = new Dialog("Vous avez trouvé :", new Skin(Gdx.files.internal("uiskin.json")));
         Table rootTable = new Table();
-
         rootTable.setFillParent(true);
-
         rootTable.top();
-
         String listeNomsItems = "";
         int compteur = 0;
         for (Item objet:objets) {
-
             if (compteur==0){
                 listeNomsItems = ""+objet.getNom();
             }else if (compteur==objets.size()-1){
@@ -154,13 +154,33 @@ public class GameScreen implements Screen {
         conversationDialog.show(stage);
     }
 
+    private void createInventoryScreen(){
+        ArrayList<Item> inventaire = TeamType.JOUEUR.inventaire;
+        inventaireDialog = new Dialog("Inventaire", new Skin(Gdx.files.internal("uiskin.json")));
+        Table rootTable = new Table();
+        rootTable.setFillParent(true);
+        rootTable.top();
+        Table scrollTable = new Table();
+        ScrollPane scrollPane = new ScrollPane(scrollTable, new Skin(Gdx.files.internal("uiskin.json")));
+        for (Item item:inventaire){
+            Table line = new Table();
+            line.addActor(new Image(item.getSprite()));
+            line.addActor(new Label(""+item.getNom(), new Skin(Gdx.files.internal("uiskin.json"))));
+            scrollTable.addActor(line);
+        }
+        rootTable.addActor(new Label("TEST", new Skin(Gdx.files.internal("uiskin.json"))));
+        rootTable.row();
+        rootTable.addActor(scrollPane);
+        inventaireDialog.add(rootTable);
+    }
+
     private void updateLabelConv(){
         if (Game.debug){
             System.out.println("PointerConv : "+pointerConv);
             System.out.println("ConversationTempo : "+conversationTempo.getPhrase(pointerConv));
         }
         if (pointerConv==conversationTempo.getConversation().size()){
-            conversationUIState = false;
+            Game.dialogueActif = false;
             conversationTempo.isRead();
             conversationDialog.hide();
             pointerConv=0;
@@ -181,13 +201,28 @@ public class GameScreen implements Screen {
         game.gameMap.render(game.cam, game.batch);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            if (newItemUIState){
-                newItemUIState=false;
+            if (Game.newItemActif){
+                Game.newItemActif=false;
                 newItemDialog.hide();
-            }else if (conversationUIState){
-                conversationUIState = false;
+            }else if (Game.dialogueActif){
+                Game.dialogueActif = false;
                 conversationDialog.hide();
+            }else if (Game.inventaireActif){
+                Game.inventaireActif = false;
+                inventaireDialog.hide();
             }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
+            TeamType.JOUEUR.inventaire.add(new Arme(ArmeType.DAGUE));
+            if (!Game.inventaireActif){
+                Game.inventaireActif=true;
+                createInventoryScreen();
+                inventaireDialog.show(stage);
+            }else{
+                Game.inventaireActif = false;
+                inventaireDialog.hide();
+            }
+            if (Game.debug) System.out.println(TeamType.JOUEUR.inventaire.size());
         }
 
         game.batch.begin();

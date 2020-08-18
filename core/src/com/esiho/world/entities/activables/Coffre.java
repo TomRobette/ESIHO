@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.esiho.Game;
 import com.esiho.ScreenLoader;
+import com.esiho.combat.teams.TeamType;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.EntitySnapshot;
 import com.esiho.world.entities.EntityType;
@@ -81,5 +82,6 @@ public class Coffre extends Activable {
         listeItems = new ArrayList<>();
 //        readItemsFromString(snapshot.getString("items", "NULL"));
         listeItems.add(new Arme(ArmeType.ARC));
+        TeamType.JOUEUR.inventaire.addAll(listeItems);
     }
 }
