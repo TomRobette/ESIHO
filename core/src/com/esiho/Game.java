@@ -25,7 +25,12 @@ public class Game extends com.badlogic.gdx.Game {
 	public static boolean debug = false;
 	public static Screen activeScreen;
 	public static GameScreen gameScreen;
-	public static Boolean pause = false;
+	public static boolean pause = false;
+	public static boolean inventaireActif = false;
+	public static boolean lvlUpActif = false;
+	public static boolean listeCbtsActif = false;
+	public static boolean dialogueActif = false;
+	public static boolean newItemActif = false;
 
 	@Override
 	public void create () {

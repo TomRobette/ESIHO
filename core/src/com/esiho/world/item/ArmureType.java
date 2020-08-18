@@ -22,6 +22,17 @@ public enum ArmureType {
         this.coeffProtection = coeffProtection;
     }
 
+    public static ArmureType getElement(String key){
+        try{
+            if (armureTypes.get(key).nom!=null){
+                return armureTypes.get(key);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        return null;
+    }
+
     private static HashMap<String, ArmureType> armureTypes;
 
     static {

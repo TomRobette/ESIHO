@@ -21,6 +21,17 @@ public enum DiversType {
         this.valeur = valeur;
     }
 
+    public static DiversType getElement(String key){
+        try{
+            if (diversTypes.get(key).nom!=null){
+                return diversTypes.get(key);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        return null;
+    }
+
     private static HashMap<String, DiversType> diversTypes;
 
     static {

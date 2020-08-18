@@ -24,6 +24,17 @@ public enum ArmeType {
         this.coeffDegats = coeffDegats;
     }
 
+    public static ArmeType getElement(String key){
+        try{
+            if (armeTypes.get(key).nom!=null){
+                return armeTypes.get(key);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        return null;
+    }
+
     private static HashMap<String, ArmeType> armeTypes;
 
     static {

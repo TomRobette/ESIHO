@@ -17,7 +17,6 @@ public abstract class Entity {
     protected Boolean droite;
     protected TextureRegion sprite;
     protected GameMap map;
-    protected Boolean immobilize = false;
 
     protected int pas = 0;
     protected int sens = 0;

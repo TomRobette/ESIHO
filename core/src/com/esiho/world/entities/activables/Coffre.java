@@ -14,28 +14,49 @@ import com.esiho.world.item.Armure;
 import com.esiho.world.item.ArmureType;
 import com.esiho.world.item.Item;
 import com.esiho.world.map.GameMap;
+import com.esiho.world.scenarii.Conversation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Coffre extends Activable {
+    ArrayList<Item> listeItems;
 
     @Override
     public void onUse(/*SpriteBatch batch*/) {
 //        render(batch);
         if (Game.debug) {
             System.out.println("COFFRE");
+            if (listeItems.size()!=0){
+                for (Item objet:listeItems) {
+                    System.out.println(objet.getNom());
+                }
+            }
         }
         if (Game.gameScreen!=null){
-            ArrayList<Item> listeItems = new ArrayList<>();
-            listeItems.add(new Arme(ArmeType.BATON));
-            listeItems.add( new Armure(ArmureType.ARMURE_LEGENDAIRE));
-            listeItems.add(new Arme(ArmeType.EPEELEGENDAIRE));
-            listeItems.add(new Arme(ArmeType.ARC));
-            listeItems.add(new Arme(ArmeType.DAGUE));
-            listeItems.add(new Armure(ArmureType.ARMURE_BANALE));
+//            listeItems.add(new Arme(ArmeType.BATON));
+//            listeItems.add(new Armure(ArmureType.ARMURE_LEGENDAIRE));
+//            listeItems.add(new Arme(ArmeType.EPEELEGENDAIRE));
+//            listeItems.add(new Arme(ArmeType.ARC));
+//            listeItems.add(new Arme(ArmeType.DAGUE));
+//            listeItems.add(new Armure(ArmureType.ARMURE_BANALE));
             Game.gameScreen.newItems(listeItems);
         }
         Game.pause = false;
+    }
+
+    private void readItemsFromString(String string){
+        if (!string.equals("NULL")){
+            String items[] = string.trim().split("@@"); //Coupe entre les deux conversations (lues et nonlues)
+            ArrayList<Item> listeObjets = new ArrayList<>();
+            for (String chaine:items) {
+                Item item = Item.getItemFromID(chaine);
+                if (item!=null){
+                    listeObjets.add(item);
+                }
+            }
+            listeItems = listeObjets;
+        }
     }
 
     @Override
@@ -57,6 +78,8 @@ public class Coffre extends Activable {
 
     @Override
     public void onCreate(EntitySnapshot snapshot) {
-
+        listeItems = new ArrayList<>();
+//        readItemsFromString(snapshot.getString("items", "NULL"));
+        listeItems.add(new Arme(ArmeType.ARC));
     }
 }

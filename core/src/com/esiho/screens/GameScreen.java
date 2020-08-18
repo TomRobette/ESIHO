@@ -33,12 +33,12 @@ public class GameScreen implements Screen {
     private Viewport viewport;
     private OrthographicCamera camera;
     Skin skin;
-    Table newItemUI, conversationUI;
     Boolean newItemUIState = false;
     Boolean conversationUIState = false;
     Label labelConv;
     int pointerConv = 0;
     Conversation conversationTempo;
+    Dialog newItemDialog, conversationDialog;
 
     public GameScreen(Game game){
         this.game=game;
@@ -66,7 +66,7 @@ public class GameScreen implements Screen {
         if (!newItemUIState){
             newItemUIState = true;
             createNewItemScreen(objets);
-            changeScreen(newItemUI);
+//            changeScreen(newItemUI);
 //        }else{
 //            newItemUI.clear();
         }
@@ -82,7 +82,7 @@ public class GameScreen implements Screen {
     }
 
     private void createNewItemScreen(ArrayList<Item> objets) {
-        Dialog dia = new Dialog("Vous avez trouvé :", new Skin(Gdx.files.internal("uiskin.json")));
+        newItemDialog = new Dialog("Vous avez trouvé :", new Skin(Gdx.files.internal("uiskin.json")));
         Table rootTable = new Table();
 
         rootTable.setFillParent(true);
@@ -117,27 +117,27 @@ public class GameScreen implements Screen {
         }
         rootTable.row();
         rootTable.add(new Label("Vous avez gagné "+listeNomsItems, skin));
-//        TextButton btn = new TextButton(, skin);
 
-        dia.add(rootTable);
+        newItemDialog.add(rootTable);
 //        newItemUI = rootTable;
 //        newItemUI.align(Align.center);
-        dia.show(stage);
+        newItemDialog.show(stage);
 //        stage.addActor(dia);
     }
 
     private void createConversationScreen(){
-        conversationUI = new Table();
+        conversationDialog = new Dialog("Discussion", new Skin(Gdx.files.internal("uiskin.json")));
+        Table rootTable = new Table();
 
-        conversationUI.setFillParent(true);
+        rootTable.setFillParent(true);
 
-        conversationUI.top();
+        rootTable.top();
 
         labelConv = new Label(conversationTempo.getPhrase(0), skin);
 
 
-        conversationUI.row();
-        conversationUI.add(labelConv);
+        rootTable.row();
+        rootTable.add(labelConv);
         TextButton btn = new TextButton("Suivant", skin);
         btn.addListener(new ClickListener(){
             @Override
@@ -146,10 +146,12 @@ public class GameScreen implements Screen {
                 updateLabelConv();
             }
         });
-        conversationUI.row();
-        conversationUI.add(btn).align(Align.bottomRight);
+        rootTable.row();
+        rootTable.add(btn).align(Align.bottomRight);
 
-        conversationUI.align(Align.bottom);
+        rootTable.align(Align.bottom);
+        conversationDialog.add(rootTable);
+        conversationDialog.show(stage);
     }
 
     private void updateLabelConv(){
@@ -160,7 +162,7 @@ public class GameScreen implements Screen {
         if (pointerConv==conversationTempo.getConversation().size()){
             conversationUIState = false;
             conversationTempo.isRead();
-            conversationUI.clear();
+            conversationDialog.hide();
             pointerConv=0;
             Game.pause = false;
         }else{
@@ -181,10 +183,10 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             if (newItemUIState){
                 newItemUIState=false;
-                newItemUI.clear();
+                newItemDialog.hide();
             }else if (conversationUIState){
                 conversationUIState = false;
-                conversationUI.clear();
+                conversationDialog.hide();
             }
         }
 

@@ -40,6 +40,7 @@
 		activated: false
 		oneUse: true
 		loop: false
+		items: "I2@@I6@@I3"
 	}
 }
 {

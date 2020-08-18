@@ -51,6 +51,17 @@ public enum ConsommableType {
         return this.useItem.useItemOnEntity(combattant);
     }
 
+    public static ConsommableType getElement(String key){
+        try{
+            if (consommableTypes.get(key).nom!=null){
+                return consommableTypes.get(key);
+            }
+        }catch (Exception e){
+            return null;
+        }
+        return null;
+    }
+
     public Team useItemOnTeam(Team team){
         return this.useItem.useItemOnTeam(team);
     }
