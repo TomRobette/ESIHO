@@ -3,6 +3,7 @@
 // Veuillez déposer à partir d'ici :
 #TomRobette#20/08/2020#
 -Correction du bug d'affichage de l'inventaire
+-Ajout de la liste des combattants dans le menu inventaire
 
 #TomRobette#18/08/2020#
 -Ajout de la possibilité d'initialiser le contenu d'un coffre depuis le fichier .entities de la carte

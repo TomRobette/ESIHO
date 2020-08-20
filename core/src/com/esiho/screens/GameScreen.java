@@ -3,6 +3,7 @@ package com.esiho.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,6 +25,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.combat.entities.Combattant;
+import com.esiho.combat.entities.CombattantType;
 import com.esiho.combat.teams.TeamType;
 import com.esiho.world.item.Arme;
 import com.esiho.world.item.ArmeType;
@@ -149,28 +152,46 @@ public class GameScreen implements Screen {
 
     private void createInventoryScreen(){
         ArrayList<Item> inventaire = TeamType.JOUEUR.inventaire;
+        ArrayList<Combattant> listeCbts = TeamType.JOUEUR.listeCbtEntities;
+        Combattant combattant = new Combattant();
+        combattant.create(CombattantType.JOUEUR);
+        listeCbts.add(combattant);
         inventaireDialog = new Dialog("Inventaire", skin);
+        inventaireDialog.setResizable(true);
         Table rootTable = new Table();
         rootTable.setFillParent(true);
-        rootTable.top();
-        Table scrollTable = new Table();
-        ScrollPane scrollPane = new ScrollPane(scrollTable, skin);
+        Table itemScrollTable = new Table();
+        itemScrollTable.align(Align.topLeft);
+        ScrollPane itemScrollPane = new ScrollPane(itemScrollTable, skin);
         for (Item item:inventaire){
             Table line = new Table();
             if (item.getSprite()!=null){
                 Image image = new Image(item.getSprite());
-                image.setScale(2, 2);
+                image.setScale(1.5f, 1.5f);
                 line.add(image).pad(10);
                 line.right();
             }
             line.add(new Label(""+item.getNom(), skin));
-            scrollTable.add(line);
-            scrollTable.row();
+            itemScrollTable.add(line);
+            itemScrollTable.row();
         }
-        rootTable.add(new Label("TEST", skin));
-        rootTable.row();
-        rootTable.add(scrollPane);
-        inventaireDialog.add(rootTable);
+        rootTable.add(itemScrollPane).align(Align.topLeft);
+        Table cbtsScrollTable = new Table();
+        ScrollPane cbtsScrollPane = new ScrollPane(cbtsScrollTable, skin);
+        for (Combattant cbt:listeCbts){
+            Table line = new Table();
+            if (cbt.getTexture()!=null){
+                Image image = new Image(cbt.getTexture());
+                image.setSize(32, 32);
+                line.add(image);
+                line.right();
+            }
+            line.add(new Label(""+cbt.getName(), skin));
+            cbtsScrollTable.add(line);
+            cbtsScrollTable.row();
+        }
+        rootTable.add(cbtsScrollPane).align(Align.left);
+        inventaireDialog.add(rootTable).align(Align.topLeft);
     }
 
     private void updateLabelConv(){
