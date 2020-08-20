@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
     }
 
     private void createNewItemScreen(ArrayList<Item> objets) {
-        newItemDialog = new Dialog("Vous avez trouvé :", new Skin(Gdx.files.internal("uiskin.json")));
+        newItemDialog = new Dialog("Vous avez trouvé :", skin);
         Table rootTable = new Table();
         rootTable.setFillParent(true);
         rootTable.top();
@@ -103,9 +103,6 @@ public class GameScreen implements Screen {
             compteur++;
             if (objet.getSprite()!=null){
                 Image image = new Image(objet.getSprite());
-//            image.setSize(0.17f*Gdx.graphics.getWidth(), 0.17f*Gdx.graphics.getWidth());
-//                image.setWidth(0.5f*Gdx.graphics.getWidth());
-//                image.setHeight(0.5f*Gdx.graphics.getWidth());
                 image.setScale(2, 2);
                 rootTable.add(image).pad(10);
                 rootTable.row();
@@ -126,15 +123,12 @@ public class GameScreen implements Screen {
     }
 
     private void createConversationScreen(){
-        conversationDialog = new Dialog("Discussion", new Skin(Gdx.files.internal("uiskin.json")));
+        conversationDialog = new Dialog("Discussion", skin);
         Table rootTable = new Table();
-
         rootTable.setFillParent(true);
-
         rootTable.top();
 
         labelConv = new Label(conversationTempo.getPhrase(0), skin);
-
 
         rootTable.row();
         rootTable.add(labelConv);
@@ -148,7 +142,6 @@ public class GameScreen implements Screen {
         });
         rootTable.row();
         rootTable.add(btn).align(Align.bottomRight);
-
         rootTable.align(Align.bottom);
         conversationDialog.add(rootTable);
         conversationDialog.show(stage);
@@ -156,21 +149,27 @@ public class GameScreen implements Screen {
 
     private void createInventoryScreen(){
         ArrayList<Item> inventaire = TeamType.JOUEUR.inventaire;
-        inventaireDialog = new Dialog("Inventaire", new Skin(Gdx.files.internal("uiskin.json")));
+        inventaireDialog = new Dialog("Inventaire", skin);
         Table rootTable = new Table();
         rootTable.setFillParent(true);
         rootTable.top();
         Table scrollTable = new Table();
-        ScrollPane scrollPane = new ScrollPane(scrollTable, new Skin(Gdx.files.internal("uiskin.json")));
+        ScrollPane scrollPane = new ScrollPane(scrollTable, skin);
         for (Item item:inventaire){
             Table line = new Table();
-            line.addActor(new Image(item.getSprite()));
-            line.addActor(new Label(""+item.getNom(), new Skin(Gdx.files.internal("uiskin.json"))));
-            scrollTable.addActor(line);
+            if (item.getSprite()!=null){
+                Image image = new Image(item.getSprite());
+                image.setScale(2, 2);
+                line.add(image).pad(10);
+                line.right();
+            }
+            line.add(new Label(""+item.getNom(), skin));
+            scrollTable.add(line);
+            scrollTable.row();
         }
-        rootTable.addActor(new Label("TEST", new Skin(Gdx.files.internal("uiskin.json"))));
+        rootTable.add(new Label("TEST", skin));
         rootTable.row();
-        rootTable.addActor(scrollPane);
+        rootTable.add(scrollPane);
         inventaireDialog.add(rootTable);
     }
 

@@ -1,0 +1,2 @@
+La solution fut de remplacer, dans la classe GameScreen, dans la méthode 
+createInventoryScreen(), les .addActors() par .add()
