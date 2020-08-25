@@ -292,20 +292,6 @@ public class CombatScreen implements Screen {
         swapScreen = rootTable;
     }
 
-    private void createVictoryScreen(){
-        Table rootTable = new Table();
-
-        rootTable.setFillParent(true);
-
-        rootTable.top();
-        Combattant entity = cbtState.team1.getListeCbtEntities().get(pointerV);
-
-        rootTable.add(new Label(""+entity.getName()+"  lvl:"+entity.getLvl(), skin));
-//        TextButton btn = new TextButton(, skin);
-
-        victoryScreen = rootTable;
-    }
-
     private void changeScreen(Actor actor){
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);

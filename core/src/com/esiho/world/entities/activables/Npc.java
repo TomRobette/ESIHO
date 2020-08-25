@@ -3,7 +3,7 @@ package com.esiho.world.entities.activables;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.esiho.world.scenarii.Conversation;
+import com.esiho.world.scenario.Conversation;
 import com.esiho.world.entities.Activable;
 import com.esiho.world.entities.EntitySnapshot;
 

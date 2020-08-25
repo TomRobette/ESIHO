@@ -1,4 +1,4 @@
-package com.esiho.world.scenarii;
+package com.esiho.world.scenario;
 
 import java.util.ArrayList;
 

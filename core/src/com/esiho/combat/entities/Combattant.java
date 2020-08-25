@@ -2,6 +2,7 @@ package com.esiho.combat.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.esiho.Game;
 import com.esiho.combat.moves.MoveList;
 import com.esiho.combat.types.Type;
 import com.esiho.world.item.Arme;
@@ -187,7 +188,7 @@ public class Combattant {
         }else{
             pv=0;
         }
-        System.out.println(degats);
+        if (Game.debug) System.out.println(degats);
     }
 
     public void degatsPVprct(double pourcentage){

@@ -28,9 +28,11 @@ public class Game extends com.badlogic.gdx.Game {
 	public static boolean pause = false;
 	public static boolean inventaireActif = false;
 	public static boolean lvlUpActif = false;
-	public static boolean listeCbtsActif = false;
+	public static boolean finCbt = false;
 	public static boolean dialogueActif = false;
 	public static boolean newItemActif = false;
+
+	public static CombatState finCbtState;
 
 	@Override
 	public void create () {

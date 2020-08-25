@@ -6,6 +6,7 @@ import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.entities.Ennemis;
 import com.esiho.combat.entities.Joueur;
 import com.esiho.world.item.Item;
+import com.esiho.world.scenario.Quest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public enum TeamType {
     public ArrayList<Combattant> listeCbtEntities;
     public ArrayList<Item> inventaire;
     public Integer argent;
+    public ArrayList<Quest> quests;
     private Class loaderClass;
 
     public static final int ENTITY_SIZE = 32;
@@ -28,6 +30,7 @@ public enum TeamType {
         this.loaderClass = loaderClass;
         this.listeCbtEntities = new ArrayList<>();
         this.inventaire = new ArrayList<>();
+        this.quests = new ArrayList<>();
         this.argent = 0;
     }
 
@@ -36,6 +39,7 @@ public enum TeamType {
         this.loaderClass = loaderClass;
         this.listeCbtEntities = listeCbtEntities;
         this.inventaire = new ArrayList<>();
+        this.quests = new ArrayList<>();
         this.argent = 0;
     }
 

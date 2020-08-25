@@ -3,7 +3,6 @@ package com.esiho.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,25 +11,24 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
+import com.esiho.combat.CombatState;
 import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.entities.CombattantType;
 import com.esiho.combat.teams.TeamType;
 import com.esiho.world.item.Arme;
 import com.esiho.world.item.ArmeType;
-import com.esiho.world.scenarii.Conversation;
+import com.esiho.world.scenario.Conversation;
 import com.esiho.world.item.Item;
 
 import java.util.ArrayList;
@@ -43,9 +41,13 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     Skin skin;
     Label labelConv;
+    Table rootElement;
     int pointerConv = 0;
     Conversation conversationTempo;
-    Dialog newItemDialog, conversationDialog, inventaireDialog;
+    Dialog newItemDialog, conversationDialog, inventaireDialog, finCbtDialog;
+
+    int pointerFinCbt;
+    int pointerLvlUp;
 
     public GameScreen(Game game){
         this.game=game;
@@ -186,12 +188,81 @@ public class GameScreen implements Screen {
                 line.add(image);
                 line.right();
             }
-            line.add(new Label(""+cbt.getName(), skin));
+            line.add(new Label(""+cbt.getName()+" lvl: "+cbt.getLvl(), skin));
             cbtsScrollTable.add(line);
             cbtsScrollTable.row();
         }
         rootTable.add(cbtsScrollPane).align(Align.left);
         inventaireDialog.add(rootTable).align(Align.topLeft);
+    }
+
+    private void createFinCbtScreen(CombatState combatState){
+        finCbtDialog = new Dialog(""+combatState.messageFin, skin);
+        Table rootTable = new Table();
+
+        rootTable.setFillParent(true);
+        rootTable.top();
+        rootElement = new Table();
+        rootElement.setFillParent(true);
+        rootElement.top();
+
+        rootElement.add(new Label("Vous avez gagné :", skin)).align(Align.center);
+        rootElement.row();
+
+        for (Item item:combatState.itemsObtenus) {
+            Table line = new Table();
+            if (item.getSprite()!=null){
+                Image image = new Image(item.getSprite());
+                image.setScale(1.5f, 1.5f);
+                line.add(image).pad(10);
+                line.right();
+            }
+            line.add(new Label(""+item.getNom(), skin));
+            rootElement.add(line).align(Align.center);
+            rootElement.row();
+        }
+
+        rootTable.add(rootElement);
+        TextButton btn = new TextButton("Suivant", skin);
+        final CombatState cbtState = combatState;
+        btn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                updateRootFinCbt(cbtState);
+            }
+        });
+        rootTable.row();
+        rootTable.add(btn).align(Align.bottomRight);
+
+        finCbtDialog.add(rootTable);
+        finCbtDialog.show(stage);
+    }
+
+    private void updateRootFinCbt(CombatState combatState){
+        System.out.println("bruh");
+        rootElement = new Table();
+        rootElement.setFillParent(true);
+        rootElement.top();
+        switch (pointerFinCbt){
+            case 0 :
+                pointerFinCbt++;//Étape Or
+                rootElement.add(new Label("Vous avez gagné :", skin)).align(Align.center);
+                rootElement.row();
+                rootElement.add(new Label(""+combatState.orObtenu+" pièces d'or", skin)).align(Align.center);
+                break;
+            case 1 :
+                //Étape XP
+                ArrayList<Combattant> listeCbts = combatState.team1.getListeCbtEntities();
+                if (pointerLvlUp < listeCbts.size()){
+                    rootElement.add(new Label(""+listeCbts.get(pointerLvlUp).getName()+" a gagné "+combatState.listeXP.get(pointerLvlUp), skin)).align(Align.center);
+                    pointerLvlUp++;
+                }else{
+                    pointerFinCbt=0;
+                    pointerLvlUp=0;
+
+                }
+        }
+        System.out.println(pointerFinCbt+" "+pointerLvlUp);
     }
 
     private void updateLabelConv(){
@@ -220,6 +291,10 @@ public class GameScreen implements Screen {
         game.gameMap.update(Gdx.graphics.getDeltaTime());
         game.gameMap.render(game.cam, game.batch);
 
+        if (Game.finCbt && Game.finCbtState!=null){
+            createFinCbtScreen(Game.finCbtState);
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             if (Game.newItemActif){
                 Game.newItemActif=false;
@@ -230,6 +305,10 @@ public class GameScreen implements Screen {
             }else if (Game.inventaireActif){
                 Game.inventaireActif = false;
                 inventaireDialog.hide();
+            }else if (Game.finCbt){
+                Game.finCbt = false;
+                Game.finCbtState = null;
+                finCbtDialog.hide();
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)){

@@ -1,8 +1,10 @@
 package com.esiho.combat;
 
+import com.esiho.Game;
 import com.esiho.combat.entities.Combattant;
 import com.esiho.combat.moves.MoveType;
 import com.esiho.combat.teams.Team;
+import com.esiho.combat.teams.TeamType;
 import com.esiho.combat.types.Type;
 import com.esiho.world.item.Item;
 
@@ -21,6 +23,11 @@ public class CombatState {
     private ArrayList<Combattant> ordreReceveurs;
     private Integer victoire;
 
+    public String messageFin;
+    public ArrayList<Item> itemsObtenus;
+    public int orObtenu;
+    public ArrayList<Integer> listeXP;
+
     public CombatState(Team team1, Team team2){
         this.team1=team1;
         this.team2=team2;
@@ -31,6 +38,8 @@ public class CombatState {
         this.ordreMoves = new ArrayList<>();
         this.ordreLanceurs = new ArrayList<>();
         this.ordreReceveurs = new ArrayList<>();
+        this.itemsObtenus = new ArrayList<>();
+        this.listeXP = new ArrayList<>();
         victoire=0;
     }
 
@@ -106,7 +115,8 @@ public class CombatState {
 
     private void fin(Integer victoire){
         if (victoire==1){
-            System.out.println("VICTOIRE !");
+            if (Game.debug) System.out.println("VICTOIRE !");
+            this.messageFin = "Victoire !";
             //Réussite !
             if (team2.getInventaire()!=null){
                 if (team2.getInventaire().size()!=0){
@@ -114,25 +124,34 @@ public class CombatState {
                         team1.getInventaire().add(objet);
                     }//Pillage des objets de l'équipe adverse
                 }
+                this.itemsObtenus = team2.getInventaire();
             }
-            team1.addArgent(team2.getArgent()/2);//Pillage de la moitié de l'argent de l'équipe adverse
+            team1.addArgent(Math.round(team2.getArgent()/2));//Pillage de la moitié de l'argent de l'équipe adverse
+            this.orObtenu = Math.round(team2.getArgent()/2);
             int xpObtenu = 0;
             for (Combattant pnjEnnemi:team2.getListeCbtEntities()) {
                 xpObtenu+=pnjEnnemi.getXp()*pnjEnnemi.getLvl();
             }//On récupère la somme d'xp de l'équipe adversaire
             int compteur = 0;
             for (Combattant pnjAllie:team1.getListeCbtEntities()){
-                pnjAllie.addXp((Integer) xpObtenu/team1.getListeCbtEntities().size());
+                pnjAllie.addXp(Math.round(xpObtenu/team1.getListeCbtEntities().size()));
+                this.listeXP.add(Math.round(xpObtenu/team1.getListeCbtEntities().size()));
                 team1.getListeCbtEntities().set(compteur, pnjAllie);
                 compteur++;
             }//Ajout de l'xp sur chaque entité de l'équipe alliée
             this.victoire = 1;
         }else if (victoire==-1){
-            System.out.println("DÉFAITE !");
+            if (Game.debug) System.out.println("DÉFAITE !");
+            this.messageFin = "Défaite...";
             //Défaite !
             this.victoire = -1;
         }
+        TeamType.JOUEUR.listeCbtEntities = team1.getListeCbtEntities();
+        TeamType.JOUEUR.inventaire = team1.getInventaire();
+        TeamType.JOUEUR.argent = team1.getArgent();
         fin=true;
+        Game.finCbtState = this;
+        Game.finCbt = true;
     }
 
     private Integer analyseVictoire(){
