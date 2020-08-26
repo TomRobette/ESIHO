@@ -197,11 +197,13 @@ public class GameScreen implements Screen {
     }
 
     private void createFinCbtScreen(CombatState combatState){
+        Game.finCbt = false;
         finCbtDialog = new Dialog(""+combatState.messageFin, skin);
+        finCbtDialog.setResizable(true);
         Table rootTable = new Table();
-
-        rootTable.setFillParent(true);
-        rootTable.top();
+//
+//        rootTable.setFillParent(true);
+//        rootTable.top();
         rootElement = new Table();
         rootElement.setFillParent(true);
         rootElement.top();
@@ -231,7 +233,6 @@ public class GameScreen implements Screen {
                 updateRootFinCbt(cbtState);
             }
         });
-        rootTable.row();
         rootTable.add(btn).align(Align.bottomRight);
 
         finCbtDialog.add(rootTable);
@@ -239,8 +240,7 @@ public class GameScreen implements Screen {
     }
 
     private void updateRootFinCbt(CombatState combatState){
-        System.out.println("bruh");
-        rootElement = new Table();
+        rootElement.reset();
         rootElement.setFillParent(true);
         rootElement.top();
         switch (pointerFinCbt){
@@ -254,15 +254,17 @@ public class GameScreen implements Screen {
                 //Étape XP
                 ArrayList<Combattant> listeCbts = combatState.team1.getListeCbtEntities();
                 if (pointerLvlUp < listeCbts.size()){
-                    rootElement.add(new Label(""+listeCbts.get(pointerLvlUp).getName()+" a gagné "+combatState.listeXP.get(pointerLvlUp), skin)).align(Align.center);
+                    rootElement.add(new Label(""+listeCbts.get(pointerLvlUp).getName()+" a gagné "+combatState.listeXP.get(pointerLvlUp)+" points d'exp", skin)).align(Align.top);
                     pointerLvlUp++;
                 }else{
                     pointerFinCbt=0;
                     pointerLvlUp=0;
-
+                    Game.finCbt = false;
+                    Game.finCbtState = null;
+                    finCbtDialog.hide();
                 }
         }
-        System.out.println(pointerFinCbt+" "+pointerLvlUp);
+        if (Game.debug) System.out.println(pointerFinCbt+" "+pointerLvlUp);
     }
 
     private void updateLabelConv(){

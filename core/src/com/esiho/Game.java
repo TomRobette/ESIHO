@@ -59,7 +59,6 @@ public class Game extends com.badlogic.gdx.Game {
 			if (classWrote.equals("com.esiho.screens.GameScreen")){
 				gameScreen= (GameScreen) activeScreen;
 				if (debug)System.out.println("GameScreen est initialisé");
-
 			}
 		}catch (Exception e){
 			activeScreen = backupScreen;
