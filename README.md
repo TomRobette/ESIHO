@@ -5,4 +5,4 @@ Fiche de Projet : https://docs.google.com/document/d/1ehbEwsh9g1NEwvBTiePcKjzaph
 
 Liste des tâches : https://docs.google.com/spreadsheets/d/163qolLG_hVASQtwgwx8tgpVHZ_yIeb3yAKTIU7DIvQc
 
-Le changelog : https://github.com/TomBPro/ProjetPPE_RPG/blob/master/changelog.txt
+Le changelog : https://github.com/TomRobette/ESIHO/blob/master/changelog.txt
