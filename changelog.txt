@@ -1,6 +1,11 @@
 // ICI SERONT NOTÉES LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
+#TomRobette#28/08/2020#
+-Ajout de PNJs et entités divers
+-Ajout d'un combattant Slime
+-Quelques optimisations
+
 #TomRobette#26/08/2020#
 -Correction du bug d'affichage du dialog de fin de combat
 

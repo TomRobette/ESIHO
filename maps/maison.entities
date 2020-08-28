@@ -59,20 +59,4 @@
 		fixed: false
 	}
 }
-{
-	class: com.esiho.world.entities.EntitySnapshot
-	type: P6
-	x: 160
-	y: 192
-	data: {
-		activated: false
-		oneUse: true
-		loop: false
-		sens: "false@@false@@true@@false"
-		text: "NULL"
-		wait: 64
-		amount: 32
-		fixed: true
-	}
-}
 ]

@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import com.esiho.world.entities.activables.Coffre;
 import com.esiho.world.entities.activables.Npc;
+import com.esiho.world.entities.activables.Npcs.Chat;
 import com.esiho.world.entities.activables.Npcs.Mauricette;
+import com.esiho.world.entities.activables.Npcs.Monstre;
 import com.esiho.world.entities.activables.Npcs.Roger;
 import com.esiho.world.entities.activables.Teleporteur;
 import com.esiho.world.map.GameMap;
@@ -21,7 +23,10 @@ public enum EntityType {
     FLAMME("P3", Divers.class, "!Other2", 6, 32, 64, true, 1f/4f, false),
     CRISTAL("P4", Divers.class, "!Crystal",1, 32, 64, false, 1f/8f, true),
     MAURICETTE("P5", Mauricette.class, "Actor1", 3, 32, 32, true, 1f/4f, true),
-    ROGER("P6", Roger.class, "Actor1", 2, 32, 32, true, 1f/4f, true);
+    ROGER("P6", Roger.class, "Actor1", 2, 32, 32, true, 1f/4f, true),
+    PAPILLON("P7", Divers.class, "Animal", 7, 32, 32, true, 1f/8f, false),
+    CHAT("P8", Chat.class, "Animal", 1, 32, 32, true, 1f/4f, true),
+    SLIME("P9", Monstre.class, "Monster2", 2, 32, 32, true, 1f/4f, true);
 
     private String id;
     private Class loaderClass;

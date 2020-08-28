@@ -20,15 +20,8 @@ public class ScreenLoader {
     public static void team(){
         Team team1 = new Team();
         team1.create(TeamType.JOUEUR);
-        for (int a = 0; a<6; a++ ){
-            Combattant joueur = new Combattant();
-            joueur.create(CombattantType.JOUEUR);
-            team1.addPNJ(joueur);
-        }
-        team1.addArgent(100);
         Combattant rat = new Combattant();
         rat.create(CombattantType.RAT);
-        team1.addPNJ(rat);
         Team team2 = new Team();
         team2.create(TeamType.MONSTRES);
         for (int a = 0; a<3; a++) {

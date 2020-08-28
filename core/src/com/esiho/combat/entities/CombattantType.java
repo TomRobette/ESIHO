@@ -14,8 +14,9 @@ import com.esiho.world.item.ArmureType;
 import java.util.HashMap;
 
 public enum CombattantType {
-    JOUEUR("C1", new Eau(), "Swordman", "Maurice", 5, 300, 0, 2000, 2000, 150, 100, 50, 100, 100, new Arme(ArmeType.EPEELEGENDAIRE), new Armure(ArmureType.ARMURE_BANALE), new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU, MoveType.FLECHE_EAU)),
-    RAT("C2", new Normal(), "Rat", "Rat",2, 100, 37, 500, 500, 50, 20, 20, 50, 90, null, null, new MoveList(MoveType.COUP_POING));
+    JOUEUR("C1", new Eau(), "Swordman", "Maurice", 5, 300, 290, 500, 500, 70, 70, 50, 70, 100, new Arme(ArmeType.EPEELEGENDAIRE), new Armure(ArmureType.ARMURE_BANALE), new MoveList(MoveType.COUP_EPEE, MoveType.LAME_EAU, MoveType.FLECHE_EAU)),
+    RAT("C2", new Normal(), "Rat", "Rat",2, 100, 37, 500, 500, 50, 20, 20, 50, 90, null, null, new MoveList(MoveType.COUP_POING)),
+    SLIME("C3", new Eau(), "Slime", "Slime", 3, 110, 40, 300, 300, 50, 30, 60, 70, 30, null, null, new MoveList(MoveType.CANNON_EAU, MoveType.LAME_EAU));
 
     private String id;
     protected Type type;

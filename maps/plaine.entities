@@ -7,6 +7,12 @@
 }
 {
 	class: com.esiho.world.entities.EntitySnapshot
+	type: P7
+	x: 96
+	y: 32
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
 	type: P1
 	x: 176
 	y: 192
@@ -17,6 +23,38 @@
 		destination: "maison"
 		destiX: 160
 		destiY: 304
+	}
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P8
+	x: 160
+	y: 64
+	data: {
+		activated: false
+		oneUse: false
+		loop: false
+		sens: "true@@false@@false@@false"
+		text: "Mew ! @@ Mew ?"
+		wait: 32
+		amount: 32
+		fixed: false
+	}
+}
+{
+	class: com.esiho.world.entities.EntitySnapshot
+	type: P9
+	x: 256
+	y: 160
+	data: {
+		activated: false
+		oneUse: true
+		loop: false
+		sens: "false@@false@@true@@false"
+		text: "NULL"
+		wait: 64
+		amount: 32
+		fixed: true
 	}
 }
 ]
