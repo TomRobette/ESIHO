@@ -1,10 +1,8 @@
 package com.esiho.world.entities;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Timer;
 import com.esiho.Game;
 import com.esiho.world.map.GameMap;
 
@@ -17,6 +15,7 @@ public abstract class Entity {
     protected Boolean droite;
     protected TextureRegion sprite;
     protected GameMap map;
+    public Boolean dead;
 
     protected int pas = 0;
     protected int sens = 0;
@@ -29,6 +28,7 @@ public abstract class Entity {
         this.gauche=false;
         this.droite=false;
         this.map=map;
+        dead = false;
 //        sprite = type.getSprite(0, 0);
     }
 
@@ -141,9 +141,20 @@ public abstract class Entity {
         return type.getHeight();
     }
 
-    public void hardPositionning(int x, int y){
+    public void hardPositionning(int x, int y) {
         this.pos.x = x;
         this.pos.y = y;
+    }
+
+    public abstract void onDeath();
+
+    public void death(){
+        onDeath();
+        dead = true;
+    }
+
+    public void resurrect(){
+        dead = false;
     }
 
 }

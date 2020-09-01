@@ -6,12 +6,14 @@ import com.esiho.combat.moves.MoveType;
 import com.esiho.combat.teams.Team;
 import com.esiho.combat.teams.TeamType;
 import com.esiho.combat.types.Type;
+import com.esiho.world.entities.Entity;
 import com.esiho.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CombatState {
+    private Entity entityToKill;
     public Team team1;
     public Team team2;
     public Combattant entity1;
@@ -29,6 +31,22 @@ public class CombatState {
     public ArrayList<Integer> listeXP;
 
     public CombatState(Team team1, Team team2){
+        this.team1=team1;
+        this.team2=team2;
+        this.tour = 0;
+        this.fin = false;
+        this.entity1 = team1.getListeCbtEntities().get(0);
+        this.entity2 = team2.getListeCbtEntities().get(0);
+        this.ordreMoves = new ArrayList<>();
+        this.ordreLanceurs = new ArrayList<>();
+        this.ordreReceveurs = new ArrayList<>();
+        this.itemsObtenus = new ArrayList<>();
+        this.listeXP = new ArrayList<>();
+        victoire=0;
+    }
+
+    public CombatState(Team team1, Team team2, Entity entityToKill){
+        this.entityToKill = entityToKill;
         this.team1=team1;
         this.team2=team2;
         this.tour = 0;
@@ -140,6 +158,8 @@ public class CombatState {
                 compteur++;
             }//Ajout de l'xp sur chaque entité de l'équipe alliée
             this.victoire = 1;
+            if (this.entityToKill!=null)
+                Game.killEntityOnActiveMap(this.entityToKill);
         }else if (victoire==-1){
             if (Game.debug) System.out.println("DÉFAITE !");
             this.messageFin = "Défaite...";

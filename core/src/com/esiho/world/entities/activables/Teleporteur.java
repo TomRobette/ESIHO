@@ -39,6 +39,11 @@ public class Teleporteur extends Activable {
     }
 
     @Override
+    public void onDeath() {
+
+    }
+
+    @Override
     public void onUse() {
         Entity player = super.map.getPlayer();
         System.out.println(1);

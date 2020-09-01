@@ -94,7 +94,7 @@ public class TiledGameMap extends GameMap {
     @Override
     public Boolean doesEntityCollideWithEntity(Entity entity1, float x, float y, Entity entity2) {
         if (!entity1.equals(entity2)){
-            if (entity2.getHeight()+entity2.getY()>=y && entity2.getY()<=y+entity1.getHeight() && entity2.getWidth()+entity2.getX()>=x && entity2.getX()<=x+entity1.getWidth()){
+            if (entity2.getHeight()+entity2.getY()>=y && entity2.getY()<=y+entity1.getHeight() && entity2.getWidth()+entity2.getX()>=x && entity2.getX()<=x+entity1.getWidth() && !entity2.dead){
                 return true;
             }
         }
@@ -105,7 +105,7 @@ public class TiledGameMap extends GameMap {
     public Boolean doesEntityCollideWithEntities(Entity entity1, float x, float y) {
         for (Entity entity2:entities){
             if (!entity1.equals(entity2)){
-                if (entity2.getHeight()+entity2.getY()>=y && entity2.getY()<=y+entity1.getHeight() && entity2.getWidth()+entity2.getX()>=x && entity2.getX()<=x+entity1.getWidth() && entity2.getType().collidable){
+                if (entity2.getHeight()+entity2.getY()>=y && entity2.getY()<=y+entity1.getHeight() && entity2.getWidth()+entity2.getX()>=x && entity2.getX()<=x+entity1.getWidth() && entity2.getType().collidable && !entity2.dead){
                     return true;
                 }
             }

@@ -11,6 +11,7 @@ import com.esiho.combat.CombatState;
 import com.esiho.screens.CombatScreen;
 import com.esiho.screens.GameScreen;
 import com.esiho.screens.MainScreen;
+import com.esiho.world.entities.Entity;
 import com.esiho.world.map.GameMap;
 import com.esiho.world.map.TiledGameMap;
 
@@ -67,6 +68,10 @@ public class Game extends com.badlogic.gdx.Game {
 
 	public static void setActiveScreen(Screen activeScreen) {
 		Game.activeScreen = activeScreen;
+	}
+
+	public static void killEntityOnActiveMap(Entity entity){
+		gameMap.killEntity(entity);
 	}
 
 	public void cbtScreen(CombatState cbt){

@@ -9,4 +9,9 @@ public class Roger extends Npc {
         ScreenLoader.team();
         ScreenLoader.game.cbtScreen(ScreenLoader.cbt);
     }
+
+    @Override
+    public void onDeath() {
+
+    }
 }

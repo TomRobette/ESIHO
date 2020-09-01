@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Divers extends Entity {
     float stateTime = 0;
+    public boolean hide = false;
 
     @Override
     public void update(float deltaTime) {
@@ -19,5 +20,10 @@ public class Divers extends Entity {
         stateTime += Gdx.graphics.getDeltaTime();
         TextureRegion texture = (TextureRegion) type.animations[0].getKeyFrame(stateTime, true);
         batch.draw(texture, pos.x, pos.y, getWidth(), getHeight());
+    }
+
+    @Override
+    public void onDeath() {
+
     }
 }

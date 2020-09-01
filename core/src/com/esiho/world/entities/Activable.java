@@ -50,4 +50,7 @@ public abstract class Activable extends Entity {
     public abstract void routine();
 
     public abstract void onCreate(EntitySnapshot snapshot);
+
+    @Override
+    public abstract void onDeath();
 }

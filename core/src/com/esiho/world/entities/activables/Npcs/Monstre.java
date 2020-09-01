@@ -29,7 +29,12 @@ public class Monstre extends Npc {
         }
         team2.addArgent(100);
         team2.addItem(new Divers(DiversType.BALLE));
-        ScreenLoader.cbt = new CombatState(team1, team2);
+        ScreenLoader.cbt = new CombatState(team1, team2, this);
         ScreenLoader.game.cbtScreen(ScreenLoader.cbt);
+    }
+
+    @Override
+    public void onDeath() {
+
     }
 }

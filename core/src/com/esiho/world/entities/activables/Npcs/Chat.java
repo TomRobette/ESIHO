@@ -8,4 +8,11 @@ public class Chat extends Npc {
     public void onUse() {
         Game.gameScreen.newConversation(conversation);
     }
+
+    @Override
+    public void onDeath() {
+
+    }
+
+
 }

@@ -22,8 +22,6 @@ public abstract class Npc extends Activable {
     private int waitMax;
     private Boolean fixed;
 
-
-
     @Override
     public void routine() {
         if (!fixed){
@@ -136,4 +134,7 @@ public abstract class Npc extends Activable {
             }
         }
     }
+
+    @Override
+    public abstract void onDeath();
 }

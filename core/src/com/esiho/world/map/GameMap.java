@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.esiho.world.entities.Entity;
 import com.esiho.world.entities.EntityLoader;
 
@@ -20,7 +19,8 @@ public abstract class GameMap {
 
     public void render(OrthographicCamera cam, SpriteBatch batch){
         for (Entity entity:entities) {
-            entity.render(batch);
+            if (!entity.dead)
+                entity.render(batch);
         }
     }
 
@@ -31,6 +31,16 @@ public abstract class GameMap {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             saveEntities();
+        }
+    }
+
+    public void killEntity(Entity entity){
+        int compteur = 0;
+        for (Entity entity1:entities){
+            if (entity.equals(entity1)){
+                entities.get(compteur).death();
+            }
+            compteur++;
         }
     }
 

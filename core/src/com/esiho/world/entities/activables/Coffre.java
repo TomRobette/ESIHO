@@ -77,4 +77,9 @@ public class Coffre extends Activable {
         listeItems.add(new Arme(ArmeType.ARC));
         TeamType.JOUEUR.inventaire.addAll(listeItems);
     }
+
+    @Override
+    public void onDeath() {
+
+    }
 }
