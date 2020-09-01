@@ -9,6 +9,7 @@ import com.esiho.combat.teams.TeamType;
 import com.esiho.world.entities.activables.Npc;
 import com.esiho.world.item.Divers;
 import com.esiho.world.item.DiversType;
+import com.esiho.world.scenario.QuestsStatus;
 
 public class Monstre extends Npc {
     @Override
@@ -35,6 +36,6 @@ public class Monstre extends Npc {
 
     @Override
     public void onDeath() {
-
+        QuestsStatus.killSlime = true;
     }
 }

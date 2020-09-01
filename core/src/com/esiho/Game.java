@@ -32,6 +32,7 @@ public class Game extends com.badlogic.gdx.Game {
 	public static boolean finCbt = false;
 	public static boolean dialogueActif = false;
 	public static boolean newItemActif = false;
+	public static boolean journalQuestActif = false;
 
 	public static CombatState finCbtState;
 
