@@ -24,11 +24,12 @@ public class TiledGameMap extends GameMap {
         this.mapName=mapName;
         FileHandle mapOfTheDayFile = Gdx.files.internal("maps/"+mapName+".tmx");
         this.tiledMap = new TmxMapLoader(new InternalFileHandleResolver()).load(mapOfTheDayFile.file().getPath());
-//        try{
-//            this.tiledMap = new TmxMapLoader().load("core/assets/maps/"+mapName+".tmx");
-//        }catch (Exception e){
-//            this.tiledMap = new TmxMapLoader().load("maps/"+mapName+".tmx");
-//        }
+        try{
+            if (tiledMap!=null)
+                this.tiledMap = new TmxMapLoader().load("core/assets/maps/"+mapName+".tmx");
+        }catch (Exception e){
+            this.tiledMap = new TmxMapLoader().load("maps/"+mapName+".tmx");
+        }
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
 
