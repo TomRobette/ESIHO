@@ -1,6 +1,6 @@
 package com.esiho.world.item;
 
-import com.esiho.combat.entities.Combattant;
+import com.esiho.combat.combattants.Combattant;
 import com.esiho.combat.teams.Team;
 
 public abstract class UseItem {

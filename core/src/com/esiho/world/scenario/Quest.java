@@ -23,13 +23,25 @@ public abstract class Quest {
 
     public abstract void howToComplete();
 
-    public void refreshStatus(){
-        if (status)
-            end();
+    public void end(){
+        TeamType.JOUEUR.argent+=sommeVictoire;
+        if (cadeauxVictoire!=null)
+            TeamType.JOUEUR.inventaire.addAll(cadeauxVictoire);
     }
 
-    private void end(){
-        TeamType.JOUEUR.argent+=sommeVictoire;
-        TeamType.JOUEUR.inventaire.addAll(cadeauxVictoire);
+    public String getNom() {
+        return nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ArrayList<Item> getCadeauxVictoire() {
+        return cadeauxVictoire;
+    }
+
+    public int getSommeVictoire() {
+        return sommeVictoire;
     }
 }

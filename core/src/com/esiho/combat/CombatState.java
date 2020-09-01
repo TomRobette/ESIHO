@@ -1,7 +1,7 @@
 package com.esiho.combat;
 
 import com.esiho.Game;
-import com.esiho.combat.entities.Combattant;
+import com.esiho.combat.combattants.Combattant;
 import com.esiho.combat.moves.MoveType;
 import com.esiho.combat.teams.Team;
 import com.esiho.combat.teams.TeamType;

@@ -23,13 +23,12 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.esiho.Game;
 import com.esiho.combat.CombatState;
-import com.esiho.combat.entities.Combattant;
-import com.esiho.combat.entities.CombattantType;
+import com.esiho.combat.combattants.Combattant;
 import com.esiho.combat.teams.TeamType;
-import com.esiho.world.item.Arme;
-import com.esiho.world.item.ArmeType;
 import com.esiho.world.scenario.Conversation;
 import com.esiho.world.item.Item;
+import com.esiho.world.scenario.Quest;
+import com.esiho.world.scenario.QuestsStatus;
 
 import java.util.ArrayList;
 
@@ -42,9 +41,11 @@ public class GameScreen implements Screen {
     Skin skin;
     Label labelConv;
     Table rootElement;
+    Table descriptionTable;
     int pointerConv = 0;
     Conversation conversationTempo;
-    Dialog newItemDialog, conversationDialog, inventaireDialog, finCbtDialog;
+    Quest questTempo;
+    Dialog newItemDialog, conversationDialog, inventaireDialog, finCbtDialog, journalDialog;
 
     int pointerFinCbt;
     int pointerLvlUp;
@@ -93,7 +94,6 @@ public class GameScreen implements Screen {
     private void createNewItemScreen(ArrayList<Item> objets) {
         newItemDialog = new Dialog("Vous avez trouvé :", skin);
         Table rootTable = new Table();
-        rootTable.setFillParent(true);
         rootTable.top();
         String listeNomsItems = "";
         int compteur = 0;
@@ -130,7 +130,6 @@ public class GameScreen implements Screen {
     private void createConversationScreen(){
         conversationDialog = new Dialog("Discussion", skin);
         Table rootTable = new Table();
-        rootTable.setFillParent(true);
         rootTable.top();
 
         labelConv = new Label(conversationTempo.getPhrase(0), skin);
@@ -155,13 +154,9 @@ public class GameScreen implements Screen {
     private void createInventoryScreen(){
         ArrayList<Item> inventaire = TeamType.JOUEUR.inventaire;
         ArrayList<Combattant> listeCbts = TeamType.JOUEUR.listeCbtEntities;
-        Combattant combattant = new Combattant();
-        combattant.create(CombattantType.JOUEUR);
-        listeCbts.add(combattant);
         inventaireDialog = new Dialog("Inventaire", skin);
         inventaireDialog.setResizable(true);
         Table rootTable = new Table();
-        rootTable.setFillParent(true);
         Table itemScrollTable = new Table();
         itemScrollTable.align(Align.topLeft);
         ScrollPane itemScrollPane = new ScrollPane(itemScrollTable, skin);
@@ -177,6 +172,7 @@ public class GameScreen implements Screen {
             itemScrollTable.add(line);
             itemScrollTable.row();
         }
+        rootTable.add(new Label(""+TeamType.JOUEUR.argent+" Or", skin));
         rootTable.add(itemScrollPane).align(Align.topLeft);
         Table cbtsScrollTable = new Table();
         ScrollPane cbtsScrollPane = new ScrollPane(cbtsScrollTable, skin);
@@ -205,7 +201,6 @@ public class GameScreen implements Screen {
 //        rootTable.setFillParent(true);
 //        rootTable.top();
         rootElement = new Table();
-        rootElement.setFillParent(true);
         rootElement.top();
 
         rootElement.add(new Label("Vous avez gagné :", skin)).align(Align.center);
@@ -239,9 +234,76 @@ public class GameScreen implements Screen {
         finCbtDialog.show(stage);
     }
 
+    private void createJournalScreen(){
+        QuestsStatus.refreshQuestsStatus();
+        journalDialog = new Dialog("Journal", skin);
+        journalDialog.setResizable(true);
+        Table rootTable = new Table();
+        Table questScrollTable = new Table();
+        questScrollTable.align(Align.topLeft);
+        ScrollPane questScrollPane = new ScrollPane(questScrollTable, skin);
+        int compteur = 0;
+        for (Quest quest:QuestsStatus.questsList){
+            TextButton btn = new TextButton(""+quest.getNom(), skin);
+            final int compteurFinal = compteur;
+            btn.addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    questTempo = QuestsStatus.questsList.get(compteurFinal);
+                    updateDescriptionTable();
+                }
+            });
+            questScrollTable.add(btn);
+            questScrollTable.row();
+            compteur++;
+        }
+        rootTable.add(questScrollPane).align(Align.topLeft);
+
+        descriptionTable = new Table();
+
+        if (questTempo!=null){
+            if (QuestsStatus.questsList.get(0)!=null){
+                questTempo=QuestsStatus.questsList.get(0);
+            }
+        }
+        rootTable.add(descriptionTable);
+        journalDialog.add(rootTable).align(Align.topLeft);
+    }
+
+    private void updateDescriptionTable(){
+        descriptionTable.reset();
+        descriptionTable.top();
+        if (questTempo!=null){
+            descriptionTable.add(new Label(""+questTempo.getNom(), skin)).align(Align.center);
+            descriptionTable.row();
+            if (questTempo.status){
+                descriptionTable.add(new Label("Terminé", skin));
+            }else {
+                descriptionTable.add(new Label("En cours", skin));
+            }
+            descriptionTable.row();
+            descriptionTable.add(new Label(""+questTempo.getDescription(), skin)).align(Align.center);
+            descriptionTable.row();
+            descriptionTable.add(new Label("Récompense : "+questTempo.getSommeVictoire()+" Or", skin));
+            if (questTempo.getCadeauxVictoire()!=null){
+                for (Item item:questTempo.getCadeauxVictoire()) {
+                    descriptionTable.row();
+                    Table line = new Table();
+                    if (item.getSprite()!=null){
+                        Image image = new Image(item.getSprite());
+                        image.setScale(1.5f, 1.5f);
+                        line.add(image).pad(10);
+                        line.right();
+                    }
+                    line.add(new Label(""+item.getNom(), skin));
+                    descriptionTable.add(line);
+                }
+            }
+        }
+    }
+
     private void updateRootFinCbt(CombatState combatState){
         rootElement.reset();
-        rootElement.setFillParent(true);
         rootElement.top();
         switch (pointerFinCbt){
             case 0 :
@@ -311,10 +373,12 @@ public class GameScreen implements Screen {
                 Game.finCbt = false;
                 Game.finCbtState = null;
                 finCbtDialog.hide();
+            }else if (Game.journalActif){
+                Game.journalActif = false;
+                journalDialog.hide();
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
-            TeamType.JOUEUR.inventaire.add(new Arme(ArmeType.DAGUE));
             if (!Game.inventaireActif){
                 Game.inventaireActif=true;
                 createInventoryScreen();
@@ -324,6 +388,16 @@ public class GameScreen implements Screen {
                 inventaireDialog.hide();
             }
             if (Game.debug) System.out.println(TeamType.JOUEUR.inventaire.size());
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.J)){
+            if (!Game.journalActif){
+                Game.journalActif=true;
+                createJournalScreen();
+                journalDialog.show(stage);
+            }else{
+                Game.journalActif = false;
+                journalDialog.hide();
+            }
         }
 
         game.batch.begin();

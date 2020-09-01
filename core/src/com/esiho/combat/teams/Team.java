@@ -1,6 +1,6 @@
 package com.esiho.combat.teams;
 
-import com.esiho.combat.entities.Combattant;
+import com.esiho.combat.combattants.Combattant;
 import com.esiho.world.item.Item;
 
 import java.util.ArrayList;

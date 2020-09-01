@@ -1,5 +1,6 @@
 package com.esiho.desktop;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.esiho.Game;
@@ -14,6 +15,7 @@ public class DesktopLauncher {
 		config.width = Game.WIDTH;
 		config.height = Game.HEIGHT;
 		config.resizable = false;
+		config.addIcon("main_icon.png", Files.FileType.Internal);
 		game = new Game();
 		screenLoader = new ScreenLoader(game);
 		new LwjglApplication(ScreenLoader.game, config);

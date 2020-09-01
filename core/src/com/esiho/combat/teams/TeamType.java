@@ -2,9 +2,9 @@ package com.esiho.combat.teams;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
-import com.esiho.combat.entities.Combattant;
-import com.esiho.combat.entities.Ennemis;
-import com.esiho.combat.entities.Joueur;
+import com.esiho.combat.combattants.Combattant;
+import com.esiho.combat.combattants.Ennemis;
+import com.esiho.combat.combattants.Joueur;
 import com.esiho.world.item.Item;
 import com.esiho.world.scenario.Quest;
 

@@ -1,19 +1,20 @@
 package com.esiho;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esiho.combat.CombatState;
+import com.esiho.combat.combattants.Combattant;
+import com.esiho.combat.combattants.CombattantType;
+import com.esiho.combat.teams.TeamType;
 import com.esiho.screens.CombatScreen;
 import com.esiho.screens.GameScreen;
 import com.esiho.screens.MainScreen;
 import com.esiho.world.entities.Entity;
 import com.esiho.world.map.GameMap;
 import com.esiho.world.map.TiledGameMap;
+import com.esiho.world.scenario.QuestsStatus;
 
 public class Game extends com.badlogic.gdx.Game {
 	public SpriteBatch batch;
@@ -32,7 +33,7 @@ public class Game extends com.badlogic.gdx.Game {
 	public static boolean finCbt = false;
 	public static boolean dialogueActif = false;
 	public static boolean newItemActif = false;
-	public static boolean journalQuestActif = false;
+	public static boolean journalActif = false;
 
 	public static CombatState finCbtState;
 
@@ -46,6 +47,10 @@ public class Game extends com.badlogic.gdx.Game {
 
 		gameMap = new TiledGameMap("maison");
 		gameMap.refreshEntities();
+
+		TeamType.JOUEUR.listeCbtEntities.add(new Combattant(CombattantType.JOUEUR));
+
+		QuestsStatus.create();
 
 		activeScreen = new MainScreen(this);
 		this.setScreen(activeScreen);

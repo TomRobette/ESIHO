@@ -1,11 +1,8 @@
 package com.esiho.world.item;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.esiho.Game;
-import com.esiho.combat.entities.Combattant;
+import com.esiho.combat.combattants.Combattant;
 import com.esiho.combat.teams.Team;
-
-import java.util.concurrent.ExecutionException;
 
 public abstract class Item{
 

@@ -1,4 +1,4 @@
-package com.esiho.combat.entities;
+package com.esiho.combat.combattants;
 
 public class Joueur extends Combattant {
 

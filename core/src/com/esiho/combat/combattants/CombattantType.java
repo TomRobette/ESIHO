@@ -1,4 +1,4 @@
-package com.esiho.combat.entities;
+package com.esiho.combat.combattants;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.esiho.combat.moves.MoveList;

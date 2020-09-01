@@ -1,4 +1,4 @@
-package com.esiho.combat.entities;
+package com.esiho.combat.combattants;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -28,6 +28,12 @@ public class Combattant {
     protected Arme arme;
     protected Armure armure;
     protected MoveList moves;
+
+    public Combattant(CombattantType entityType){
+        this.create(entityType);
+    }
+
+    public Combattant(){}
 
     public void create(CombattantType entityType) {
         this.type=entityType.type;

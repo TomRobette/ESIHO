@@ -2,8 +2,8 @@ package com.esiho;
 
 import com.badlogic.gdx.Screen;
 import com.esiho.combat.CombatState;
-import com.esiho.combat.entities.Combattant;
-import com.esiho.combat.entities.CombattantType;
+import com.esiho.combat.combattants.Combattant;
+import com.esiho.combat.combattants.CombattantType;
 import com.esiho.combat.teams.Team;
 import com.esiho.combat.teams.TeamType;
 import com.esiho.world.item.Arme;
