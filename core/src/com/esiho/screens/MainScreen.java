@@ -53,8 +53,6 @@ public class MainScreen implements Screen {
 
         mainTable.top();
 
-//        Skin skin = new Skin(Gdx.files.internal("default/skin/uiskin.json"));
-//        skin.remove("default-font", BitmapFont.class);
         Skin skin = new Skin();
         skin.addRegions(new TextureAtlas(Gdx.files.internal("default/skin/uiskin.atlas")));
         skin.load(Gdx.files.internal("default/skin/uiskin.json"));

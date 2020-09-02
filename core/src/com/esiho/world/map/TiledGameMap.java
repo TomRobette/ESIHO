@@ -2,6 +2,10 @@ package com.esiho.world.map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.assets.loaders.resolvers.LocalFileHandleResolver;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -18,7 +22,14 @@ public class TiledGameMap extends GameMap {
 
     public TiledGameMap(String mapName){
         this.mapName=mapName;
-        this.tiledMap = new TmxMapLoader().load("maps/"+mapName+".tmx");
+        FileHandle mapOfTheDayFile = Gdx.files.internal("maps/"+mapName+".tmx");
+        this.tiledMap = new TmxMapLoader(new InternalFileHandleResolver()).load(mapOfTheDayFile.file().getPath());
+        try{
+            if (tiledMap!=null)
+                this.tiledMap = new TmxMapLoader().load("core/assets/maps/"+mapName+".tmx");
+        }catch (Exception e){
+            this.tiledMap = new TmxMapLoader().load("maps/"+mapName+".tmx");
+        }
         this.tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
 

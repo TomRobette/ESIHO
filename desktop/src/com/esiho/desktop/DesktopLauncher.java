@@ -16,6 +16,8 @@ public class DesktopLauncher {
 		config.height = Game.HEIGHT;
 		config.resizable = false;
 		config.addIcon("main_icon.png", Files.FileType.Internal);
+		config.pauseWhenMinimized = true;
+		config.title = "ESIHO";
 		game = new Game();
 		screenLoader = new ScreenLoader(game);
 		new LwjglApplication(ScreenLoader.game, config);
