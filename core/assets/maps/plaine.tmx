@@ -2,70 +2,70 @@
 <map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
  <tileset firstgid="1" source="collisionTiles.tsx"/>
  <tileset firstgid="2" name="Dungeon_C" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/Dungeon_C.png" width="512" height="512"/>
+  <image source="../tilesets/Dungeon_C.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="1026" name="Dungeon_A1" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/Dungeon_A1.png" width="512" height="384"/>
+  <image source="../tilesets/Dungeon_A1.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="1794" name="Dungeon_A2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/Dungeon_A2.png" width="512" height="384"/>
+  <image source="../tilesets/Dungeon_A2.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="2562" name="Dungeon_A4" tilewidth="16" tileheight="16" tilecount="960" columns="32">
-  <image source="../core/assets/tilesets/Dungeon_A4.png" width="512" height="480"/>
+  <image source="../tilesets/Dungeon_A4.png" width="512" height="480"/>
  </tileset>
  <tileset firstgid="3522" name="Dungeon_A5" tilewidth="16" tileheight="16" tilecount="512" columns="16">
-  <image source="../core/assets/tilesets/Dungeon_A5.png" width="256" height="512"/>
+  <image source="../tilesets/Dungeon_A5.png" width="256" height="512"/>
  </tileset>
  <tileset firstgid="4034" name="Dungeon_B" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/Dungeon_B.png" width="512" height="512"/>
+  <image source="../tilesets/Dungeon_B.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="5058" name="Inside_A1" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/Inside_A1.png" width="512" height="384"/>
+  <image source="../tilesets/Inside_A1.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="5826" name="Inside_A2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/Inside_A2.png" width="512" height="384"/>
+  <image source="../tilesets/Inside_A2.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="6594" name="Inside_A4" tilewidth="16" tileheight="16" tilecount="960" columns="32">
-  <image source="../core/assets/tilesets/Inside_A4.png" width="512" height="480"/>
+  <image source="../tilesets/Inside_A4.png" width="512" height="480"/>
  </tileset>
  <tileset firstgid="7554" name="Inside_A5" tilewidth="16" tileheight="16" tilecount="512" columns="16">
-  <image source="../core/assets/tilesets/Inside_A5.png" width="256" height="512"/>
+  <image source="../tilesets/Inside_A5.png" width="256" height="512"/>
  </tileset>
  <tileset firstgid="8066" name="Inside_B" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/Inside_B.png" width="512" height="512"/>
+  <image source="../tilesets/Inside_B.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="9090" name="Inside_C" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/Inside_C.png" width="512" height="512"/>
+  <image source="../tilesets/Inside_C.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="10114" name="Outside_A1" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/Outside_A1.png" width="512" height="384"/>
+  <image source="../tilesets/Outside_A1.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="10882" name="Outside_A2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/Outside_A2.png" width="512" height="384"/>
+  <image source="../tilesets/Outside_A2.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="11650" name="Outside_A3" tilewidth="16" tileheight="16" tilecount="512" columns="32">
-  <image source="../core/assets/tilesets/Outside_A3.png" width="512" height="256"/>
+  <image source="../tilesets/Outside_A3.png" width="512" height="256"/>
  </tileset>
  <tileset firstgid="12162" name="Outside_A4" tilewidth="16" tileheight="16" tilecount="960" columns="32">
-  <image source="../core/assets/tilesets/Outside_A4.png" width="512" height="480"/>
+  <image source="../tilesets/Outside_A4.png" width="512" height="480"/>
  </tileset>
  <tileset firstgid="13122" name="Outside_A5" tilewidth="16" tileheight="16" tilecount="512" columns="16">
-  <image source="../core/assets/tilesets/Outside_A5.png" width="256" height="512"/>
+  <image source="../tilesets/Outside_A5.png" width="256" height="512"/>
  </tileset>
  <tileset firstgid="13634" name="Outside_B" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/Outside_B.png" width="512" height="512"/>
+  <image source="../tilesets/Outside_B.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="14658" name="Outside_C" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/Outside_C.png" width="512" height="512"/>
+  <image source="../tilesets/Outside_C.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="15682" name="World_A1" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/World_A1.png" width="512" height="384"/>
+  <image source="../tilesets/World_A1.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="16450" name="World_A2" tilewidth="16" tileheight="16" tilecount="768" columns="32">
-  <image source="../core/assets/tilesets/World_A2.png" width="512" height="384"/>
+  <image source="../tilesets/World_A2.png" width="512" height="384"/>
  </tileset>
  <tileset firstgid="17218" name="World_B" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
-  <image source="../core/assets/tilesets/World_B.png" width="512" height="512"/>
+  <image source="../tilesets/World_B.png" width="512" height="512"/>
  </tileset>
  <layer id="1" name="Calque 0" width="25" height="20">
   <data encoding="csv">
