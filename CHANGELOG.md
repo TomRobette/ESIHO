@@ -1,6 +1,10 @@
 // ICI SERONT NOTÉES LES MODIFICATIONS FAITES (si elles sont assez pertinentes) AU CODE
 
 // Veuillez déposer à partir d'ici :
+#TomRobette#04/05/2021#
+-Mise en place du déplacement du joueur de case en case
+-Changement de ce fichier changelog.txt en CHANGELOG.md
+
 #TomRobette#02/09/2020#
 -Corrections de bugs
 -Ajout d'un titre à la fenêtre
